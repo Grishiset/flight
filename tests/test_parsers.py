@@ -159,3 +159,28 @@ def test_date_plan():
     for rid, dep, ret in plan:
         assert cfg.window.contains(dep, ret)
     assert {p[0] for p in plan} == {r.id for r in cfg.routes}
+
+
+def test_etihad_stops_when_refused():
+    import httpx
+
+    from tracker.config import load_config
+    from tracker.fx import Rates
+    from tracker.models import SourceResult
+    from tracker.providers.base import Context
+    from tracker.providers.etihad import EtihadProvider
+
+    calls = []
+
+    def handler(request):
+        calls.append(str(request.url))
+        raise httpx.ReadTimeout("The read operation timed out")
+
+    cfg = load_config("config.yaml")
+    cfg.sources["etihad"]["enabled"] = True
+    ctx = Context(cfg=cfg, http=httpx.Client(transport=httpx.MockTransport(handler)),
+                  rates=Rates({"EUR": 100}, "test"), state={}, browser=None, env={})
+    res = EtihadProvider(ctx).run()
+    assert isinstance(res, SourceResult)
+    assert len(calls) == 1                       # после первого отказа остальные страницы не трогаем
+    assert len(res.errors) == 1 and "Google Flights" in res.errors[0]

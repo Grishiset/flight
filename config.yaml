@@ -91,7 +91,10 @@ sources:
     trip_days: [10, 14]              # длины поездок, которые проверяются по очереди
     every_days: 7                    # шаг дат вылета по окну
   etihad:
-    enabled: true
+    # etihad.com не пускает автоматические запросы с серверов GitHub (защита от ботов),
+    # поэтому здесь выключен: тарифы Etihad и так попадают в Google Flights и Aviasales.
+    # Можно включить, если запускаешь трекер со своего компьютера.
+    enabled: false
     base_url: https://www.etihad.com/ru/flights/
   samokatus:
     enabled: true

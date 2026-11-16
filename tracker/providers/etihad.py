@@ -86,28 +86,35 @@ class EtihadProvider(Provider):
         base = self.opts.get("base_url", "https://www.etihad.com/ru/flights/")
         return base + quote(slug, safe="-")
 
-    def fetch_text(self, url: str) -> tuple[str | None, str | None]:
-        """Сначала обычный запрос, при блокировке — настоящий браузер."""
+    def fetch_text(self, url: str) -> tuple[str | None, str | None, bool]:
+        """Возвращает (текст, ошибка, сайт_отказал).
+
+        Обычный запрос, а если страница рисуется скриптами — браузер.
+        Защиту от ботов не обходим: если сайт отказал, просто сообщаем об этом.
+        """
         err = None
+        refused = False
         try:
-            r = get(self.ctx.http, url, tries=2)
+            r = get(self.ctx.http, url, tries=1)
             if r.status_code == 404:
-                return None, "страница не найдена (404)"
+                return None, "страница не найдена (404)", False
             if r.status_code == 200:
                 text = html_to_text(r.text)
                 if "обратно" in text:
-                    return text, None
-                err = "страница без тарифов (возможно, защита от ботов)"
+                    return text, None, False
+                err = "на странице нет тарифов"
             else:
                 err = f"HTTP {r.status_code}"
+                refused = r.status_code in (403, 429)
         except Exception as e:  # noqa: BLE001
             err = str(e)
-        if self.ctx.browser is None:
-            return None, err
+            refused = True
+        if self.ctx.browser is None or refused:
+            return None, err, refused
         try:
-            return self.ctx.browser.text(url), None
+            return self.ctx.browser.text(url), None, False
         except Exception as e:  # noqa: BLE001
-            return None, f"{err}; браузер: {e}"
+            return None, f"{err}; браузер: {str(e).splitlines()[0]}", True
 
     def collect(self, res: SourceResult) -> None:
         cfg = self.ctx.cfg
@@ -116,7 +123,14 @@ class EtihadProvider(Provider):
             dests = set(route.airports)
             for slug in route.etihad_pages:
                 url = self.page_url(slug)
-                text, err = self.fetch_text(url)
+                text, err, refused = self.fetch_text(url)
+                if refused:
+                    # Сайт не пускает автоматические запросы с этого адреса — не долбим остальные страницы
+                    res.errors.append(
+                        f"etihad.com не отвечает на автоматические запросы с этого сервера ({err}). "
+                        "Тарифы Etihad приходят через Google Flights."
+                    )
+                    return
                 if text is None:
                     if err and "404" not in err:
                         res.errors.append(f"{route.id} {slug}: {err}")
