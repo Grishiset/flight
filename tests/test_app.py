@@ -126,3 +126,23 @@ def test_health_warning(tmp_path, monkeypatch):
         latest = run(cfg, store, None, use_browser=False, now=NOW + timedelta(hours=4 * i), results=bad, env={})
         sent_kinds.append(latest["sent"])
     assert sent_kinds == [[], [], ["health"], []]
+
+
+def test_telegram_many_recipients(monkeypatch):
+    import httpx
+
+    from tracker.notify import Telegram
+
+    sent = []
+
+    def fake_post(url, json, timeout):
+        sent.append(json["chat_id"])
+        code = 403 if json["chat_id"] == "222" else 200   # второй не нажал Start
+        return httpx.Response(code, text="{}")
+
+    monkeypatch.setattr("tracker.notify.httpx.post", fake_post)
+    tg = Telegram("token", " 111, 222 ;-100333 ")
+    assert tg.chat_ids == ["111", "222", "-100333"]
+    assert tg.send("привет") is True
+    assert sent == ["111", "222", "-100333"]
+    assert Telegram("token", "").configured is False

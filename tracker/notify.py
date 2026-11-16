@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import html
 import logging
+import re
 from datetime import datetime
 
 import httpx
@@ -114,35 +115,44 @@ def digest_message(sts: list[RouteStatus], sources: dict, site_url: str | None =
 
 
 class Telegram:
+    """Отправка в Telegram. chat_id — один или несколько через запятую: «111,222,-100333»."""
+
     def __init__(self, token: str | None, chat_id: str | None, dry_run: bool = False) -> None:
-        self.token = token
-        self.chat_id = chat_id
+        self.token = (token or "").strip() or None
+        self.chat_ids = [c.strip() for c in re.split(r"[,;\s]+", chat_id or "") if c.strip()]
         self.dry_run = dry_run
 
     @property
     def configured(self) -> bool:
-        return bool(self.token and self.chat_id)
+        return bool(self.token and self.chat_ids)
 
     def send(self, text: str) -> bool:
+        """True, если сообщение дошло хотя бы до одного получателя."""
         if self.dry_run or not self.configured:
             log.info("Telegram %s:\n%s", "(dry-run)" if self.dry_run else "(не настроен)", text)
             return False
         url = f"https://api.telegram.org/bot{self.token}/sendMessage"
         # Telegram ограничивает сообщение 4096 символами
         chunks = [text[i:i + 3900] for i in range(0, len(text), 3900)] or [text]
-        ok = True
-        for chunk in chunks:
-            try:
-                r = httpx.post(url, json={
-                    "chat_id": self.chat_id,
-                    "text": chunk,
-                    "parse_mode": "HTML",
-                    "disable_web_page_preview": True,
-                }, timeout=30)
-                if r.status_code != 200:
-                    log.error("Telegram ответил %s: %s", r.status_code, r.text[:300])
+        delivered = 0
+        for chat in self.chat_ids:
+            ok = True
+            for chunk in chunks:
+                try:
+                    r = httpx.post(url, json={
+                        "chat_id": chat,
+                        "text": chunk,
+                        "parse_mode": "HTML",
+                        "disable_web_page_preview": True,
+                    }, timeout=30)
+                    if r.status_code != 200:
+                        # Частая причина — получатель не нажал Start у бота
+                        log.error("Telegram не доставил в чат %s (%s): %s", chat, r.status_code, r.text[:300])
+                        ok = False
+                        break
+                except httpx.HTTPError as e:
+                    log.error("Telegram недоступен: %s", e)
                     ok = False
-            except httpx.HTTPError as e:
-                log.error("Telegram недоступен: %s", e)
-                ok = False
-        return ok
+                    break
+            delivered += ok
+        return delivered > 0
