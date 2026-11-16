@@ -30,6 +30,28 @@
     return ul;
   }
 
+  function gfl(o) {
+    const N = window.__N || 1;
+    const q = `Flights to ${o.destination || ''} from ${o.origin || 'MOW'} on ${o.depart} through ${o.ret}` + (N > 1 ? ` for ${N} adults` : '');
+    return 'https://www.google.com/travel/flights?hl=ru&curr=RUB&q=' + encodeURIComponent(q);
+  }
+
+  // Ссылки «где проверить и купить»: агрегатор (на всех пассажиров), сайты авиакомпаний, Google Flights
+  function buyLinks(o, cls) {
+    const box = el('div', cls || 'buy');
+    const add = (text, href) => {
+      const a = el('a', cls === 'buy-inline' ? null : 'btn', text);
+      a.href = href; a.target = '_blank'; a.rel = 'noopener';
+      if (box.childNodes.length && cls === 'buy-inline') box.append(' · ');
+      box.append(a);
+    };
+    const N = window.__N || 1;
+    if (o.link && !o.legs) add((SRC[o.source] || o.source) + (N > 1 ? ` на ${N}` : '') + ' →', o.link);
+    for (const s of o.airline_sites || []) add('Сайт ' + s.name, s.url);
+    if (!o.legs) add('Google Flights' + (N > 1 ? ` на ${N}` : ''), gfl(o));
+    return box;
+  }
+
   function sparkline(points, threshold, colorVar) {
     const ns = 'http://www.w3.org/2000/svg';
     const W = 300, H = 56, P = 4;
@@ -69,6 +91,7 @@
   function render(data) {
     const L = data.latest;
     const N = L.passengers || 1;
+    window.__N = N;
     const total = (n) => rub(n * N);
     const pp = N > 1 ? ' с чел.' : '';
     const routes = L.routes;
@@ -105,7 +128,7 @@
         if (r.reasons.length) { const ul = el('ul', 'reasons'); r.reasons.forEach((x) => ul.append(el('li', null, x))); c.append(ul); }
         const others = Object.entries(r.by_source).filter(([k]) => k !== b.source).map(([k, v]) => `${SRC[k] || k}: ${total(v.price_rub)}`);
         if (others.length) c.append(el('div', 'sub', 'Другие источники: ' + others.join(' · ')));
-        if (b.link && !b.legs) { const a = el('a', 'btn', 'Открыть билет →'); a.href = b.link; a.target = '_blank'; a.rel = 'noopener'; c.append(a); }
+        c.append(buyLinks(b));
       } else {
         c.append(el('div', 'price none', 'Летних билетов пока нет'));
         c.append(el('div', 'sub', `Порог ${rub(r.threshold)}${pp}`));
@@ -157,7 +180,7 @@
       tr.append(el('td', null, (o.airline || '—') + (o.stops != null ? `, пересадок: ${o.stops}` : '')));
       const s = el('td'); s.append(el('span', 'src', SRC[o.source] || o.source)); tr.append(s);
       const l = el('td');
-      if (o.link && !o.legs) { const a = el('a', null, 'открыть'); a.href = o.link; a.target = '_blank'; a.rel = 'noopener'; l.append(a); }
+      l.append(buyLinks(o, 'buy-inline'));
       tr.append(l);
       tb.append(tr);
     }

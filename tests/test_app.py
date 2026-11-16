@@ -202,3 +202,21 @@ def test_passengers_everywhere():
             "price_insights": {"typical_price_range": [180000, 240000]}}
     o = parse_response(body, "NYC", date(2027, 6, 1), date(2027, 6, 15), passengers=3)[0]
     assert o.price_rub == 50000 and o.typical_range == [60000, 80000]
+
+
+def test_buy_links():
+    from tracker.notify import buy_links, digest_message
+    o = offer("SEL", 52955, airline="China Southern", link="https://www.aviasales.ru/search/MOW0406SEL11063",
+              origin="SVO", destination="ICN")
+    links = buy_links(o, 3)
+    assert "Aviasales (на 3)" in links
+    assert 'href="https://www.csair.com/ru/ru/"' in links and "сайт China Southern" in links
+    assert "travel/flights" in links and "for%203%20adults" in links and "Google Flights (на 3)" in links
+    # маршрут из отдельных билетов: сайты всех авиакомпаний, без общей ссылки Google
+    st = offer("NYC", 75000, source="self_transfer", airline="Uzbekistan Airways / Turkish Airlines", legs=[{}])
+    lk = buy_links(st, 3)
+    assert "uzairways" in lk and "turkishairlines" in lk and "Google" not in lk
+    cfg = load_config("config.yaml")
+    msg = digest_message(evaluate(cfg, [o], [], NOW), {}, None, passengers=3)
+    assert "csair.com" in msg and "из кэша поиска на одного" in msg
+    assert o.to_dict()["airline_sites"] == [{"name": "China Southern", "url": "https://www.csair.com/ru/ru/"}]

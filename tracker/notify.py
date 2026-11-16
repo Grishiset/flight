@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 
 import httpx
 
+from .airlines import airline_links, google_flights_url
 from .analyze import RouteStatus, fmt_rub
 from .models import Offer
 
@@ -50,6 +51,20 @@ def legs_lines(o: Offer) -> list[str]:
     return lines
 
 
+def buy_links(o: Offer, passengers: int = 1) -> str:
+    """«Aviasales (на 3) · China Southern · Google Flights» — где проверить и купить билет."""
+    links = []
+    if o.link and not o.legs:
+        who = f" (на {passengers})" if passengers > 1 else ""
+        links.append(f'<a href="{html.escape(o.link, quote=True)}">{SOURCE_TITLES.get(o.source, o.source)}{who}</a>')
+    for name, url in airline_links(o.airline):
+        links.append(f'<a href="{html.escape(url, quote=True)}">сайт {html.escape(name)}</a>')
+    if not o.legs:
+        g = google_flights_url(o.origin or "MOW", o.destination or "", o.depart, o.ret, passengers)
+        links.append(f'<a href="{html.escape(g, quote=True)}">Google Flights{f" (на {passengers})" if passengers > 1 else ""}</a>')
+    return " · ".join(links)
+
+
 def offer_line(o: Offer) -> str:
     parts = [f"{fmt_date(o.depart)} → {fmt_date(o.ret)} ({o.days} дн.)"]
     if o.via:
@@ -89,8 +104,11 @@ def alert_message(sts: list[RouteStatus], site_url: str | None = None, passenger
                 d = min(direct, key=lambda x: x.price_rub)
                 lines.append(f"Для сравнения, одним билетом: {price_text(d.price_rub, passengers)} "
                              f"({SOURCE_TITLES.get(d.source, d.source)}, {fmt_date(d.depart)} → {fmt_date(d.ret)})")
-        elif o.link:
-            lines.append(f'<a href="{html.escape(o.link, quote=True)}">Открыть билет</a>')
+        links = buy_links(o, passengers)
+        if links:
+            lines.append("Проверить и купить: " + links)
+        if passengers > 1:
+            lines.append(f"⚠️ Цена — из кэша поиска на одного. Наличие {passengers} мест и итоговую сумму проверь по ссылке.")
         blocks.append("\n".join(lines))
     text = "\n\n".join(blocks)
     if site_url:
@@ -127,7 +145,8 @@ def digest_message(sts: list[RouteStatus], sources: dict, site_url: str | None =
     n = max(1, passengers)
     who = "1 взрослого" if n == 1 else f"{n} взрослых"
     lines = [f"🗓 <b>Отчёт по летним билетам</b> · {fmt_date(now.date())}\n"
-             f"Туда-обратно на {who}; в скобках — цена с человека"]
+             f"Туда-обратно на {who}; в скобках — цена с человека"
+             + ("\n⚠️ Цены — из кэша поиска на одного: наличие мест на всех проверяй по ссылкам" if n > 1 else "")]
     for st in sts:
         lines.append("")
         if st.best:
@@ -137,6 +156,9 @@ def digest_message(sts: list[RouteStatus], sources: dict, site_url: str | None =
             lines.append(f"{mark} <b>{html.escape(st.name)}: {fmt_rub(b.price_rub * n)}</b> ({fmt_rub(b.price_rub)}, "
                          f"{'+' if diff > 0 else ''}{diff}% к порогу {fmt_rub(st.threshold)})")
             lines.append(f"   {offer_line(b)} — {SOURCE_TITLES.get(b.source, b.source)}")
+            links = buy_links(b, n)
+            if links:
+                lines.append("   " + links)
         else:
             lines.append(f"▫️ <b>{html.escape(st.name)}</b>: летних билетов сейчас нет (порог {fmt_rub(st.threshold)} с человека)")
         # по каждому источнику

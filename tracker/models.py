@@ -38,12 +38,15 @@ class Offer:
         d["depart"] = self.depart.isoformat()
         d["ret"] = self.ret.isoformat()
         d["days"] = self.days
+        from .airlines import airline_links
+        d["airline_sites"] = [{"name": n, "url": u} for n, u in airline_links(self.airline)]
         return d
 
     @classmethod
     def from_dict(cls, d: dict) -> "Offer":
         d = dict(d)
         d.pop("days", None)
+        d.pop("airline_sites", None)
         d["depart"] = date.fromisoformat(d["depart"])
         d["ret"] = date.fromisoformat(d["ret"])
         return cls(**d)
