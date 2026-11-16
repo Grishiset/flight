@@ -4,7 +4,7 @@ from __future__ import annotations
 import html
 import logging
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import httpx
 
@@ -90,27 +90,76 @@ def alert_message(sts: list[RouteStatus], site_url: str | None = None) -> str:
     return text
 
 
-def digest_message(sts: list[RouteStatus], sources: dict, site_url: str | None = None) -> str:
-    lines = ["🗓 <b>Сводка по летним билетам</b>"]
+def week_min(history: list[dict], route_id: str, start, end) -> int | None:
+    """Лучшая цена направления среди проверок в интервале [start, end)."""
+    vals = []
+    for run in history or []:
+        try:
+            at = datetime.fromisoformat(run["at"])
+        except (KeyError, ValueError):
+            continue
+        if start <= at < end:
+            v = ((run.get("routes") or {}).get(route_id) or {}).get("best")
+            if isinstance(v, (int, float)):
+                vals.append(int(v))
+    return min(vals) if vals else None
+
+
+def _pct(a: int, b: int) -> str:
+    p = round((a / b - 1) * 100)
+    return f"{'+' if p > 0 else '−' if p < 0 else '±'}{abs(p)}%"
+
+
+def digest_message(sts: list[RouteStatus], sources: dict, site_url: str | None = None,
+                   history: list[dict] | None = None, now: datetime | None = None) -> str:
+    """Недельный отчёт: по каждому направлению — лучшая цена, лучшие варианты по каждому источнику,
+    минимум за неделю и сравнение с прошлой неделей."""
+    now = now or datetime.now().astimezone()
+    week_ago, two_weeks = now - timedelta(days=7), now - timedelta(days=14)
+    d1, d2 = week_ago.date(), now.date()
+    lines = [f"🗓 <b>Недельный отчёт по летним билетам</b>\n{fmt_date(d1)} – {fmt_date(d2)}, туда-обратно на 1 взрослого"]
     for st in sts:
+        lines.append("")
         if st.best:
-            diff = round((st.best.price_rub / st.threshold - 1) * 100)
-            mark = "✅" if st.best.price_rub <= st.threshold else ("🔸" if diff <= 15 else "▫️")
-            lines.append(
-                f"{mark} {html.escape(st.name)}: {fmt_rub(st.best.price_rub)} "
-                f"({'+' if diff > 0 else ''}{diff}% к порогу), {fmt_date(st.best.depart)}–{fmt_date(st.best.ret)}, "
-                f"{SOURCE_TITLES.get(st.best.source, st.best.source)}"
-            )
+            b = st.best
+            diff = round((b.price_rub / st.threshold - 1) * 100)
+            mark = "✅" if b.price_rub <= st.threshold else ("🔸" if diff <= 15 else "▫️")
+            head = (f"{mark} <b>{html.escape(st.name)}: {fmt_rub(b.price_rub)}</b> "
+                    f"({'+' if diff > 0 else ''}{diff}% к порогу {fmt_rub(st.threshold)})")
+            lines.append(head)
+            lines.append(f"   {offer_line(b)} — {SOURCE_TITLES.get(b.source, b.source)}")
         else:
-            lines.append(f"▫️ {html.escape(st.name)}: летних билетов в выдаче пока нет")
+            lines.append(f"▫️ <b>{html.escape(st.name)}</b>: летних билетов сейчас нет (порог {fmt_rub(st.threshold)})")
+        # по каждому источнику
+        if st.by_source:
+            parts = []
+            for src, o in sorted(st.by_source.items(), key=lambda kv: kv[1].price_rub):
+                title = SOURCE_TITLES.get(src, src).replace(" (Aviasales)", "")
+                if o.via:
+                    title += f" через {o.via}"
+                parts.append(f"{html.escape(title)} {fmt_rub(o.price_rub)}")
+            lines.append("   Варианты: " + " · ".join(parts))
+        # динамика
+        if history is not None:
+            this_w = week_min(history, st.route_id, week_ago, now + timedelta(seconds=1))
+            prev_w = week_min(history, st.route_id, two_weeks, week_ago)
+            if this_w and prev_w:
+                lines.append(f"   Минимум за неделю {fmt_rub(this_w)}, неделей раньше {fmt_rub(prev_w)} ({_pct(this_w, prev_w)})")
+            elif this_w:
+                lines.append(f"   Минимум за неделю {fmt_rub(this_w)}")
     bad = [SOURCE_TITLES.get(k, k) for k, v in sources.items() if not v.get("skipped") and not v.get("ok")]
     skipped = [f"{SOURCE_TITLES.get(k, k)} ({v['skipped']})" for k, v in sources.items() if v.get("skipped")]
+    ok = [f"{SOURCE_TITLES.get(k, k)}: {v.get('summer', 0)} летних" for k, v in sources.items()
+          if v.get("ok") and not v.get("skipped")]
+    lines.append("")
+    if ok:
+        lines.append("Источники: " + html.escape(", ".join(ok)))
     if bad:
-        lines.append("\n⚠️ Ошибки источников: " + ", ".join(bad))
+        lines.append("⚠️ Ошибки: " + html.escape(", ".join(bad)))
     if skipped:
         lines.append("Пропущены: " + html.escape(", ".join(skipped)))
     if site_url:
-        lines.append(f'\n<a href="{html.escape(site_url, quote=True)}">Все цены и история</a>')
+        lines.append(f'<a href="{html.escape(site_url, quote=True)}">Все цены и история</a>')
     return "\n".join(lines)
 
 

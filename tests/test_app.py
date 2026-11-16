@@ -78,7 +78,8 @@ def test_messages_escape_html():
     msg = alert_message([s for s in sts if s.is_deal], "https://me.github.io/flight-tracker/")
     assert "A&amp;B &lt;Air&gt;" in msg and "a=1&amp;b=2" in msg and "Сеул" in msg
     dig = digest_message(sts, {"etihad": {"ok": False, "skipped": None}, "google_flights": {"ok": True, "skipped": "нет ключа"}})
-    assert "Ошибки источников: Etihad" in dig and "Google Flights (нет ключа)" in dig
+    assert "Ошибки: Etihad" in dig and "Google Flights (нет ключа)" in dig
+    assert "Варианты: Aviasales 41" in dig
 
 
 def test_full_run(tmp_path, monkeypatch):
@@ -108,12 +109,32 @@ def test_full_run(tmp_path, monkeypatch):
     assert latest2["sent"] == []
     assert len(store.history()) == 2
 
-    # понедельник — еженедельная сводка, один раз за день
-    monday = datetime(2026, 11, 23, 4, 17, tzinfo=timezone.utc)
-    latest3 = run(cfg, store, None, use_browser=False, now=monday, results=results, env={})
-    assert "digest" in latest3["sent"]
-    latest4 = run(cfg, store, None, use_browser=False, now=monday + timedelta(hours=4), results=results, env={})
-    assert "digest" not in latest4["sent"]
+    # воскресенье: до 18:00 по Москве отчёта нет, первая проверка после — отчёт, дальше в этот день — нет
+    sun_day = datetime(2026, 11, 22, 12, 17, tzinfo=timezone.utc)      # 15:17 МСК
+    assert "digest" not in run(cfg, store, None, use_browser=False, now=sun_day, results=results, env={})["sent"]
+    sun_eve = datetime(2026, 11, 22, 16, 17, tzinfo=timezone.utc)      # 19:17 МСК
+    assert "digest" in run(cfg, store, None, use_browser=False, now=sun_eve, results=results, env={})["sent"]
+    later = sun_eve + timedelta(hours=4)
+    assert "digest" not in run(cfg, store, None, use_browser=False, now=later, results=results, env={})["sent"]
+    # по кнопке — в любой день
+    forced = run(cfg, store, None, use_browser=False, now=NOW + timedelta(days=1), results=results,
+                 env={"FORCE_REPORT": "1"})
+    assert "digest" in forced["sent"]
+
+
+def test_report_dynamics():
+    from tracker.notify import digest_message
+    cfg = load_config("config.yaml")
+    hist = [
+        {"at": (NOW - timedelta(days=10)).isoformat(), "routes": {"SEL": {"best": 50000}}},
+        {"at": (NOW - timedelta(days=2)).isoformat(), "routes": {"SEL": {"best": 45000}}},
+    ]
+    sts = evaluate(cfg, [offer("SEL", 46000, airline="CA"), offer("SEL", 47000, source="self_transfer", via="Ташкент")], hist, NOW)
+    msg = digest_message(sts, {}, None, history=hist, now=NOW)
+    assert "Недельный отчёт" in msg
+    assert "Минимум за неделю 45" in msg and "неделей раньше 50" in msg and "−10%" in msg
+    assert "Свои пересадки через Ташкент 47" in msg
+    assert "Нью-Йорк</b>: летних билетов сейчас нет" in msg
 
 
 def test_health_warning(tmp_path, monkeypatch):

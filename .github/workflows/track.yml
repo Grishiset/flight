@@ -10,6 +10,10 @@ on:
         description: "Пробный запуск: не сохранять и не слать уведомления"
         type: boolean
         default: false
+      report:
+        description: "Отправить недельный отчёт в Telegram прямо сейчас"
+        type: boolean
+        default: false
 
 permissions:
   contents: write             # сохранить историю цен в data/
@@ -46,6 +50,7 @@ jobs:
           SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          FORCE_REPORT: ${{ inputs.report && '1' || '' }}
           SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
         run: |
           python -m tracker run ${{ inputs.dry_run && '--dry-run' || '' }}

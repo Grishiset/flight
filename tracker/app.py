@@ -94,13 +94,23 @@ def run(
         tg.send(alert_message(to_alert, site_url))
         sent.append("alert:" + ",".join(s.route_id for s in to_alert))
 
-    # 2. Еженедельная сводка — в первый запуск выбранного дня недели (по Москве)
+    # 2. Еженедельный отчёт — в первую проверку после digest_hour_msk в выбранный день (по Москве),
+    #    либо сразу, если попросили (FORCE_REPORT=1 / кнопка в GitHub Actions)
     weekday = cfg.alerts.get("digest_weekday")
-    msk_day = now.astimezone(MSK).date()
-    if weekday is not None and msk_day.weekday() == int(weekday) and state.get("last_digest") != msk_day.isoformat():
-        tg.send(digest_message(statuses, srcs, site_url))
-        state["last_digest"] = msk_day.isoformat()
-        sent.append("digest")
+    msk_now = now.astimezone(MSK)
+    msk_day = msk_now.date()
+    due = (
+        weekday is not None
+        and msk_day.weekday() == int(weekday)
+        and msk_now.hour >= int(cfg.alerts.get("digest_hour_msk", 0))
+        and state.get("last_digest") != msk_day.isoformat()
+    )
+    forced = env.get("FORCE_REPORT") in ("1", "true", "True")
+    if due or forced:
+        delivered = tg.send(digest_message(statuses, srcs, site_url, history=history, now=now))
+        if due:
+            state["last_digest"] = msk_day.isoformat()
+        sent.append("digest" if delivered or dry_run or not tg.configured else "digest:not_delivered")
 
     # 3. Все источники падают несколько запусков подряд
     active = [v for v in srcs.values() if not v["skipped"]]
