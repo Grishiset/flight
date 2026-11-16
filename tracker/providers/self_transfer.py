@@ -22,7 +22,7 @@ from ..airlines import airline_name
 from ..config import Window
 from ..models import Offer, SourceResult
 from .base import Provider
-from .travelpayouts import TokenError, month_pairs, route_dests, tp_request
+from .travelpayouts import TokenError, aviasales_link, month_pairs, route_dests, tp_request
 
 
 @dataclass
@@ -49,7 +49,7 @@ class Leg:
         }
 
 
-def parse_legs(items: list[dict]) -> list[Leg]:
+def parse_legs(items: list[dict], passengers: int = 1) -> list[Leg]:
     legs = []
     for it in items or []:
         try:
@@ -72,7 +72,7 @@ def parse_legs(items: list[dict]) -> list[Leg]:
                 price=price,
                 airline=airline_name(it.get("airline")),
                 transfers=int(it.get("transfers") or 0),
-                link=("https://www.aviasales.ru" + link) if link and link.startswith("/") else link,
+                link=aviasales_link(link, passengers),
             )
         )
     return legs
@@ -242,7 +242,8 @@ class SelfTransferProvider(Provider):
                     time.sleep(float(self.opts.get("pause_seconds", 0.2)))
                 self._calls += 1
                 try:
-                    self._cache[key] = parse_legs(tp_request(self.ctx.http, self.ctx.env["TRAVELPAYOUTS_TOKEN"], params))
+                    self._cache[key] = parse_legs(tp_request(self.ctx.http, self.ctx.env["TRAVELPAYOUTS_TOKEN"], params),
+                                                  cfg.passengers)
                 except TokenError:
                     raise
                 except Exception as e:  # noqa: BLE001

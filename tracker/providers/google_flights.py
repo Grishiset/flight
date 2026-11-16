@@ -29,7 +29,9 @@ def date_plan(cfg, trip_days: list[int], every_days: int) -> list[tuple[str, dat
     return plan
 
 
-def parse_response(body: dict, route_id: str, dep: date, ret: date) -> list[Offer]:
+def parse_response(body: dict, route_id: str, dep: date, ret: date, passengers: int = 1) -> list[Offer]:
+    """Google отдаёт цену за всех пассажиров — переводим в цену с человека."""
+    n = max(1, passengers)
     flights = (body.get("best_flights") or []) + (body.get("other_flights") or [])
     insights = body.get("price_insights") or {}
     typical = insights.get("typical_price_range")
@@ -51,7 +53,7 @@ def parse_response(body: dict, route_id: str, dep: date, ret: date) -> list[Offe
             Offer(
                 route_id=route_id,
                 source="google_flights",
-                price_rub=int(price),
+                price_rub=int(round(price / n)),
                 depart=dep,
                 ret=ret,
                 airline=", ".join(airlines) or None,
@@ -61,7 +63,7 @@ def parse_response(body: dict, route_id: str, dep: date, ret: date) -> list[Offe
                 link=url,
                 price_orig=price,
                 currency_orig="RUB",
-                typical_range=[int(x) for x in typical] if typical else None,
+                typical_range=[int(round(x / n)) for x in typical] if typical else None,
                 note=f"Google: цена {insights.get('price_level')}" if insights.get("price_level") else None,
             )
         )
@@ -101,7 +103,7 @@ class GoogleFlightsProvider(Provider):
                 "type": 1,
                 "currency": "RUB",
                 "hl": "ru",
-                "adults": 1,
+                "adults": cfg.passengers,
                 "api_key": self.ctx.env["SERPAPI_KEY"],
             }
             try:
@@ -116,6 +118,6 @@ class GoogleFlightsProvider(Provider):
                 if "returned any results" not in str(err):
                     res.errors.append(f"{route_id} {dep}: {err}")
                 continue
-            res.offers.extend(parse_response(body, route_id, dep, ret))
+            res.offers.extend(parse_response(body, route_id, dep, ret, cfg.passengers))
         st["cursor"] = (cursor + n) % len(plan)
         st["plan_size"] = len(plan)

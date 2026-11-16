@@ -48,7 +48,7 @@ a.btn:hover { border-color: var(--accent); color: var(--accent); }
 select { font: inherit; font-size: 14px; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; }
 .scroll { overflow-x: auto; }
 table.offers { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 14px; }
-.offers td:nth-child(3) { white-space: nowrap; }
+.offers td.dates { white-space: nowrap; }
 .offers th { text-align: left; color: var(--muted); font-weight: 500; font-size: 12px; padding: 6px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
 .offers td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
 .offers tr:last-child td { border-bottom: none; }
@@ -68,3 +68,4 @@ ul.legs { list-style: none; margin: 4px 0 0; padding: 0; font-size: 12px; color:
 ul.legs li { margin: 2px 0; white-space: normal; }
 ul.legs a { color: var(--accent); text-decoration: none; }
 .legnote { font-size: 12px; color: var(--muted); white-space: normal; }
+.muted { color: var(--muted); }

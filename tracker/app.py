@@ -22,6 +22,19 @@ log = logging.getLogger(__name__)
 MSK = ZoneInfo("Europe/Moscow")
 
 
+def report_due(alerts: dict, msk_now: datetime) -> bool:
+    """Пора ли слать отчёт: подходящий день и время уже наступило (по Москве)."""
+    days = alerts.get("digest_days", alerts.get("digest_weekday"))
+    if days is None:
+        return False
+    if days != "daily":
+        allowed = {int(d) for d in (days if isinstance(days, list) else [days])}
+        if msk_now.weekday() not in allowed:
+            return False
+    hh, mm = (str(alerts.get("digest_time_msk") or f"{alerts.get('digest_hour_msk', 0)}:00").split(":") + ["0"])[:2]
+    return (msk_now.hour, msk_now.minute) >= (int(hh), int(mm))
+
+
 def collect(ctx: Context, only: list[str] | None = None) -> list[SourceResult]:
     results = []
     for cls in ALL_PROVIDERS:
@@ -91,23 +104,18 @@ def run(
     # 1. Выгодные цены
     to_alert = pick_alerts(statuses, state, cfg, now)
     if to_alert:
-        tg.send(alert_message(to_alert, site_url))
+        tg.send(alert_message(to_alert, site_url, passengers=cfg.passengers))
         sent.append("alert:" + ",".join(s.route_id for s in to_alert))
 
-    # 2. Еженедельный отчёт — в первую проверку после digest_hour_msk в выбранный день (по Москве),
+    # 2. Отчёт — в первую проверку после digest_time_msk в подходящий день (по Москве),
     #    либо сразу, если попросили (FORCE_REPORT=1 / кнопка в GitHub Actions)
-    weekday = cfg.alerts.get("digest_weekday")
     msk_now = now.astimezone(MSK)
     msk_day = msk_now.date()
-    due = (
-        weekday is not None
-        and msk_day.weekday() == int(weekday)
-        and msk_now.hour >= int(cfg.alerts.get("digest_hour_msk", 0))
-        and state.get("last_digest") != msk_day.isoformat()
-    )
+    due = report_due(cfg.alerts, msk_now) and state.get("last_digest") != msk_day.isoformat()
     forced = env.get("FORCE_REPORT") in ("1", "true", "True")
     if due or forced:
-        delivered = tg.send(digest_message(statuses, srcs, site_url, history=history, now=now))
+        delivered = tg.send(digest_message(statuses, srcs, site_url, history=history, now=now,
+                                           passengers=cfg.passengers))
         if due:
             state["last_digest"] = msk_day.isoformat()
         sent.append("digest" if delivered or dry_run or not tg.configured else "digest:not_delivered")
@@ -145,6 +153,7 @@ def run(
             "max_days": cfg.window.max_days,
         },
         "origin": cfg.origin_name,
+        "passengers": cfg.passengers,
         "rates_source": rates.source,
         "routes": [s.to_dict() for s in statuses],
         "sources": srcs,

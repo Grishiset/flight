@@ -61,14 +61,22 @@ def offer_line(o: Offer) -> str:
     return ", ".join(parts)
 
 
-def alert_message(sts: list[RouteStatus], site_url: str | None = None) -> str:
+def price_text(per_person: int, passengers: int) -> str:
+    """«41 000 ₽ с человека, 123 000 ₽ на троих»."""
+    if passengers <= 1:
+        return fmt_rub(per_person)
+    who = {2: "двоих", 3: "троих", 4: "четверых", 5: "пятерых"}.get(passengers, f"{passengers} чел.")
+    return f"{fmt_rub(per_person * passengers)} на {who} ({fmt_rub(per_person)} с человека)"
+
+
+def alert_message(sts: list[RouteStatus], site_url: str | None = None, passengers: int = 1) -> str:
     blocks = []
     for st in sts:
         o = st.best
         assert o is not None
         src = SOURCE_TITLES.get(o.source, o.source)
         lines = [
-            f"✈️ <b>{html.escape(st.name)} — {fmt_rub(o.price_rub)}</b> туда-обратно",
+            f"✈️ <b>{html.escape(st.name)} — {price_text(o.price_rub, passengers)}</b>, туда-обратно",
             offer_line(o),
             f"Источник: {src}. " + "; ".join(html.escape(r) for r in st.reasons) + ".",
         ]
@@ -79,7 +87,7 @@ def alert_message(sts: list[RouteStatus], site_url: str | None = None) -> str:
             direct = [v for k, v in st.by_source.items() if k != "self_transfer"]
             if direct:
                 d = min(direct, key=lambda x: x.price_rub)
-                lines.append(f"Для сравнения, одним билетом: {fmt_rub(d.price_rub)} "
+                lines.append(f"Для сравнения, одним билетом: {price_text(d.price_rub, passengers)} "
                              f"({SOURCE_TITLES.get(d.source, d.source)}, {fmt_date(d.depart)} → {fmt_date(d.ret)})")
         elif o.link:
             lines.append(f'<a href="{html.escape(o.link, quote=True)}">Открыть билет</a>')
@@ -111,25 +119,26 @@ def _pct(a: int, b: int) -> str:
 
 
 def digest_message(sts: list[RouteStatus], sources: dict, site_url: str | None = None,
-                   history: list[dict] | None = None, now: datetime | None = None) -> str:
-    """Недельный отчёт: по каждому направлению — лучшая цена, лучшие варианты по каждому источнику,
-    минимум за неделю и сравнение с прошлой неделей."""
+                   history: list[dict] | None = None, now: datetime | None = None,
+                   passengers: int = 1) -> str:
+    """Отчёт: по каждому направлению — лучшая цена, лучшие варианты по каждому источнику,
+    изменение за сутки и минимум за неделю."""
     now = now or datetime.now().astimezone()
-    week_ago, two_weeks = now - timedelta(days=7), now - timedelta(days=14)
-    d1, d2 = week_ago.date(), now.date()
-    lines = [f"🗓 <b>Недельный отчёт по летним билетам</b>\n{fmt_date(d1)} – {fmt_date(d2)}, туда-обратно на 1 взрослого"]
+    n = max(1, passengers)
+    who = "1 взрослого" if n == 1 else f"{n} взрослых"
+    lines = [f"🗓 <b>Отчёт по летним билетам</b> · {fmt_date(now.date())}\n"
+             f"Туда-обратно на {who}; в скобках — цена с человека"]
     for st in sts:
         lines.append("")
         if st.best:
             b = st.best
             diff = round((b.price_rub / st.threshold - 1) * 100)
             mark = "✅" if b.price_rub <= st.threshold else ("🔸" if diff <= 15 else "▫️")
-            head = (f"{mark} <b>{html.escape(st.name)}: {fmt_rub(b.price_rub)}</b> "
-                    f"({'+' if diff > 0 else ''}{diff}% к порогу {fmt_rub(st.threshold)})")
-            lines.append(head)
+            lines.append(f"{mark} <b>{html.escape(st.name)}: {fmt_rub(b.price_rub * n)}</b> ({fmt_rub(b.price_rub)}, "
+                         f"{'+' if diff > 0 else ''}{diff}% к порогу {fmt_rub(st.threshold)})")
             lines.append(f"   {offer_line(b)} — {SOURCE_TITLES.get(b.source, b.source)}")
         else:
-            lines.append(f"▫️ <b>{html.escape(st.name)}</b>: летних билетов сейчас нет (порог {fmt_rub(st.threshold)})")
+            lines.append(f"▫️ <b>{html.escape(st.name)}</b>: летних билетов сейчас нет (порог {fmt_rub(st.threshold)} с человека)")
         # по каждому источнику
         if st.by_source:
             parts = []
@@ -137,16 +146,19 @@ def digest_message(sts: list[RouteStatus], sources: dict, site_url: str | None =
                 title = SOURCE_TITLES.get(src, src).replace(" (Aviasales)", "")
                 if o.via:
                     title += f" через {o.via}"
-                parts.append(f"{html.escape(title)} {fmt_rub(o.price_rub)}")
+                parts.append(f"{html.escape(title)} {fmt_rub(o.price_rub * n)}")
             lines.append("   Варианты: " + " · ".join(parts))
-        # динамика
+        # динамика (цены с человека)
         if history is not None:
-            this_w = week_min(history, st.route_id, week_ago, now + timedelta(seconds=1))
-            prev_w = week_min(history, st.route_id, two_weeks, week_ago)
-            if this_w and prev_w:
-                lines.append(f"   Минимум за неделю {fmt_rub(this_w)}, неделей раньше {fmt_rub(prev_w)} ({_pct(this_w, prev_w)})")
-            elif this_w:
-                lines.append(f"   Минимум за неделю {fmt_rub(this_w)}")
+            yday = week_min(history, st.route_id, now - timedelta(hours=48), now - timedelta(hours=20))
+            week = week_min(history, st.route_id, now - timedelta(days=7), now + timedelta(seconds=1))
+            bits = []
+            if st.best and yday:
+                bits.append(f"сутки назад {fmt_rub(yday)} ({_pct(st.best.price_rub, yday)})")
+            if week:
+                bits.append(f"минимум за неделю {fmt_rub(week)}")
+            if bits:
+                lines.append("   С человека: " + ", ".join(bits))
     bad = [SOURCE_TITLES.get(k, k) for k, v in sources.items() if not v.get("skipped") and not v.get("ok")]
     skipped = [f"{SOURCE_TITLES.get(k, k)} ({v['skipped']})" for k, v in sources.items() if v.get("skipped")]
     ok = [f"{SOURCE_TITLES.get(k, k)}: {v.get('summer', 0)} летних" for k, v in sources.items()

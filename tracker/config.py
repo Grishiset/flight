@@ -45,6 +45,7 @@ class Config:
     alerts: dict
     sources: dict
     fallback_rates: dict
+    passengers: int = 1
 
     def route(self, route_id: str) -> Route:
         for r in self.routes:
@@ -98,4 +99,5 @@ def load_config(path: str | Path = "config.yaml") -> Config:
         alerts=raw.get("alerts") or {},
         sources=raw.get("sources") or {},
         fallback_rates=raw.get("fallback_rates") or {},
+        passengers=max(1, int(raw.get("passengers") or 1)),
     )

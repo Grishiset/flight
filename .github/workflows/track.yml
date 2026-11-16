@@ -4,6 +4,8 @@ on:
   schedule:
     # Каждые 4 часа (время UTC; GitHub может запускать с опозданием до ~30 минут)
     - cron: "17 */4 * * *"
+    # Ежедневный отчёт в 9:30 по Москве (= 6:30 UTC)
+    - cron: "30 6 * * *"
   workflow_dispatch:          # кнопка «Run workflow» — проверить прямо сейчас
     inputs:
       dry_run:
@@ -11,7 +13,7 @@ on:
         type: boolean
         default: false
       report:
-        description: "Отправить недельный отчёт в Telegram прямо сейчас"
+        description: "Отправить отчёт в Telegram прямо сейчас"
         type: boolean
         default: false
 

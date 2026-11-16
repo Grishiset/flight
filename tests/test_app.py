@@ -84,6 +84,7 @@ def test_messages_escape_html():
 
 def test_full_run(tmp_path, monkeypatch):
     cfg = load_config("config.yaml")
+    cfg.alerts["digest_days"] = None   # отчёт проверяется отдельно
     store = Store(tmp_path / "data")
     results = [
         SourceResult("travelpayouts", offers=[offer("SEL", 39900, airline="CA", link="https://www.aviasales.ru/search/x")]),
@@ -109,17 +110,31 @@ def test_full_run(tmp_path, monkeypatch):
     assert latest2["sent"] == []
     assert len(store.history()) == 2
 
-    # воскресенье: до 18:00 по Москве отчёта нет, первая проверка после — отчёт, дальше в этот день — нет
-    sun_day = datetime(2026, 11, 22, 12, 17, tzinfo=timezone.utc)      # 15:17 МСК
-    assert "digest" not in run(cfg, store, None, use_browser=False, now=sun_day, results=results, env={})["sent"]
-    sun_eve = datetime(2026, 11, 22, 16, 17, tzinfo=timezone.utc)      # 19:17 МСК
-    assert "digest" in run(cfg, store, None, use_browser=False, now=sun_eve, results=results, env={})["sent"]
-    later = sun_eve + timedelta(hours=4)
-    assert "digest" not in run(cfg, store, None, use_browser=False, now=later, results=results, env={})["sent"]
-    # по кнопке — в любой день
+    # по кнопке — в любой момент
     forced = run(cfg, store, None, use_browser=False, now=NOW + timedelta(days=1), results=results,
                  env={"FORCE_REPORT": "1"})
     assert "digest" in forced["sent"]
+
+
+def test_daily_report_at_930(tmp_path, monkeypatch):
+    from tracker.app import MSK, report_due
+    cfg = load_config("config.yaml")
+    assert cfg.alerts["digest_days"] == "daily" and cfg.alerts["digest_time_msk"] == "09:30"
+    at = lambda h, m, day=18: datetime(2026, 11, day, h, m, tzinfo=MSK)  # noqa: E731
+    assert not report_due(cfg.alerts, at(9, 29))
+    assert report_due(cfg.alerts, at(9, 30)) and report_due(cfg.alerts, at(11, 17))
+    assert not report_due({"digest_days": [6], "digest_time_msk": "18:00"}, at(19, 0, day=18))   # среда
+    assert report_due({"digest_days": [6], "digest_time_msk": "18:00"}, at(19, 0, day=22))       # воскресенье
+    assert not report_due({"digest_days": None}, at(12, 0))
+
+    store = Store(tmp_path / "data")
+    monkeypatch.setattr("tracker.app.load_rates", lambda http, fb: __import__("tracker.fx", fromlist=["Rates"]).Rates(fb, "test"))
+    results = [SourceResult("travelpayouts", offers=[offer("TYO", 60000)])]
+    kinds = []
+    for h, m in [(7, 17), (9, 31), (11, 17), (15, 17)]:          # МСК 18 ноября, затем утро 19-го
+        kinds.append("digest" in run(cfg, store, None, use_browser=False, now=at(h, m), results=results, env={})["sent"])
+    kinds.append("digest" in run(cfg, store, None, use_browser=False, now=at(9, 40, day=19), results=results, env={})["sent"])
+    assert kinds == [False, True, False, False, True]
 
 
 def test_report_dynamics():
@@ -127,18 +142,24 @@ def test_report_dynamics():
     cfg = load_config("config.yaml")
     hist = [
         {"at": (NOW - timedelta(days=10)).isoformat(), "routes": {"SEL": {"best": 50000}}},
-        {"at": (NOW - timedelta(days=2)).isoformat(), "routes": {"SEL": {"best": 45000}}},
+        {"at": (NOW - timedelta(days=3)).isoformat(), "routes": {"SEL": {"best": 45000}}},
     ]
     sts = evaluate(cfg, [offer("SEL", 46000, airline="CA"), offer("SEL", 47000, source="self_transfer", via="Ташкент")], hist, NOW)
     msg = digest_message(sts, {}, None, history=hist, now=NOW)
-    assert "Недельный отчёт" in msg
-    assert "Минимум за неделю 45" in msg and "неделей раньше 50" in msg and "−10%" in msg
+    assert "Отчёт по летним билетам" in msg
+    assert "минимум за неделю 45" in msg
     assert "Свои пересадки через Ташкент 47" in msg
+    hist.append({"at": (NOW - timedelta(hours=30)).isoformat(), "routes": {"SEL": {"best": 50000}}})
+    msg3 = digest_message(sts, {}, None, history=hist, now=NOW, passengers=3)
+    assert "сутки назад 50" in msg3 and "−8%" in msg3          # 46 000 против 50 000
+    assert "Сеул: 138\u202f000\u00a0₽" in msg3                   # 46 000 × 3
+    assert "3 взрослых" in msg3
     assert "Нью-Йорк</b>: летних билетов сейчас нет" in msg
 
 
 def test_health_warning(tmp_path, monkeypatch):
     cfg = load_config("config.yaml")
+    cfg.alerts["digest_days"] = None
     store = Store(tmp_path / "data")
     monkeypatch.setattr("tracker.app.load_rates", lambda http, fb: __import__("tracker.fx", fromlist=["Rates"]).Rates(fb, "test"))
     bad = [SourceResult("travelpayouts", ok=False, errors=["timeout"]), SourceResult("etihad", ok=False, errors=["403"])]
@@ -167,3 +188,17 @@ def test_telegram_many_recipients(monkeypatch):
     assert tg.send("привет") is True
     assert sent == ["111", "222", "-100333"]
     assert Telegram("token", "").configured is False
+
+
+def test_passengers_everywhere():
+    from tracker.notify import alert_message
+    from tracker.providers.google_flights import parse_response
+    cfg = load_config("config.yaml")
+    assert cfg.passengers == 3
+    sts = evaluate(cfg, [offer("SEL", 41000)], [], NOW)
+    msg = alert_message([s for s in sts if s.is_deal], None, passengers=3)
+    assert "123\u202f000\u00a0₽ на троих (41\u202f000\u00a0₽ с человека)" in msg
+    body = {"other_flights": [{"price": 150000, "flights": [{"airline": "Etihad"}], "layovers": []}],
+            "price_insights": {"typical_price_range": [180000, 240000]}}
+    o = parse_response(body, "NYC", date(2027, 6, 1), date(2027, 6, 15), passengers=3)[0]
+    assert o.price_rub == 50000 and o.typical_range == [60000, 80000]
