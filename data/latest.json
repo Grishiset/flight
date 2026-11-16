@@ -1,0 +1,184 @@
+{
+ "at": "2026-11-16T14:11:06+00:00",
+ "window": {
+  "start": "2027-06-01",
+  "end": "2027-08-31",
+  "min_days": 5,
+  "max_days": 30
+ },
+ "origin": "Москва",
+ "rates_source": "ЦБ РФ",
+ "routes": [
+  {
+   "route_id": "SEL",
+   "name": "Сеул",
+   "threshold": 42500,
+   "best": null,
+   "top": [],
+   "by_source": {},
+   "median": null,
+   "median_points": 0,
+   "reasons": [],
+   "is_deal": false
+  },
+  {
+   "route_id": "TYO",
+   "name": "Токио",
+   "threshold": 43900,
+   "best": {
+    "route_id": "TYO",
+    "source": "samokatus",
+    "price_rub": 55896,
+    "depart": "2027-06-06",
+    "ret": "2027-06-12",
+    "airline": null,
+    "stops": 1,
+    "origin": null,
+    "destination": null,
+    "link": "https://samokatus.ru/flights/mow/tyo/rt",
+    "price_orig": 55896,
+    "currency_orig": "RUB",
+    "note": null,
+    "typical_range": null,
+    "days": 6
+   },
+   "top": [
+    {
+     "route_id": "TYO",
+     "source": "samokatus",
+     "price_rub": 55896,
+     "depart": "2027-06-06",
+     "ret": "2027-06-12",
+     "airline": null,
+     "stops": 1,
+     "origin": null,
+     "destination": null,
+     "link": "https://samokatus.ru/flights/mow/tyo/rt",
+     "price_orig": 55896,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "days": 6
+    },
+    {
+     "route_id": "TYO",
+     "source": "samokatus",
+     "price_rub": 55896,
+     "depart": "2027-06-10",
+     "ret": "2027-06-19",
+     "airline": null,
+     "stops": 1,
+     "origin": null,
+     "destination": null,
+     "link": "https://samokatus.ru/flights/mow/tyo/rt",
+     "price_orig": 55896,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "days": 9
+    }
+   ],
+   "by_source": {
+    "samokatus": {
+     "route_id": "TYO",
+     "source": "samokatus",
+     "price_rub": 55896,
+     "depart": "2027-06-06",
+     "ret": "2027-06-12",
+     "airline": null,
+     "stops": 1,
+     "origin": null,
+     "destination": null,
+     "link": "https://samokatus.ru/flights/mow/tyo/rt",
+     "price_orig": 55896,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "days": 6
+    }
+   },
+   "median": null,
+   "median_points": 0,
+   "reasons": [],
+   "is_deal": false
+  },
+  {
+   "route_id": "NYC",
+   "name": "Нью-Йорк",
+   "threshold": 65800,
+   "best": null,
+   "top": [],
+   "by_source": {},
+   "median": null,
+   "median_points": 0,
+   "reasons": [],
+   "is_deal": false
+  },
+  {
+   "route_id": "LAX",
+   "name": "Лос-Анджелес",
+   "threshold": 72000,
+   "best": null,
+   "top": [],
+   "by_source": {},
+   "median": null,
+   "median_points": 0,
+   "reasons": [],
+   "is_deal": false
+  },
+  {
+   "route_id": "NZ",
+   "name": "Новая Зеландия",
+   "threshold": 66900,
+   "best": null,
+   "top": [],
+   "by_source": {},
+   "median": null,
+   "median_points": 0,
+   "reasons": [],
+   "is_deal": false
+  }
+ ],
+ "sources": {
+  "travelpayouts": {
+   "ok": false,
+   "skipped": "нет секрета TRAVELPAYOUTS_TOKEN",
+   "offers": 0,
+   "summer": 0,
+   "errors": []
+  },
+  "google_flights": {
+   "ok": false,
+   "skipped": "нет секрета SERPAPI_KEY",
+   "offers": 0,
+   "summer": 0,
+   "errors": []
+  },
+  "etihad": {
+   "ok": false,
+   "skipped": null,
+   "offers": 0,
+   "summer": 0,
+   "errors": [
+    "SEL рейсы-из-Москва-в-Сеул: The read operation timed out; браузер: Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.etihad.com/ru/flights/%D1%80%D0%B5%D0%B9%D1%81%D1%8B-%D0%B8%D0%B7-%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0-%D0%B2-%D0%A1%D0%B5%D1%83%D0%BB\nCall log:\n  - navigating to \"https://www.etihad.com/ru/flights/%D1%80%D0%B5%D0%B9%D1%81%D1%8B-%D0%B8%D0%B7-%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0-%D0%B2-%D0%A1%D0%B5%D1%83%D0%BB\", waiting until \"domcontentloaded\"\n",
+    "SEL рейсы-из-россия-в-Сеул: The read operation timed out; браузер: Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.etihad.com/ru/flights/%D1%80%D0%B5%D0%B9%D1%81%D1%8B-%D0%B8%D0%B7-%D1%80%D0%BE%D1%81%D1%81%D0%B8%D1%8F-%D0%B2-%D0%A1%D0%B5%D1%83%D0%BB\nCall log:\n  - navigating to \"https://www.etihad.com/ru/flights/%D1%80%D0%B5%D0%B9%D1%81%D1%8B-%D0%B8%D0%B7-%D1%80%D0%BE%D1%81%D1%81%D0%B8%D1%8F-%D0%B2-%D0%A1%D0%B5%D1%83%D0%BB\", waiting until \"domcontentloaded\"\n",
+    "TYO рейсы-из-Москва-в-Токио: The read operation timed out; браузер: Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.etihad.com/ru/flights/%D1%80%D0%B5%D0%B9%D1%81%D1%8B-%D0%B8%D0%B7-%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0-%D0%B2-%D0%A2%D0%BE%D0%BA%D0%B8%D0%BE\nCall log:\n  - navigating to \"https://www.etihad.com/ru/flights/%D1%80%D0%B5%D0%B9%D1%81%D1%8B-%D0%B8%D0%B7-%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0-%D0%B2-%D0%A2%D0%BE%D0%BA%D0%B8%D0%BE\", waiting until \"domcontentloaded\"\n",
+    "TYO рейсы-из-россия-в-Токио: The read operation timed out; браузер: Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.etihad.com/ru/flights/%D1%80%D0%B5%D0%B9%D1%81%D1%8B-%D0%B8%D0%B7-%D1%80%D0%BE%D1%81%D1%81%D0%B8%D1%8F-%D0%B2-%D0%A2%D0%BE%D0%BA%D0%B8%D0%BE\nCall log:\n  - navigating to \"https://www.etihad.com/ru/flights/%D1%80%D0%B5%D0%B9%D1%81%D1%8B-%D0%B8%D0%B7-%D1%80%D0%BE%D1%81%D1%81%D0%B8%D1%8F-%D0%B2-%D0%A2%D0%BE%D0%BA%D0%B8%D0%BE\", waiting until \"domcontentloaded\"\n",
+    "NYC рейсы-из-Москва-в-Нью-Йорк: The read operation timed out; браузер: Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.etihad.com/ru/flights/%D1%80%D0%B5%D0%B9%D1%81%D1%8B-%D0%B8%D0%B7-%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0-%D0%B2-%D0%9D%D1%8C%D1%8E-%D0%99%D0%BE%D1%80%D0%BA\nCall log:\n  - navigating to \"https://www.etihad.com/ru/flights/%D1%80%D0%B5%D0%B9%D1%81%D1%8B-%D0%B8%D0%B7-%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0-%D0%B2-%D0%9D%D1%8C%D1%8E-%D0%99%D0%BE%D1%80%D0%BA\", waiting until \"domcontentloaded\"\n",
+    "NYC рейсы-из-россия-в-Нью-Йорк: The read operation timed out; браузер: Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.etihad.com/ru/flights/%D1%80%D0%B5%D0%B9%D1%81%D1%8B-%D0%B8%D0%B7-%D1%80%D0%BE%D1%81%D1%81%D0%B8%D1%8F-%D0%B2-%D0%9D%D1%8C%D1%8E-%D0%99%D0%BE%D1%80%D0%BA\nCall log:\n  - navigating to \"https://www.etihad.com/ru/flights/%D1%80%D0%B5%D0%B9%D1%81%D1%8B-%D0%B8%D0%B7-%D1%80%D0%BE%D1%81%D1%81%D0%B8%D1%8F-%D0%B2-%D0%9D%D1%8C%D1%8E-%D0%99%D0%BE%D1%80%D0%BA\", waiting until \"domcontentloaded\"\n",
+    "LAX рейсы-из-Москва-в-Лос-Анджелес: The read operation timed out; браузер: Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.etihad.com/ru/flights/%D1%80%D0%B5%D0%B9%D1%81%D1%8B-%D0%B8%D0%B7-%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0-%D0%B2-%D0%9B%D0%BE%D1%81-%D0%90%D0%BD%D0%B4%D0%B6%D0%B5%D0%BB%D0%B5%D1%81\nCall log:\n  - navigating to \"https://www.etihad.com/ru/flights/%D1%80%D0%B5%D0%B9%D1%81%D1%8B-%D0%B8%D0%B7-%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0-%D0%B2-%D0%9B%D0%BE%D1%81-%D0%90%D0%BD%D0%B4%D0%B6%D0%B5%D0%BB%D0%B5%D1%81\", waiting until \"domcontentloaded\"\n",
+    "NZ рейсы-из-россия-в-новая-зеландия: The read operation timed out; браузер: Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.etihad.com/ru/flights/%D1%80%D0%B5%D0%B9%D1%81%D1%8B-%D0%B8%D0%B7-%D1%80%D0%BE%D1%81%D1%81%D0%B8%D1%8F-%D0%B2-%D0%BD%D0%BE%D0%B2%D0%B0%D1%8F-%D0%B7%D0%B5%D0%BB%D0%B0%D0%BD%D0%B4%D0%B8%D1%8F\nCall log:\n  - navigating to \"https://www.etihad.com/ru/flights/%D1%80%D0%B5%D0%B9%D1%81%D1%8B-%D0%B8%D0%B7-%D1%80%D0%BE%D1%81%D1%81%D0%B8%D1%8F-%D0%B2-%D0%BD%D0%BE%D0%B2%D0%B0%D1%8F-%D0%B7%D0%B5%D0%BB%D0%B0%D0%BD%D0%B4%D0%B8%D1%8F\", waiting until \"domcontentloaded\"\n"
+   ]
+  },
+  "samokatus": {
+   "ok": true,
+   "skipped": null,
+   "offers": 49,
+   "summer": 2,
+   "errors": []
+  }
+ },
+ "sent": [
+  "digest"
+ ]
+}

@@ -1,0 +1,56 @@
+[
+ {
+  "at": "2026-11-16T14:11:06+00:00",
+  "routes": {
+   "SEL": {
+    "best": null,
+    "src": null,
+    "by_source": {}
+   },
+   "TYO": {
+    "best": 55896,
+    "src": "samokatus",
+    "by_source": {
+     "samokatus": 55896
+    }
+   },
+   "NYC": {
+    "best": null,
+    "src": null,
+    "by_source": {}
+   },
+   "LAX": {
+    "best": null,
+    "src": null,
+    "by_source": {}
+   },
+   "NZ": {
+    "best": null,
+    "src": null,
+    "by_source": {}
+   }
+  },
+  "sources": {
+   "travelpayouts": {
+    "ok": false,
+    "offers": 0,
+    "skipped": "нет секрета TRAVELPAYOUTS_TOKEN"
+   },
+   "google_flights": {
+    "ok": false,
+    "offers": 0,
+    "skipped": "нет секрета SERPAPI_KEY"
+   },
+   "etihad": {
+    "ok": false,
+    "offers": 0,
+    "skipped": null
+   },
+   "samokatus": {
+    "ok": true,
+    "offers": 49,
+    "skipped": null
+   }
+  }
+ }
+]
