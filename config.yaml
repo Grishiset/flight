@@ -85,6 +85,25 @@ sources:
   travelpayouts:
     enabled: true                    # нужен секрет TRAVELPAYOUTS_TOKEN
     market: ru
+  # Маршруты из отдельных билетов через хаб: Москва ⇄ хаб + хаб ⇄ направление.
+  # Данные — из Aviasales (тот же TRAVELPAYOUTS_TOKEN). Билеты не связаны между собой:
+  # багаж перерегистрировать, за опоздание на следующий рейс никто не отвечает.
+  self_transfer:
+    enabled: true
+    hubs:
+      - {code: TAS, name: Ташкент}
+      - {code: IST, name: Стамбул}
+      - {code: ALA, name: Алматы}
+      - {code: DXB, name: Дубай}
+    min_connection_hours: 4          # минимум между прилётом и следующим вылетом
+    airport_change_extra_hours: 3    # ещё столько, если улетать из другого аэропорта (IST ↔ SAW)
+    max_connection_hours: 30         # стыковки длиннее не рассматриваем
+    overnight_after_hours: 10        # стыковка дольше — считаем, что нужна ночёвка…
+    overnight_cost_rub: 4000         # …и добавляем к цене столько ₽ за каждую
+    min_stay_days: 1                 # минимум на месте
+    keep_per_hub: 5                  # сколько лучших вариантов сохранять на хаб и направление
+    market: ru
+
   google_flights:
     enabled: true                    # нужен секрет SERPAPI_KEY; без него источник пропускается
     searches_per_run: 1              # 6 запусков в день × 30 = 180 поисков/мес (бесплатно — 250)

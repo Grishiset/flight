@@ -1,5 +1,5 @@
 (() => {
-  const SRC = { travelpayouts: 'Aviasales', google_flights: 'Google Flights', etihad: 'Etihad', samokatus: 'Самокатус' };
+  const SRC = { travelpayouts: 'Aviasales', google_flights: 'Google Flights', etihad: 'Etihad', samokatus: 'Самокатус', self_transfer: 'Свои пересадки' };
   const MON = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
   const $ = (id) => document.getElementById(id);
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
@@ -14,6 +14,21 @@
     tip.style.left = Math.max(8, x) + 'px'; tip.style.top = (ev.clientY - 36) + 'px';
   }
   const hideTip = () => { tip.hidden = true; };
+
+  function legsList(o) {
+    const ul = el('ul', 'legs');
+    for (const g of o.legs) {
+      const li = el('li');
+      // местное время вылета, как в билете (не переводим в часовой пояс читателя)
+      const when = `${d(g.dep.slice(0, 10))} ${g.dep.slice(11, 16)}`;
+      const text = `${g.from}→${g.to} ${when} · ${g.airline || ''} · ${rub(g.price)}`;
+      if (g.link) { const a = el('a', null, text); a.href = g.link; a.target = '_blank'; a.rel = 'noopener'; li.append(a); }
+      else li.textContent = text;
+      ul.append(li);
+    }
+    if (o.note) ul.append(el('li', 'legnote', o.note));
+    return ul;
+  }
 
   function sparkline(points, threshold, colorVar) {
     const ns = 'http://www.w3.org/2000/svg';
@@ -80,12 +95,13 @@
       if (r.best) {
         const b = r.best;
         c.append(el('div', 'price', rub(b.price_rub)));
-        c.append(el('div', 'sub', `${d(b.depart)} → ${d(b.ret)} (${b.days} дн.)${b.airline ? ', ' + b.airline : ''}`));
+        c.append(el('div', 'sub', `${d(b.depart)} → ${d(b.ret)} (${b.days} дн.)${b.via ? ', через ' + b.via : ''}${b.airline ? ', ' + b.airline : ''}`));
+        if (b.legs) c.append(legsList(b));
         c.append(el('div', 'sub', `${SRC[b.source] || b.source} · порог ${rub(r.threshold)}${r.median ? ' · обычно ' + rub(r.median) : ''}`));
         if (r.reasons.length) { const ul = el('ul', 'reasons'); r.reasons.forEach((x) => ul.append(el('li', null, x))); c.append(ul); }
         const others = Object.entries(r.by_source).filter(([k]) => k !== b.source).map(([k, v]) => `${SRC[k] || k}: ${rub(v.price_rub)}`);
         if (others.length) c.append(el('div', 'sub', 'Другие источники: ' + others.join(' · ')));
-        if (b.link) { const a = el('a', 'btn', 'Открыть билет →'); a.href = b.link; a.target = '_blank'; a.rel = 'noopener'; c.append(a); }
+        if (b.link && !b.legs) { const a = el('a', 'btn', 'Открыть билет →'); a.href = b.link; a.target = '_blank'; a.rel = 'noopener'; c.append(a); }
       } else {
         c.append(el('div', 'price none', 'Летних билетов пока нет'));
         c.append(el('div', 'sub', `Порог ${rub(r.threshold)}`));
@@ -126,11 +142,14 @@
       const tr = el('tr');
       tr.append(el('td', null, r.name));
       tr.append(el('td', 'num' + (o.price_rub <= r.threshold ? ' good' : ''), rub(o.price_rub)));
-      tr.append(el('td', null, `${d(o.depart)} → ${d(o.ret)} (${o.days} дн.)`));
+      const dc = el('td', null, `${d(o.depart)} → ${d(o.ret)} (${o.days} дн.)`);
+      if (o.via) dc.append(el('div', 'legnote', 'через ' + o.via + (o.extra_rub ? ` · вкл. ночёвку ${rub(o.extra_rub)}` : '')));
+      if (o.legs) dc.append(legsList(o));
+      tr.append(dc);
       tr.append(el('td', null, (o.airline || '—') + (o.stops != null ? `, пересадок: ${o.stops}` : '')));
       const s = el('td'); s.append(el('span', 'src', SRC[o.source] || o.source)); tr.append(s);
       const l = el('td');
-      if (o.link) { const a = el('a', null, 'открыть'); a.href = o.link; a.target = '_blank'; a.rel = 'noopener'; l.append(a); }
+      if (o.link && !o.legs) { const a = el('a', null, 'открыть'); a.href = o.link; a.target = '_blank'; a.rel = 'noopener'; l.append(a); }
       tr.append(l);
       tb.append(tr);
     }

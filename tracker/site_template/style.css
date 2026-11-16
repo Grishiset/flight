@@ -64,3 +64,7 @@ table.offers { width: 100%; min-width: 760px; border-collapse: collapse; font-si
 .how summary { cursor: pointer; font-weight: 600; }
 .how p { color: var(--muted); font-size: 14px; max-width: 75ch; }
 .tip { position: fixed; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 5px 8px; font-size: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.15); z-index: 10; white-space: nowrap; }
+ul.legs { list-style: none; margin: 4px 0 0; padding: 0; font-size: 12px; color: var(--muted); }
+ul.legs li { margin: 2px 0; white-space: normal; }
+ul.legs a { color: var(--accent); text-decoration: none; }
+.legnote { font-size: 12px; color: var(--muted); white-space: normal; }

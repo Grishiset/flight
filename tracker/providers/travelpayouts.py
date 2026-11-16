@@ -6,6 +6,7 @@ from __future__ import annotations
 
 from datetime import date, datetime
 
+from ..airlines import airline_name
 from ..http import get
 from ..models import Offer, SourceResult
 from .base import Provider
@@ -44,7 +45,7 @@ def parse_items(items: list[dict], route_id: str) -> list[Offer]:
                 price_rub=price,
                 depart=dep,
                 ret=ret,
-                airline=it.get("airline"),
+                airline=airline_name(it.get("airline")),
                 stops=max(int(it.get("transfers") or 0), int(it.get("return_transfers") or 0)),
                 origin=it.get("origin_airport") or it.get("origin"),
                 destination=it.get("destination_airport") or it.get("destination"),
@@ -54,6 +55,31 @@ def parse_items(items: list[dict], route_id: str) -> list[Offer]:
             )
         )
     return offers
+
+
+def route_dests(route) -> list[str]:
+    """Коды назначения для Aviasales.
+
+    У Токио/Сеула/Нью-Йорка есть общий код города — его достаточно. Если код города
+    совпадает с аэропортом (LAX, AKL в списке НЗ) — опрашиваем каждый аэропорт.
+    """
+    return list(route.airports) if route.city in route.airports else [route.city]
+
+
+class TokenError(RuntimeError):
+    pass
+
+
+def tp_request(http, token: str, params: dict) -> list[dict]:
+    """Один запрос prices_for_dates. Возвращает список предложений или бросает исключение."""
+    r = get(http, API, params=params, headers={"X-Access-Token": token})
+    if r.status_code == 401:
+        raise TokenError("Travelpayouts: неверный токен (401)")
+    r.raise_for_status()
+    body = r.json()
+    if not body.get("success", True):
+        raise RuntimeError(str(body.get("error")))
+    return body.get("data") or []
 
 
 class TravelpayoutsProvider(Provider):
@@ -73,9 +99,7 @@ class TravelpayoutsProvider(Provider):
         token = self.ctx.env["TRAVELPAYOUTS_TOKEN"]
         pairs = month_pairs(cfg.window.start, cfg.window.end)
         for route in cfg.routes:
-            # У Токио/Сеула/Нью-Йорка есть общий код города — его достаточно.
-            # Если код города совпадает с аэропортом (LAX, AKL в списке НЗ) — опрашиваем каждый аэропорт.
-            dests = list(route.airports) if route.city in route.airports else [route.city]
+            dests = route_dests(route)
             for dest in dests:
                 for dep_m, ret_m in pairs:
                     params = {
@@ -90,16 +114,11 @@ class TravelpayoutsProvider(Provider):
                         "limit": 1000,
                     }
                     try:
-                        r = get(self.ctx.http, API, params=params, headers={"X-Access-Token": token})
-                        if r.status_code == 401:
-                            res.errors.append("Travelpayouts: неверный токен (401)")
-                            return
-                        r.raise_for_status()
-                        body = r.json()
+                        items = tp_request(self.ctx.http, token, params)
+                    except TokenError as e:
+                        res.errors.append(str(e))
+                        return
                     except Exception as e:  # noqa: BLE001
                         res.errors.append(f"{route.id} {dest} {dep_m}/{ret_m}: {e}")
                         continue
-                    if not body.get("success", True):
-                        res.errors.append(f"{route.id} {dest}: {body.get('error')}")
-                        continue
-                    res.offers.extend(parse_items(body.get("data") or [], route.id))
+                    res.offers.extend(parse_items(items, route.id))

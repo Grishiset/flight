@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import html
 import logging
+from datetime import datetime
 
 import httpx
 
@@ -16,6 +17,7 @@ SOURCE_TITLES = {
     "google_flights": "Google Flights",
     "etihad": "Etihad",
     "samokatus": "Самокатус",
+    "self_transfer": "Свои пересадки (Aviasales)",
 }
 MONTHS = ["янв", "фев", "мар", "апр", "мая", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"]
 
@@ -30,8 +32,27 @@ def stops_text(n: int | None) -> str:
     return {0: "без пересадок", 1: "1 пересадка"}.get(n, f"{n} пересадки" if n < 5 else f"{n} пересадок")
 
 
+def _hm(iso: str) -> str:
+    d = datetime.fromisoformat(iso)
+    return f"{d.day} {MONTHS[d.month - 1]} {d:%H:%M}"
+
+
+def legs_lines(o: Offer) -> list[str]:
+    """Отдельные билеты маршрута — каждый со своей ссылкой."""
+    lines = []
+    for leg in o.legs or []:
+        txt = (f"{html.escape(leg['from'])}→{html.escape(leg['to'])} {_hm(leg['dep'])}, "
+               f"{html.escape(leg.get('airline') or '')} — {fmt_rub(leg['price'])}")
+        if leg.get("link"):
+            txt = f'<a href="{html.escape(leg["link"], quote=True)}">{txt}</a>'
+        lines.append("  • " + txt)
+    return lines
+
+
 def offer_line(o: Offer) -> str:
     parts = [f"{fmt_date(o.depart)} → {fmt_date(o.ret)} ({o.days} дн.)"]
+    if o.via:
+        parts.append(f"через {html.escape(o.via)}")
     if o.airline:
         parts.append(html.escape(o.airline))
     if o.stops is not None:
@@ -50,9 +71,16 @@ def alert_message(sts: list[RouteStatus], site_url: str | None = None) -> str:
             offer_line(o),
             f"Источник: {src}. " + "; ".join(html.escape(r) for r in st.reasons) + ".",
         ]
-        if o.note and o.source == "etihad":
+        if o.note and o.source in ("etihad", "self_transfer"):
             lines.append(html.escape(o.note))
-        if o.link:
+        if o.legs:
+            lines.extend(legs_lines(o))
+            direct = [v for k, v in st.by_source.items() if k != "self_transfer"]
+            if direct:
+                d = min(direct, key=lambda x: x.price_rub)
+                lines.append(f"Для сравнения, одним билетом: {fmt_rub(d.price_rub)} "
+                             f"({SOURCE_TITLES.get(d.source, d.source)}, {fmt_date(d.depart)} → {fmt_date(d.ret)})")
+        elif o.link:
             lines.append(f'<a href="{html.escape(o.link, quote=True)}">Открыть билет</a>')
         blocks.append("\n".join(lines))
     text = "\n\n".join(blocks)

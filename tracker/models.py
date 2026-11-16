@@ -22,13 +22,16 @@ class Offer:
     currency_orig: str | None = None
     note: str | None = None
     typical_range: list[int] | None = None   # «обычные» цены по Google Flights, ₽
+    via: str | None = None                   # хаб самостоятельной пересадки (Ташкент, Стамбул…)
+    legs: list[dict] | None = None           # отдельные билеты маршрута (для self_transfer)
+    extra_rub: int = 0                       # сколько в цене — оценка ночёвки, не билеты
 
     @property
     def days(self) -> int:
         return (self.ret - self.depart).days
 
     def key(self) -> str:
-        return f"{self.route_id}|{self.source}|{self.depart}|{self.ret}|{self.airline or ''}"
+        return f"{self.route_id}|{self.source}|{self.depart}|{self.ret}|{self.airline or ''}|{self.via or ''}"
 
     def to_dict(self) -> dict:
         d = asdict(self)
