@@ -1,0 +1,106 @@
+# Настройки трекера. Меняй прямо на GitHub (карандаш в правом верхнем углу файла).
+
+origin:
+  name: Москва
+  city: MOW                          # код города для Aviasales
+  airports: [SVO, DME, VKO, ZIA]     # аэропорты для Google Flights и фильтра Etihad
+
+# Окно поездки: и вылет, и возвращение должны попасть в этот период.
+window:
+  start: 2027-06-01
+  end: 2027-08-31
+  min_days: 5                        # минимальная длина поездки, дней
+  max_days: 30                       # максимальная длина поездки, дней
+
+# Направления. threshold — «хорошая цена» туда-обратно на 1 взрослого, ₽.
+# Если найденный билет дешевле — придёт уведомление.
+routes:
+  - id: SEL
+    name: Сеул
+    threshold: 42500
+    city: SEL
+    airports: [ICN, GMP]
+    etihad_pages:
+      - рейсы-из-Москва-в-Сеул
+      - рейсы-из-россия-в-Сеул
+    samokatus: mow/sel
+
+  - id: TYO
+    name: Токио
+    threshold: 43900
+    city: TYO
+    airports: [NRT, HND]
+    etihad_pages:
+      - рейсы-из-Москва-в-Токио
+      - рейсы-из-россия-в-Токио
+    samokatus: mow/tyo
+
+  - id: NYC
+    name: Нью-Йорк
+    threshold: 65800
+    city: NYC
+    airports: [JFK, EWR, LGA]
+    etihad_pages:
+      - рейсы-из-Москва-в-Нью-Йорк
+      - рейсы-из-россия-в-Нью-Йорк
+    samokatus: mow/nyc
+
+  - id: LAX
+    name: Лос-Анджелес
+    threshold: 72000
+    city: LAX
+    airports: [LAX]
+    etihad_pages:
+      - рейсы-из-Москва-в-Лос-Анджелес
+    samokatus: mow/lax
+
+  - id: NZ
+    name: Новая Зеландия
+    threshold: 66900
+    city: AKL                        # Aviasales ищет по всем городам из airports
+    airports: [AKL, CHC, ZQN, WLG]
+    etihad_pages:
+      - рейсы-из-россия-в-новая-зеландия
+    samokatus: mow/new-zealand
+
+# Когда считать цену «ниже обычного», кроме порога:
+# если она на drop_pct% ниже медианы собственной истории за history_days дней
+# (нужно хотя бы min_points наблюдений).
+baseline:
+  drop_pct: 15
+  history_days: 30
+  min_points: 10
+
+alerts:
+  # Повторно уведомлять о том же направлении, только если цена упала ещё на столько ₽
+  repeat_if_cheaper_by: 1000
+  # …или прошло столько дней с прошлого уведомления
+  repeat_after_days: 7
+  # Еженедельная сводка в Telegram (0 = понедельник … 6 = воскресенье; null — выключить)
+  digest_weekday: 0
+  # Сообщать, если все источники падают столько запусков подряд
+  failing_runs_to_warn: 3
+
+sources:
+  travelpayouts:
+    enabled: true                    # нужен секрет TRAVELPAYOUTS_TOKEN
+    market: ru
+  google_flights:
+    enabled: true                    # нужен секрет SERPAPI_KEY; без него источник пропускается
+    searches_per_run: 1              # 6 запусков в день × 30 = 180 поисков/мес (бесплатно — 250)
+    trip_days: [10, 14]              # длины поездок, которые проверяются по очереди
+    every_days: 7                    # шаг дат вылета по окну
+  etihad:
+    enabled: true
+    base_url: https://www.etihad.com/ru/flights/
+  samokatus:
+    enabled: true
+    base_url: https://samokatus.ru/flights/
+
+# Если курс ЦБ недоступен — запасные курсы к рублю
+fallback_rates:
+  EUR: 100
+  USD: 90
+  JPY: 0.6
+  KRW: 0.065
+  AED: 24.5
