@@ -35,7 +35,7 @@
    cd flight-tracker
    git init && git add . && git commit -m "Трекер билетов"
    git branch -M main
-   git remote add origin https://github.com/<твой-логин>/flight-tracker.git
+   git remote add origin https://github.com/Grishiset/flight.git
    git push -u origin main
    ```
    > Если загружаешь через браузер и папка `.github` не подхватилась, создай файл вручную: «Add file → Create new file», имя `.github/workflows/track.yml`, вставь содержимое.
@@ -67,7 +67,7 @@
 1. **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 2. Вкладка **Actions** → если просит, нажми «I understand… enable workflows».
 3. Слева выбери **«Проверка цен на билеты» → Run workflow → Run workflow**. Через 3–5 минут:
-   - на сайте `https://<твой-логин>.github.io/flight-tracker/` появятся цены (ссылка есть и в логе запуска, шаг deploy);
+   - на сайте `https://grishiset.github.io/flight/` появятся цены (ссылка есть и в логе запуска, шаг deploy);
    - если сегодня понедельник, в Telegram придёт сводка. В другие дни сообщение приходит, только когда найдена выгодная цена.
 
 Дальше всё работает само каждые 4 часа. С телефона запустить проверку вручную можно в приложении GitHub: Actions → Run workflow.
