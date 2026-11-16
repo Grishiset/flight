@@ -22,7 +22,8 @@ def month_pairs(start: date, end: date) -> list[tuple[str, str]]:
         m += 1
         if m == 13:
             y, m = y + 1, 1
-    return [(a, b) for i, a in enumerate(months) for b in months[i:]]
+    # Aviasales отвечает 400, если месяц возврата дальше следующего за месяцем вылета
+    return [(a, b) for i, a in enumerate(months) for b in months[i:i + 2]]
 
 
 def parse_items(items: list[dict], route_id: str) -> list[Offer]:

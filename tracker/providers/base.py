@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import re
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -21,6 +22,14 @@ class Context:
     browser: Browser | None = None               # None — браузер запрещён (--no-browser)
     env: dict[str, str] = field(default_factory=lambda: dict(os.environ))
     extra: dict[str, Any] = field(default_factory=dict)
+
+
+_SECRET_RE = re.compile(r"((?:api_key|token|key)=)[^&\s'\"]+", re.IGNORECASE)
+
+
+def redact(text: str) -> str:
+    """Убирает ключи из текста ошибок: они попадают в публичный лог и на сайт."""
+    return _SECRET_RE.sub(r"\1***", text)
 
 
 class Provider:
@@ -46,6 +55,7 @@ class Provider:
             self.collect(res)
         except Exception as e:  # noqa: BLE001 — один источник не должен ронять остальные
             res.errors.append(f"{type(e).__name__}: {e}")
+        res.errors = [redact(e) for e in res.errors]
         res.ok = not res.errors or bool(res.offers)
         return res
 

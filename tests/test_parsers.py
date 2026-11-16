@@ -112,7 +112,7 @@ def test_samokatus_cards():
 
 def test_travelpayouts():
     assert month_pairs(date(2027, 6, 1), date(2027, 8, 31)) == [
-        ("2027-06", "2027-06"), ("2027-06", "2027-07"), ("2027-06", "2027-08"),
+        ("2027-06", "2027-06"), ("2027-06", "2027-07"),
         ("2027-07", "2027-07"), ("2027-07", "2027-08"), ("2027-08", "2027-08"),
     ]
     items = [
@@ -184,3 +184,11 @@ def test_etihad_stops_when_refused():
     assert isinstance(res, SourceResult)
     assert len(calls) == 1                       # после первого отказа остальные страницы не трогаем
     assert len(res.errors) == 1 and "Google Flights" in res.errors[0]
+
+
+def test_redact_secrets():
+    from tracker.providers.base import redact
+    msg = "Client error for url 'https://serpapi.com/search.json?engine=google_flights&api_key=abc123SECRET&hl=ru'"
+    out = redact(msg)
+    assert "abc123SECRET" not in out and "api_key=***" in out and "engine=google_flights" in out
+    assert redact("token=XYZ end") == "token=*** end"

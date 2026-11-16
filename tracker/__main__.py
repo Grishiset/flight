@@ -60,6 +60,9 @@ def main(argv: list[str] | None = None) -> int:
 
     a = p.parse_args(argv)
     logging.basicConfig(level=logging.DEBUG if a.verbose else logging.INFO, format="%(levelname)s %(message)s")
+    # httpx пишет в лог полные адреса запросов, а в них бывают ключи (SerpAPI) — лог Actions публичный
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+    logging.getLogger("httpcore").setLevel(logging.WARNING)
 
     if a.cmd == "test-telegram":
         tg = Telegram(os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID"))
