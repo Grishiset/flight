@@ -1,5 +1,5 @@
 {
- "at": "2026-11-16T15:24:34+00:00",
+ "at": "2026-11-16T15:40:02+00:00",
  "window": {
   "start": "2027-06-01",
   "end": "2027-08-31",
@@ -419,7 +419,7 @@
     }
    },
    "median": 52955,
-   "median_points": 1,
+   "median_points": 2,
    "reasons": [],
    "is_deal": false
   },
@@ -853,7 +853,7 @@
     }
    },
    "median": 55896,
-   "median_points": 2,
+   "median_points": 3,
    "reasons": [],
    "is_deal": false
   },
@@ -1267,7 +1267,7 @@
     }
    },
    "median": 88164,
-   "median_points": 1,
+   "median_points": 2,
    "reasons": [],
    "is_deal": false
   },
@@ -1722,7 +1722,7 @@
     }
    },
    "median": 101652,
-   "median_points": 1,
+   "median_points": 2,
    "reasons": [],
    "is_deal": false
   },
@@ -2075,7 +2075,7 @@
     }
    },
    "median": 87215,
-   "median_points": 1,
+   "median_points": 2,
    "reasons": [],
    "is_deal": false
   }
@@ -2084,8 +2084,8 @@
   "travelpayouts": {
    "ok": true,
    "skipped": null,
-   "offers": 2377,
-   "summer": 2072,
+   "offers": 2373,
+   "summer": 2067,
    "errors": [
     "SEL SEL 2027-06/2027-08: Client error '400 Bad Request' for url 'https://api.travelpayouts.com/aviasales/v3/prices_for_dates?origin=MOW&destination=SEL&departure_at=2027-06&return_at=2027-08&one_way=false&currency=rub&market=ru&sorting=price&limit=1000'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400",
     "TYO TYO 2027-06/2027-08: Client error '400 Bad Request' for url 'https://api.travelpayouts.com/aviasales/v3/prices_for_dates?origin=MOW&destination=TYO&departure_at=2027-06&return_at=2027-08&one_way=false&currency=rub&market=ru&sorting=price&limit=1000'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400",
@@ -2126,5 +2126,7 @@
    "errors": []
   }
  },
- "sent": []
+ "sent": [
+  "digest"
+ ]
 }
