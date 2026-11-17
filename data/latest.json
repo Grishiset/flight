@@ -1,5 +1,5 @@
 {
- "at": "2026-11-17T00:16:07+00:00",
+ "at": "2026-11-17T08:07:12+00:00",
  "window": {
   "start": "2027-06-01",
   "end": "2027-08-31",
@@ -17,22 +17,22 @@
    "best": {
     "route_id": "SEL",
     "source": "travelpayouts",
-    "price_rub": 52955,
-    "depart": "2027-06-04",
-    "ret": "2027-06-11",
+    "price_rub": 52579,
+    "depart": "2027-06-14",
+    "ret": "2027-06-25",
     "airline": "China Southern",
     "stops": 1,
     "origin": "SVO",
     "destination": "ICN",
-    "link": "https://www.aviasales.ru/search/MOW0406SEL11063?t=HU18121251001812232200001425SVOCANICN18127494001812786900000985ICNHAKSVO_36315797735af3bbad77f823871291fe_52957&search_date=10112026&expected_price_uuid=01a1c6da-d451-8030-2a9a-f9e9570e3c0d&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR0%7CTBC1&itinerary_key=FcmVtuq6rJ4FPCS6jc9s7A&expected_price_source=share&expected_price_currency=rub&expected_price=52955",
-    "price_orig": 52955,
+    "link": "https://www.aviasales.ru/search/MOW1406SEL25063?t=HU18129891001813067700000950SVOCANICN18139590001813996500000985ICNHAKSVO_1f8ec2cf4b6129b72a8a4070e806d677_52583&search_date=17112026&expected_price_uuid=01a1e809-a807-8030-6d56-220410bb94c3&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR0%7CTBC1&itinerary_key=icLn3nCBM0Av0x1W539NnA&expected_price_source=share&expected_price_currency=rub&expected_price=52579",
+    "price_orig": 52579,
     "currency_orig": "RUB",
     "note": null,
     "typical_range": null,
     "via": null,
     "legs": null,
     "extra_rub": 0,
-    "days": 7,
+    "days": 11,
     "airline_sites": [
      {
       "name": "China Southern",
@@ -41,6 +41,58 @@
     ]
    },
    "top": [
+    {
+     "route_id": "SEL",
+     "source": "travelpayouts",
+     "price_rub": 52579,
+     "depart": "2027-06-14",
+     "ret": "2027-06-25",
+     "airline": "China Southern",
+     "stops": 1,
+     "origin": "SVO",
+     "destination": "ICN",
+     "link": "https://www.aviasales.ru/search/MOW1406SEL25063?t=HU18129891001813067700000950SVOCANICN18139590001813996500000985ICNHAKSVO_1f8ec2cf4b6129b72a8a4070e806d677_52583&search_date=17112026&expected_price_uuid=01a1e809-a807-8030-6d56-220410bb94c3&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR0%7CTBC1&itinerary_key=icLn3nCBM0Av0x1W539NnA&expected_price_source=share&expected_price_currency=rub&expected_price=52579",
+     "price_orig": 52579,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "days": 11,
+     "airline_sites": [
+      {
+       "name": "China Southern",
+       "url": "https://www.csair.com/ru/ru/"
+      }
+     ]
+    },
+    {
+     "route_id": "SEL",
+     "source": "travelpayouts",
+     "price_rub": 52584,
+     "depart": "2027-06-04",
+     "ret": "2027-06-18",
+     "airline": "China Southern",
+     "stops": 1,
+     "origin": "SVO",
+     "destination": "ICN",
+     "link": "https://www.aviasales.ru/search/MOW0406SEL18063?t=HU18121251001812232200001425SVOCANICN18133542001813391700000985ICNHAKSVO_56128037e26a3b7d19962080f857787b_52583&search_date=17112026&expected_price_uuid=01a1e884-ef9e-8030-20dc-2f4d38d82635&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR0%7CTBC1&itinerary_key=9ghRiftvtgUJNtMSxIsdGw&expected_price_source=share&expected_price_currency=rub&expected_price=52584",
+     "price_orig": 52584,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "days": 14,
+     "airline_sites": [
+      {
+       "name": "China Southern",
+       "url": "https://www.csair.com/ru/ru/"
+      }
+     ]
+    },
     {
      "route_id": "SEL",
      "source": "travelpayouts",
@@ -190,32 +242,6 @@
      "legs": null,
      "extra_rub": 0,
      "days": 14,
-     "airline_sites": [
-      {
-       "name": "China Southern",
-       "url": "https://www.csair.com/ru/ru/"
-      }
-     ]
-    },
-    {
-     "route_id": "SEL",
-     "source": "travelpayouts",
-     "price_rub": 53074,
-     "depart": "2027-06-14",
-     "ret": "2027-06-25",
-     "airline": "China Southern",
-     "stops": 1,
-     "origin": "SVO",
-     "destination": "ICN",
-     "link": "https://www.aviasales.ru/search/MOW1406SEL25063?t=HU18129891001813067700000950SVOCANICN18139590001813996500000985ICNHAKSVO_1f8ec2cf4b6129b72a8a4070e806d677_53060&search_date=16112026&expected_price_uuid=01a1e44a-97a5-8030-e6b2-72cec58a1a50&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR0%7CTBC1&itinerary_key=icLn3nCBM0Av0x1W539NnA&expected_price_source=share&expected_price_currency=rub&expected_price=53074",
-     "price_orig": 53074,
-     "currency_orig": "RUB",
-     "note": null,
-     "typical_range": null,
-     "via": null,
-     "legs": null,
-     "extra_rub": 0,
-     "days": 11,
      "airline_sites": [
       {
        "name": "China Southern",
@@ -404,54 +430,28 @@
        "url": "https://www.csair.com/ru/ru/"
       }
      ]
-    },
-    {
-     "route_id": "SEL",
-     "source": "travelpayouts",
-     "price_rub": 53777,
-     "depart": "2027-06-19",
-     "ret": "2027-07-02",
-     "airline": "China Southern",
-     "stops": 1,
-     "origin": "SVO",
-     "destination": "ICN",
-     "link": "https://www.aviasales.ru/search/MOW1906SEL02073?t=HU18134211001813505100001040SVOCANICN18145638001814601300000985ICNHAKSVO_590dc12411cb68098cd0ec0d0c6f06e1_53747&search_date=16112026&expected_price_uuid=01a1e554-c645-8030-23a2-fe7178d03cc5&static_fare_key=TY%7CP0%7CH1%7CL1_1_23%7CCH1%7CR1%7CTBC1&itinerary_key=RticgYBNLjuUA6WPgaF1dw&expected_price_source=share&expected_price_currency=rub&expected_price=53777",
-     "price_orig": 53777,
-     "currency_orig": "RUB",
-     "note": null,
-     "typical_range": null,
-     "via": null,
-     "legs": null,
-     "extra_rub": 0,
-     "days": 13,
-     "airline_sites": [
-      {
-       "name": "China Southern",
-       "url": "https://www.csair.com/ru/ru/"
-      }
-     ]
     }
    ],
    "by_source": {
     "travelpayouts": {
      "route_id": "SEL",
      "source": "travelpayouts",
-     "price_rub": 52955,
-     "depart": "2027-06-04",
-     "ret": "2027-06-11",
+     "price_rub": 52579,
+     "depart": "2027-06-14",
+     "ret": "2027-06-25",
      "airline": "China Southern",
      "stops": 1,
      "origin": "SVO",
      "destination": "ICN",
-     "link": "https://www.aviasales.ru/search/MOW0406SEL11063?t=HU18121251001812232200001425SVOCANICN18127494001812786900000985ICNHAKSVO_36315797735af3bbad77f823871291fe_52957&search_date=10112026&expected_price_uuid=01a1c6da-d451-8030-2a9a-f9e9570e3c0d&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR0%7CTBC1&itinerary_key=FcmVtuq6rJ4FPCS6jc9s7A&expected_price_source=share&expected_price_currency=rub&expected_price=52955",
-     "price_orig": 52955,
+     "link": "https://www.aviasales.ru/search/MOW1406SEL25063?t=HU18129891001813067700000950SVOCANICN18139590001813996500000985ICNHAKSVO_1f8ec2cf4b6129b72a8a4070e806d677_52583&search_date=17112026&expected_price_uuid=01a1e809-a807-8030-6d56-220410bb94c3&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR0%7CTBC1&itinerary_key=icLn3nCBM0Av0x1W539NnA&expected_price_source=share&expected_price_currency=rub&expected_price=52579",
+     "price_orig": 52579,
      "currency_orig": "RUB",
      "note": null,
      "typical_range": null,
      "via": null,
      "legs": null,
      "extra_rub": 0,
-     "days": 7,
+     "days": 11,
      "airline_sites": [
       {
        "name": "China Southern",
@@ -462,39 +462,39 @@
     "self_transfer": {
      "route_id": "SEL",
      "source": "self_transfer",
-     "price_rub": 62143,
-     "depart": "2027-07-30",
+     "price_rub": 57967,
+     "depart": "2027-08-24",
      "ret": "2027-08-29",
-     "airline": "Uzbekistan Airways / HH",
+     "airline": "Uzbekistan Airways",
      "stops": 1,
      "origin": "DME",
      "destination": "ICN",
-     "link": "https://www.aviasales.ru/search/MOW3007TAS3?t=HY18169479001816968600000225DMETAS_02c7596b2322cad5ea2c41c544610fcf_13253&search_date=14112026&expected_price_uuid=01a1dc2c-d311-8030-e3ae-b3cb44360976&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH0%7CR0%7CTBC0&itinerary_key=ifZNIv0qGiLszWUi4fRLkA&expected_price_source=share&expected_price_currency=rub&expected_price=13253",
-     "price_orig": 62143,
+     "link": "https://www.aviasales.ru/search/MOW2408TAS3?t=HY18191079001819128600000225DMETAS_badf419ac0ae20f3ab32a173256867b5_13253&search_date=16112026&expected_price_uuid=01a1e3f1-de39-8030-61b8-3f013f11e111&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH0%7CR0%7CTBC0&itinerary_key=ifZNIv0qGiLszWUi4fRLkA&expected_price_source=share&expected_price_currency=rub&expected_price=13256",
+     "price_orig": 57967,
      "currency_orig": "RUB",
-     "note": "4 отдельных билета через Ташкент; стыковка туда 7 ч, обратно 8 ч; багаж — получать и сдавать заново",
+     "note": "4 отдельных билета через Ташкент; стыковка туда 5 ч, обратно 8 ч; багаж — получать и сдавать заново",
      "typical_range": null,
      "via": "Ташкент",
      "legs": [
       {
        "from": "DME",
        "to": "TAS",
-       "dep": "2027-07-30T11:45:00+03:00",
-       "arr": "2027-07-30T15:30:00+03:00",
-       "price": 13253,
+       "dep": "2027-08-24T11:45:00+03:00",
+       "arr": "2027-08-24T15:30:00+03:00",
+       "price": 13256,
        "airline": "Uzbekistan Airways",
        "transfers": 0,
-       "link": "https://www.aviasales.ru/search/MOW3007TAS3?t=HY18169479001816968600000225DMETAS_02c7596b2322cad5ea2c41c544610fcf_13253&search_date=14112026&expected_price_uuid=01a1dc2c-d311-8030-e3ae-b3cb44360976&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH0%7CR0%7CTBC0&itinerary_key=ifZNIv0qGiLszWUi4fRLkA&expected_price_source=share&expected_price_currency=rub&expected_price=13253"
+       "link": "https://www.aviasales.ru/search/MOW2408TAS3?t=HY18191079001819128600000225DMETAS_badf419ac0ae20f3ab32a173256867b5_13253&search_date=16112026&expected_price_uuid=01a1e3f1-de39-8030-61b8-3f013f11e111&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH0%7CR0%7CTBC0&itinerary_key=ifZNIv0qGiLszWUi4fRLkA&expected_price_source=share&expected_price_currency=rub&expected_price=13256"
       },
       {
        "from": "TAS",
        "to": "ICN",
-       "dep": "2027-07-31T00:05:00+05:00",
-       "arr": "2027-07-31T06:45:00+05:00",
-       "price": 22283,
-       "airline": "HH",
+       "dep": "2027-08-24T22:25:00+05:00",
+       "arr": "2027-08-25T04:25:00+05:00",
+       "price": 18104,
+       "airline": "Uzbekistan Airways",
        "transfers": 0,
-       "link": "https://www.aviasales.ru/search/TAS3107SEL3?t=HH18169923001817030700000400TASICN_4c07ec57a4b01dba556603e0d0c49029_22283&search_date=14112026&expected_price_uuid=01a1da73-93ed-8031-65ab-7ffa737fc5ca&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH1%7CR0%7CTBC0&itinerary_key=R_p0x1_VPQefbWPlHLmatw&expected_price_source=share&expected_price_currency=rub&expected_price=22283"
+       "link": "https://www.aviasales.ru/search/TAS2408SEL3?t=HY18191463001819182300000360TASICN_881be500cf6e29f8cd0a0dbfb478dcce_18105&search_date=17112026&expected_price_uuid=01a1e803-9987-8030-6acf-39d62238598a&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH0%7CR0%7CTBC1&itinerary_key=Z-bbHR0ZU9-Pq9EoV_3UWw&expected_price_source=share&expected_price_currency=rub&expected_price=18104"
       },
       {
        "from": "ICN",
@@ -518,7 +518,7 @@
       }
      ],
      "extra_rub": 0,
-     "days": 30,
+     "days": 5,
      "airline_sites": [
       {
        "name": "Uzbekistan Airways",
@@ -528,7 +528,7 @@
     }
    },
    "median": 52955,
-   "median_points": 4,
+   "median_points": 5,
    "reasons": [],
    "is_deal": false
   },
@@ -541,12 +541,12 @@
     "source": "travelpayouts",
     "price_rub": 55880,
     "depart": "2027-06-01",
-    "ret": "2027-06-22",
+    "ret": "2027-06-12",
     "airline": "Hainan Airlines",
     "stops": 1,
     "origin": "SVO",
     "destination": "NRT",
-    "link": "https://www.aviasales.ru/search/MOW0106TYO22063?t=HU18118803001812025800002065SVOPEKNRT18136746001813773900002015NRTPEKSVO_429aeb9b17b249faf1de3fcc8ecbc5e6_55880&search_date=16112026&expected_price_uuid=01a1e64c-5437-8031-2caf-460796aac564&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR1%7CTBC1&itinerary_key=Gm-FKl2RDH3GvmciyEmhhg&expected_price_source=share&expected_price_currency=rub&expected_price=55880",
+    "link": "https://www.aviasales.ru/search/MOW0106TYO12063?t=HU18118803001812025800002065SVOPEKNRT18128106001812909900002015NRTPEKSVO_bc866c927be4d42f121132ee5a78e299_55884&search_date=17112026&expected_price_uuid=01a1e81d-f3f3-8030-6eb1-5f0cecc59c11&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR1%7CTBC1&itinerary_key=qxn9Vb7xBR__cJqffI_8xg&expected_price_source=share&expected_price_currency=rub&expected_price=55880",
     "price_orig": 55880,
     "currency_orig": "RUB",
     "note": null,
@@ -554,7 +554,7 @@
     "via": null,
     "legs": null,
     "extra_rub": 0,
-    "days": 21,
+    "days": 11,
     "airline_sites": [
      {
       "name": "Hainan Airlines",
@@ -563,6 +563,32 @@
     ]
    },
    "top": [
+    {
+     "route_id": "TYO",
+     "source": "travelpayouts",
+     "price_rub": 55880,
+     "depart": "2027-06-01",
+     "ret": "2027-06-12",
+     "airline": "Hainan Airlines",
+     "stops": 1,
+     "origin": "SVO",
+     "destination": "NRT",
+     "link": "https://www.aviasales.ru/search/MOW0106TYO12063?t=HU18118803001812025800002065SVOPEKNRT18128106001812909900002015NRTPEKSVO_bc866c927be4d42f121132ee5a78e299_55884&search_date=17112026&expected_price_uuid=01a1e81d-f3f3-8030-6eb1-5f0cecc59c11&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR1%7CTBC1&itinerary_key=qxn9Vb7xBR__cJqffI_8xg&expected_price_source=share&expected_price_currency=rub&expected_price=55880",
+     "price_orig": 55880,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "days": 11,
+     "airline_sites": [
+      {
+       "name": "Hainan Airlines",
+       "url": "https://www.hainanairlines.com/"
+      }
+     ]
+    },
     {
      "route_id": "TYO",
      "source": "travelpayouts",
@@ -591,36 +617,15 @@
     },
     {
      "route_id": "TYO",
-     "source": "samokatus",
-     "price_rub": 55880,
-     "depart": "2027-06-01",
-     "ret": "2027-06-22",
-     "airline": null,
-     "stops": 1,
-     "origin": null,
-     "destination": null,
-     "link": "https://samokatus.ru/flights/mow/tyo/rt",
-     "price_orig": 55880,
-     "currency_orig": "RUB",
-     "note": null,
-     "typical_range": null,
-     "via": null,
-     "legs": null,
-     "extra_rub": 0,
-     "days": 21,
-     "airline_sites": []
-    },
-    {
-     "route_id": "TYO",
      "source": "travelpayouts",
      "price_rub": 55880,
      "depart": "2027-06-06",
-     "ret": "2027-06-15",
+     "ret": "2027-06-12",
      "airline": "Hainan Airlines",
      "stops": 1,
      "origin": "SVO",
      "destination": "NRT",
-     "link": "https://www.aviasales.ru/search/MOW0606TYO15063?t=HU18123123001812457800002065SVOPEKNRT18130698001813169100002015NRTPEKSVO_3cf8e139a67aa03a870383e4767dfa5b_55880&search_date=16112026&expected_price_uuid=01a1e65f-2aa2-8031-6bbd-9d6b95872a77&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR1%7CTBC1&itinerary_key=ndR6859ME6zXGZMIpdxuOg&expected_price_source=share&expected_price_currency=rub&expected_price=55880",
+     "link": "https://www.aviasales.ru/search/MOW0606TYO12063?t=HU18123123001812457800002065SVOPEKNRT18128106001812909900002015NRTPEKSVO_c476cc614c37a5e71acec1d97dca0072_55884&search_date=17112026&expected_price_uuid=01a1e82f-03b6-8031-20a5-08c7478dc51b&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR1%7CTBC1&itinerary_key=Q3xXRj0AcW4ie9CuMq6zrg&expected_price_source=share&expected_price_currency=rub&expected_price=55880",
      "price_orig": 55880,
      "currency_orig": "RUB",
      "note": null,
@@ -628,7 +633,7 @@
      "via": null,
      "legs": null,
      "extra_rub": 0,
-     "days": 9,
+     "days": 6,
      "airline_sites": [
       {
        "name": "Hainan Airlines",
@@ -638,15 +643,15 @@
     },
     {
      "route_id": "TYO",
-     "source": "samokatus",
+     "source": "travelpayouts",
      "price_rub": 55880,
-     "depart": "2027-06-06",
+     "depart": "2027-06-08",
      "ret": "2027-06-15",
-     "airline": null,
+     "airline": "Hainan Airlines",
      "stops": 1,
-     "origin": null,
-     "destination": null,
-     "link": "https://samokatus.ru/flights/mow/tyo/rt",
+     "origin": "SVO",
+     "destination": "NRT",
+     "link": "https://www.aviasales.ru/search/MOW0806TYO15063?t=HU18124851001812630600002065SVOPEKNRT18130698001813169100002015NRTPEKSVO_afa4849da8e925bc218c6684bd452575_55884&search_date=17112026&expected_price_uuid=01a1e825-730c-8030-a869-0b972b29361d&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR1%7CTBC1&itinerary_key=AK16f220hUh9ys8rkoNL7Q&expected_price_source=share&expected_price_currency=rub&expected_price=55880",
      "price_orig": 55880,
      "currency_orig": "RUB",
      "note": null,
@@ -654,8 +659,13 @@
      "via": null,
      "legs": null,
      "extra_rub": 0,
-     "days": 9,
-     "airline_sites": []
+     "days": 7,
+     "airline_sites": [
+      {
+       "name": "Hainan Airlines",
+       "url": "https://www.hainanairlines.com/"
+      }
+     ]
     },
     {
      "route_id": "TYO",
@@ -685,24 +695,107 @@
     },
     {
      "route_id": "TYO",
-     "source": "samokatus",
-     "price_rub": 55883,
+     "source": "travelpayouts",
+     "price_rub": 55884,
      "depart": "2027-06-01",
-     "ret": "2027-06-08",
-     "airline": null,
+     "ret": "2027-06-10",
+     "airline": "Hainan Airlines",
      "stops": 1,
-     "origin": null,
-     "destination": null,
-     "link": "https://samokatus.ru/flights/mow/tyo/rt",
-     "price_orig": 55883,
+     "origin": "SVO",
+     "destination": "NRT",
+     "link": "https://www.aviasales.ru/search/MOW0106TYO10063?t=HU18118803001812025800002065SVOPEKNRT18126378001812737100002015NRTPEKSVO_81b3a48c461cee2d0d0b4a7d0073bbea_55884&search_date=17112026&expected_price_uuid=01a1e855-2df9-8030-e004-4747faa1f398&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR1%7CTBC1&itinerary_key=ndR6859ME6zXGZMIpdxuOg&expected_price_source=share&expected_price_currency=rub&expected_price=55884",
+     "price_orig": 55884,
      "currency_orig": "RUB",
      "note": null,
      "typical_range": null,
      "via": null,
      "legs": null,
      "extra_rub": 0,
-     "days": 7,
-     "airline_sites": []
+     "days": 9,
+     "airline_sites": [
+      {
+       "name": "Hainan Airlines",
+       "url": "https://www.hainanairlines.com/"
+      }
+     ]
+    },
+    {
+     "route_id": "TYO",
+     "source": "travelpayouts",
+     "price_rub": 55884,
+     "depart": "2027-06-03",
+     "ret": "2027-06-08",
+     "airline": "Hainan Airlines",
+     "stops": 1,
+     "origin": "SVO",
+     "destination": "NRT",
+     "link": "https://www.aviasales.ru/search/MOW0306TYO08063?t=HU18120531001812198600002065SVOPEKNRT18124650001812564300002015NRTPEKSVO_3fde8021bde9069c0fedc84c460376e0_55884&search_date=17112026&expected_price_uuid=01a1e840-d4ea-8030-a8e3-b25f612ce732&static_fare_key=TY%7CP0%7CH1%7CL1_1_23%7CCH1%7CR1%7CTBC1&itinerary_key=1vXkoN5zK3wCr13C_HqR_g&expected_price_source=share&expected_price_currency=rub&expected_price=55884",
+     "price_orig": 55884,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "days": 5,
+     "airline_sites": [
+      {
+       "name": "Hainan Airlines",
+       "url": "https://www.hainanairlines.com/"
+      }
+     ]
+    },
+    {
+     "route_id": "TYO",
+     "source": "travelpayouts",
+     "price_rub": 55884,
+     "depart": "2027-06-03",
+     "ret": "2027-06-12",
+     "airline": "Hainan Airlines",
+     "stops": 1,
+     "origin": "SVO",
+     "destination": "NRT",
+     "link": "https://www.aviasales.ru/search/MOW0306TYO12063?t=HU18120531001812198600002065SVOPEKNRT18128106001812909900002015NRTPEKSVO_76d6d570f1f2a3a5dfae5e72a2dabacd_55884&search_date=17112026&expected_price_uuid=01a1e836-f97c-8030-6d5b-26263b7fa0f8&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR1%7CTBC1&itinerary_key=ndR6859ME6zXGZMIpdxuOg&expected_price_source=share&expected_price_currency=rub&expected_price=55884",
+     "price_orig": 55884,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "days": 9,
+     "airline_sites": [
+      {
+       "name": "Hainan Airlines",
+       "url": "https://www.hainanairlines.com/"
+      }
+     ]
+    },
+    {
+     "route_id": "TYO",
+     "source": "travelpayouts",
+     "price_rub": 55889,
+     "depart": "2027-06-06",
+     "ret": "2027-06-15",
+     "airline": "Hainan Airlines",
+     "stops": 1,
+     "origin": "SVO",
+     "destination": "NRT",
+     "link": "https://www.aviasales.ru/search/MOW0606TYO15063?t=HU18123123001812457800002065SVOPEKNRT18130698001813169100002015NRTPEKSVO_3cf8e139a67aa03a870383e4767dfa5b_55884&search_date=17112026&expected_price_uuid=01a1e7d7-9b1f-8031-65ea-c11bf48b1efd&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR1%7CTBC1&itinerary_key=ndR6859ME6zXGZMIpdxuOg&expected_price_source=share&expected_price_currency=rub&expected_price=55889",
+     "price_orig": 55889,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "days": 9,
+     "airline_sites": [
+      {
+       "name": "Hainan Airlines",
+       "url": "https://www.hainanairlines.com/"
+      }
+     ]
     },
     {
      "route_id": "TYO",
@@ -859,84 +952,6 @@
        "url": "https://www.hainanairlines.com/"
       }
      ]
-    },
-    {
-     "route_id": "TYO",
-     "source": "travelpayouts",
-     "price_rub": 56312,
-     "depart": "2027-06-10",
-     "ret": "2027-06-22",
-     "airline": "Hainan Airlines",
-     "stops": 1,
-     "origin": "SVO",
-     "destination": "NRT",
-     "link": "https://www.aviasales.ru/search/MOW1006TYO22063?t=HU18126579001812803400002065SVOPEKNRT18136746001813773900002015NRTPEKSVO_67a11ee5858dff513620f378f530de45_56356&search_date=15112026&expected_price_uuid=01a1dff7-eb1a-8031-2211-5444a4f5acbd&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR1%7CTBC1&itinerary_key=rhcuaLKDAR_BlmXoqICf8w&expected_price_source=share&expected_price_currency=rub&expected_price=56312",
-     "price_orig": 56312,
-     "currency_orig": "RUB",
-     "note": null,
-     "typical_range": null,
-     "via": null,
-     "legs": null,
-     "extra_rub": 0,
-     "days": 12,
-     "airline_sites": [
-      {
-       "name": "Hainan Airlines",
-       "url": "https://www.hainanairlines.com/"
-      }
-     ]
-    },
-    {
-     "route_id": "TYO",
-     "source": "travelpayouts",
-     "price_rub": 56312,
-     "depart": "2027-06-10",
-     "ret": "2027-07-06",
-     "airline": "Hainan Airlines",
-     "stops": 1,
-     "origin": "SVO",
-     "destination": "NRT",
-     "link": "https://www.aviasales.ru/search/MOW1006TYO06073?t=HU18126579001812803400002065SVOPEKNRT18148842001814983500002015NRTPEKSVO_4bbafd211efa465674c0dc4031d61810_56356&search_date=15112026&expected_price_uuid=01a1ded8-d6d6-8030-e14c-87f5c95c4e17&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR1%7CTBC1&itinerary_key=3dpVfMPFIKZxHTPQXIN-tg&expected_price_source=share&expected_price_currency=rub&expected_price=56312",
-     "price_orig": 56312,
-     "currency_orig": "RUB",
-     "note": null,
-     "typical_range": null,
-     "via": null,
-     "legs": null,
-     "extra_rub": 0,
-     "days": 26,
-     "airline_sites": [
-      {
-       "name": "Hainan Airlines",
-       "url": "https://www.hainanairlines.com/"
-      }
-     ]
-    },
-    {
-     "route_id": "TYO",
-     "source": "travelpayouts",
-     "price_rub": 56312,
-     "depart": "2027-06-15",
-     "ret": "2027-07-15",
-     "airline": "Hainan Airlines",
-     "stops": 1,
-     "origin": "SVO",
-     "destination": "NRT",
-     "link": "https://www.aviasales.ru/search/MOW1506TYO15073?t=HU18130899001813235400002065SVOPEKNRT18156618001815761100002015NRTPEKSVO_c16ce1790854e55a0c4c1fbe1a85b657_56356&search_date=15112026&expected_price_uuid=01a1e009-1014-8030-2264-9c11cccc1e00&static_fare_key=TY%7CP0%7CH1%7CL1_1_23%7CCH1%7CR1%7CTBC1&itinerary_key=n8oJkJz_jbj6uDUWPWgsRQ&expected_price_source=share&expected_price_currency=rub&expected_price=56312",
-     "price_orig": 56312,
-     "currency_orig": "RUB",
-     "note": null,
-     "typical_range": null,
-     "via": null,
-     "legs": null,
-     "extra_rub": 0,
-     "days": 30,
-     "airline_sites": [
-      {
-       "name": "Hainan Airlines",
-       "url": "https://www.hainanairlines.com/"
-      }
-     ]
     }
    ],
    "by_source": {
@@ -945,12 +960,12 @@
      "source": "travelpayouts",
      "price_rub": 55880,
      "depart": "2027-06-01",
-     "ret": "2027-06-22",
+     "ret": "2027-06-12",
      "airline": "Hainan Airlines",
      "stops": 1,
      "origin": "SVO",
      "destination": "NRT",
-     "link": "https://www.aviasales.ru/search/MOW0106TYO22063?t=HU18118803001812025800002065SVOPEKNRT18136746001813773900002015NRTPEKSVO_429aeb9b17b249faf1de3fcc8ecbc5e6_55880&search_date=16112026&expected_price_uuid=01a1e64c-5437-8031-2caf-460796aac564&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR1%7CTBC1&itinerary_key=Gm-FKl2RDH3GvmciyEmhhg&expected_price_source=share&expected_price_currency=rub&expected_price=55880",
+     "link": "https://www.aviasales.ru/search/MOW0106TYO12063?t=HU18118803001812025800002065SVOPEKNRT18128106001812909900002015NRTPEKSVO_bc866c927be4d42f121132ee5a78e299_55884&search_date=17112026&expected_price_uuid=01a1e81d-f3f3-8030-6eb1-5f0cecc59c11&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR1%7CTBC1&itinerary_key=qxn9Vb7xBR__cJqffI_8xg&expected_price_source=share&expected_price_currency=rub&expected_price=55880",
      "price_orig": 55880,
      "currency_orig": "RUB",
      "note": null,
@@ -958,7 +973,7 @@
      "via": null,
      "legs": null,
      "extra_rub": 0,
-     "days": 21,
+     "days": 11,
      "airline_sites": [
       {
        "name": "Hainan Airlines",
@@ -966,41 +981,20 @@
       }
      ]
     },
-    "samokatus": {
-     "route_id": "TYO",
-     "source": "samokatus",
-     "price_rub": 55880,
-     "depart": "2027-06-01",
-     "ret": "2027-06-22",
-     "airline": null,
-     "stops": 1,
-     "origin": null,
-     "destination": null,
-     "link": "https://samokatus.ru/flights/mow/tyo/rt",
-     "price_orig": 55880,
-     "currency_orig": "RUB",
-     "note": null,
-     "typical_range": null,
-     "via": null,
-     "legs": null,
-     "extra_rub": 0,
-     "days": 21,
-     "airline_sites": []
-    },
     "self_transfer": {
      "route_id": "TYO",
      "source": "self_transfer",
-     "price_rub": 83167,
+     "price_rub": 87157,
      "depart": "2027-08-07",
-     "ret": "2027-08-24",
+     "ret": "2027-08-25",
      "airline": "C6 / Air Astana / ZIPAIR / Uzbekistan Airways",
      "stops": 3,
      "origin": "SVO",
      "destination": "HND",
      "link": "https://www.aviasales.ru/search/MOW0708TAS3?t=C618176598001817682000000250SVOTAS_69a741c0e2d79fd35733a88bdebea55e_9513&search_date=16112026&expected_price_uuid=01a1e5a2-f784-8031-23c4-3813a3a9ad6e&static_fare_key=TY%7CP1%7CH0%7CL0%7CCH0%7CR0%7CTBC0&itinerary_key=JDfwguW8cP1tcJ7L4pbU4A&expected_price_source=share&expected_price_currency=rub&expected_price=9513",
-     "price_orig": 79167,
+     "price_orig": 79157,
      "currency_orig": "RUB",
-     "note": "4 отдельных билета через Ташкент; стыковка туда 13 ч, обратно 5 ч; в цену заложена ночёвка 4 000 ₽; багаж — получать и сдавать заново",
+     "note": "4 отдельных билета через Ташкент; стыковка туда 13 ч, обратно 17 ч; в цену заложена ночёвка 8 000 ₽; багаж — получать и сдавать заново",
      "typical_range": null,
      "via": "Ташкент",
      "legs": [
@@ -1037,16 +1031,16 @@
       {
        "from": "TAS",
        "to": "DME",
-       "dep": "2027-08-24T19:25:00+05:00",
-       "arr": "2027-08-24T23:30:00+05:00",
-       "price": 8496,
+       "dep": "2027-08-25T08:10:00+05:00",
+       "arr": "2027-08-25T12:15:00+05:00",
+       "price": 8486,
        "airline": "Uzbekistan Airways",
        "transfers": 0,
-       "link": "https://www.aviasales.ru/search/TAS2408MOW3?t=HY18191355001819143000000245TASDME_83323aa6399cc7fe198e9b603ceec6dd_8486&search_date=16112026&expected_price_uuid=01a1e380-ef70-8030-6efc-3546aa40be3c&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH0%7CR0%7CTBC0&itinerary_key=WtOHwLiFWG8Qvq6hIAkYGQ&expected_price_source=share&expected_price_currency=rub&expected_price=8496"
+       "link": "https://www.aviasales.ru/search/TAS2508MOW3?t=HY18191814001819188900000245TASDME_6b146d508d811ce66ff8daf757e47a5b_8486&search_date=16112026&expected_price_uuid=01a1e5de-b511-8030-6863-ba2269968501&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH0%7CR0%7CTBC0&itinerary_key=hHORT2rIx6vgXOG1kAcYjQ&expected_price_source=share&expected_price_currency=rub&expected_price=8486"
       }
      ],
-     "extra_rub": 4000,
-     "days": 17,
+     "extra_rub": 8000,
+     "days": 18,
      "airline_sites": [
       {
        "name": "Air Astana",
@@ -1060,7 +1054,7 @@
     }
    },
    "median": 55896,
-   "median_points": 5,
+   "median_points": 6,
    "reasons": [],
    "is_deal": false
   },
@@ -1306,6 +1300,32 @@
     {
      "route_id": "NYC",
      "source": "travelpayouts",
+     "price_rub": 92094,
+     "depart": "2027-07-01",
+     "ret": "2027-07-23",
+     "airline": "Gulf Air",
+     "stops": 1,
+     "origin": "SVO",
+     "destination": "JFK",
+     "link": "https://www.aviasales.ru/search/MOW0107NYC23073?t=GF18144468001814520300001645SVOBAHJFK18163548001816503300002055JFKBAHSVO_85772b882fcad3dfde5035a8c87069b4_92093&search_date=17112026&expected_price_uuid=01a1e86e-f2b9-8030-a7e4-69a50a79db35&static_fare_key=TY%7CP1%7CH1%7CL1_2_46%7CCH0%7CR0%7CTBC1&itinerary_key=RkOHLwotvGjd1UxagyY7Ug&expected_price_source=share&expected_price_currency=rub&expected_price=92094",
+     "price_orig": 92094,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "days": 22,
+     "airline_sites": [
+      {
+       "name": "Gulf Air",
+       "url": "https://www.gulfair.com/"
+      }
+     ]
+    },
+    {
+     "route_id": "NYC",
+     "source": "travelpayouts",
      "price_rub": 92381,
      "depart": "2027-06-24",
      "ret": "2027-07-04",
@@ -1315,6 +1335,32 @@
      "destination": "JFK",
      "link": "https://www.aviasales.ru/search/MOW2406NYC04073?t=GF18138420001813915500001645SVOBAHJFK18147132001814861700002055JFKBAHSVO_727e082322f63f588f05205c45612b24_92389&search_date=16112026&expected_price_uuid=01a1e493-a73e-8030-e54b-8d266b9394af&static_fare_key=TY%7CP1%7CH1%7CL1_2_46%7CCH0%7CR0%7CTBC1&itinerary_key=Ft-37B1R3PaeVWS1S3b6lg&expected_price_source=share&expected_price_currency=rub&expected_price=92381",
      "price_orig": 92381,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "days": 10,
+     "airline_sites": [
+      {
+       "name": "Gulf Air",
+       "url": "https://www.gulfair.com/"
+      }
+     ]
+    },
+    {
+     "route_id": "NYC",
+     "source": "travelpayouts",
+     "price_rub": 92419,
+     "depart": "2027-07-20",
+     "ret": "2027-07-30",
+     "airline": "Gulf Air",
+     "stops": 1,
+     "origin": "SVO",
+     "destination": "JFK",
+     "link": "https://www.aviasales.ru/search/MOW2007NYC30073?t=GF18160884001816161900001645SVOBAHJFK18169596001817108100002055JFKBAHSVO_eb7001cc2935f3d0b58c0e7018b37693_92419&search_date=17112026&expected_price_uuid=01a1e779-c585-8030-e54c-358a09cc37fc&static_fare_key=TY%7CP1%7CH1%7CL1_2_46%7CCH0%7CR0%7CTBC1&itinerary_key=Ft-37B1R3PaeVWS1S3b6lg&expected_price_source=share&expected_price_currency=rub&expected_price=92419",
+     "price_orig": 92419,
      "currency_orig": "RUB",
      "note": null,
      "typical_range": null,
@@ -1432,58 +1478,6 @@
        "url": "https://www.gulfair.com/"
       }
      ]
-    },
-    {
-     "route_id": "NYC",
-     "source": "travelpayouts",
-     "price_rub": 92501,
-     "depart": "2027-06-29",
-     "ret": "2027-07-18",
-     "airline": "Gulf Air",
-     "stops": 1,
-     "origin": "SVO",
-     "destination": "JFK",
-     "link": "https://www.aviasales.ru/search/MOW2906NYC18073?t=GF18142740001814347500001645SVOBAHJFK18159228001816071300002055JFKBAHSVO_6cd4775e7a118dfcf315e6b1b10e3f0f_92574&search_date=15112026&expected_price_uuid=01a1e02b-c762-8031-6f27-95ad0ffbe3ce&static_fare_key=TY%7CP1%7CH1%7CL1_2_46%7CCH0%7CR0%7CTBC1&itinerary_key=bxkTVA_tf-dVIZqJ8Bc6rQ&expected_price_source=share&expected_price_currency=rub&expected_price=92501",
-     "price_orig": 92501,
-     "currency_orig": "RUB",
-     "note": null,
-     "typical_range": null,
-     "via": null,
-     "legs": null,
-     "extra_rub": 0,
-     "days": 19,
-     "airline_sites": [
-      {
-       "name": "Gulf Air",
-       "url": "https://www.gulfair.com/"
-      }
-     ]
-    },
-    {
-     "route_id": "NYC",
-     "source": "travelpayouts",
-     "price_rub": 92501,
-     "depart": "2027-07-01",
-     "ret": "2027-07-18",
-     "airline": "Gulf Air",
-     "stops": 1,
-     "origin": "SVO",
-     "destination": "JFK",
-     "link": "https://www.aviasales.ru/search/MOW0107NYC18073?t=GF18144468001814520300001645SVOBAHJFK18159228001816071300002055JFKBAHSVO_a5e50a8a02d66f33890069b8a19f0e4d_92574&search_date=15112026&expected_price_uuid=01a1e074-5791-8030-21f6-b8047271df30&static_fare_key=TY%7CP1%7CH1%7CL1_2_46%7CCH0%7CR0%7CTBC1&itinerary_key=mR7PywrVAXzUmca9kWf-Bg&expected_price_source=share&expected_price_currency=rub&expected_price=92501",
-     "price_orig": 92501,
-     "currency_orig": "RUB",
-     "note": null,
-     "typical_range": null,
-     "via": null,
-     "legs": null,
-     "extra_rub": 0,
-     "days": 17,
-     "airline_sites": [
-      {
-       "name": "Gulf Air",
-       "url": "https://www.gulfair.com/"
-      }
-     ]
     }
    ],
    "by_source": {
@@ -1516,15 +1510,15 @@
     "self_transfer": {
      "route_id": "NYC",
      "source": "self_transfer",
-     "price_rub": 97140,
+     "price_rub": 97136,
      "depart": "2027-06-22",
      "ret": "2027-07-20",
      "airline": "S7 / RO / Lufthansa",
      "stops": 2,
      "origin": "DME",
      "destination": "JFK",
-     "link": "https://www.aviasales.ru/search/MOW2206IST3?t=S718136581001813677000000315DMEIST_33d29db295f5a912b7d07a7867aae9d2_13762&search_date=16112026&expected_price_uuid=01a1e63c-1936-8031-6687-24cff2a801c3&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH1%7CR0%7CTBC0&itinerary_key=7uHkAQjKvAverkhRwXpaMA&expected_price_source=share&expected_price_currency=rub&expected_price=13764",
-     "price_orig": 97140,
+     "link": "https://www.aviasales.ru/search/MOW2206IST3?t=S718136581001813677000000315DMEIST_33d29db295f5a912b7d07a7867aae9d2_13762&search_date=17112026&expected_price_uuid=01a1e84a-07ab-8030-a45d-eb5317706867&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH1%7CR0%7CTBC0&itinerary_key=7uHkAQjKvAverkhRwXpaMA&expected_price_source=share&expected_price_currency=rub&expected_price=13762",
+     "price_orig": 97136,
      "currency_orig": "RUB",
      "note": "4 отдельных билета через Стамбул; стыковка туда 9 ч, обратно 5 ч; багаж — получать и сдавать заново",
      "typical_range": null,
@@ -1535,10 +1529,10 @@
        "to": "IST",
        "dep": "2027-06-22T09:55:00+03:00",
        "arr": "2027-06-22T15:10:00+03:00",
-       "price": 13764,
+       "price": 13762,
        "airline": "S7",
        "transfers": 0,
-       "link": "https://www.aviasales.ru/search/MOW2206IST3?t=S718136581001813677000000315DMEIST_33d29db295f5a912b7d07a7867aae9d2_13762&search_date=16112026&expected_price_uuid=01a1e63c-1936-8031-6687-24cff2a801c3&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH1%7CR0%7CTBC0&itinerary_key=7uHkAQjKvAverkhRwXpaMA&expected_price_source=share&expected_price_currency=rub&expected_price=13764"
+       "link": "https://www.aviasales.ru/search/MOW2206IST3?t=S718136581001813677000000315DMEIST_33d29db295f5a912b7d07a7867aae9d2_13762&search_date=17112026&expected_price_uuid=01a1e84a-07ab-8030-a45d-eb5317706867&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH1%7CR0%7CTBC0&itinerary_key=7uHkAQjKvAverkhRwXpaMA&expected_price_source=share&expected_price_currency=rub&expected_price=13762"
       },
       {
        "from": "IST",
@@ -1565,10 +1559,10 @@
        "to": "DME",
        "dep": "2027-07-20T16:10:00+03:00",
        "arr": "2027-07-20T20:50:00+03:00",
-       "price": 16289,
+       "price": 16287,
        "airline": "S7",
        "transfers": 0,
-       "link": "https://www.aviasales.ru/search/IST2007MOW3?t=S718160998001816116600000280ISTDME_8bd98147c757ebafeff5ac66b7c86814_16287&search_date=16112026&expected_price_uuid=01a1e642-c682-8030-a7b6-630f2bfd77ca&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH1%7CR0%7CTBC0&itinerary_key=LeIFW7fAmQ7V8CGEFS21xw&expected_price_source=share&expected_price_currency=rub&expected_price=16289"
+       "link": "https://www.aviasales.ru/search/IST2007MOW3?t=S718160998001816116600000280ISTDME_8bd98147c757ebafeff5ac66b7c86814_16287&search_date=17112026&expected_price_uuid=01a1e883-bb14-8030-aef8-25a11ae9fe71&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH1%7CR0%7CTBC0&itinerary_key=LeIFW7fAmQ7V8CGEFS21xw&expected_price_source=share&expected_price_currency=rub&expected_price=16287"
       }
      ],
      "extra_rub": 0,
@@ -1577,7 +1571,7 @@
     }
    },
    "median": 88164,
-   "median_points": 4,
+   "median_points": 5,
    "reasons": [],
    "is_deal": false
   },
@@ -1657,6 +1651,32 @@
      "legs": null,
      "extra_rub": 0,
      "days": 6,
+     "airline_sites": [
+      {
+       "name": "Royal Air Maroc",
+       "url": "https://www.royalairmaroc.com/"
+      }
+     ]
+    },
+    {
+     "route_id": "LAX",
+     "source": "travelpayouts",
+     "price_rub": 103192,
+     "depart": "2027-06-17",
+     "ret": "2027-06-27",
+     "airline": "Royal Air Maroc",
+     "stops": 1,
+     "origin": "SVO",
+     "destination": "LAX",
+     "link": "https://www.aviasales.ru/search/MOW1706LAX27063?t=AT18131970001813306800002430SVOCMNLAX18140916001814229600001700LAXCMNSVO_1848053e77ccc5f2b20301ab8dfccfe4_103192&search_date=17112026&expected_price_uuid=01a1e762-3844-8031-2b2f-8d618a618bea&static_fare_key=TY%7CP1%7CH1%7CL1_1_23%7CCH1%7CR0%7CTBC1&itinerary_key=pfC026mYO0y8d5jJ1BdI2w&expected_price_source=share&expected_price_currency=rub&expected_price=103192",
+     "price_orig": 103192,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "days": 10,
      "airline_sites": [
       {
        "name": "Royal Air Maroc",
@@ -1975,73 +1995,6 @@
        "url": "https://ajet.com/"
       }
      ]
-    },
-    {
-     "route_id": "LAX",
-     "source": "self_transfer",
-     "price_rub": 107098,
-     "depart": "2027-06-28",
-     "ret": "2027-07-27",
-     "airline": "S7 / British Airways / United",
-     "stops": 3,
-     "origin": "DME",
-     "destination": "LAX",
-     "link": "https://www.aviasales.ru/search/MOW2806IST3?t=S718141765001814195400000315DMEIST_45946fc588e0f5bdec3bf2b4711a1bf2_16207&search_date=15112026&expected_price_uuid=01a1dfe5-8e94-8030-2f92-9b7c00f879c9&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH1%7CR0%7CTBC0&itinerary_key=7uHkAQjKvAverkhRwXpaMA&expected_price_source=share&expected_price_currency=rub&expected_price=16194",
-     "price_orig": 103098,
-     "currency_orig": "RUB",
-     "note": "4 отдельных билета через Стамбул; стыковка туда 5 ч, обратно 14 ч; в цену заложена ночёвка 4 000 ₽; багаж — получать и сдавать заново",
-     "typical_range": null,
-     "via": "Стамбул",
-     "legs": [
-      {
-       "from": "DME",
-       "to": "IST",
-       "dep": "2027-06-28T09:55:00+03:00",
-       "arr": "2027-06-28T15:10:00+03:00",
-       "price": 16194,
-       "airline": "S7",
-       "transfers": 0,
-       "link": "https://www.aviasales.ru/search/MOW2806IST3?t=S718141765001814195400000315DMEIST_45946fc588e0f5bdec3bf2b4711a1bf2_16207&search_date=15112026&expected_price_uuid=01a1dfe5-8e94-8030-2f92-9b7c00f879c9&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH1%7CR0%7CTBC0&itinerary_key=7uHkAQjKvAverkhRwXpaMA&expected_price_source=share&expected_price_currency=rub&expected_price=16194"
-      },
-      {
-       "from": "IST",
-       "to": "LAX",
-       "dep": "2027-06-28T20:15:00+03:00",
-       "arr": "2027-06-29T11:30:00+03:00",
-       "price": 41379,
-       "airline": "British Airways",
-       "transfers": 1,
-       "link": "https://www.aviasales.ru/search/IST2806LAX3?t=BA18142137001814276700001650ISTLHRLAX_6d9c93bc0d13acb5b80cf4b9a9e9db1c_41169&search_date=10112026&expected_price_uuid=01a1c5a3-d60a-8031-6875-fb7c9186b85e&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH1%7CR0%7CTBC0&itinerary_key=f2Rlya_16QXsNr8KTmajjg&expected_price_source=share&expected_price_currency=rub&expected_price=41379"
-      },
-      {
-       "from": "LAX",
-       "to": "IST",
-       "dep": "2027-07-25T23:30:00-07:00",
-       "arr": "2027-07-26T15:50:00-07:00",
-       "price": 29090,
-       "airline": "United",
-       "transfers": 2,
-       "link": "https://www.aviasales.ru/search/LAX2507IST3?t=LH18165582001816693500001655LAXIADFRAIST_c09eac0c949d6bad5d1c6195921b0731_29113&search_date=15112026&expected_price_uuid=01a1dfaf-38c6-8031-6d80-e66dd4af5239&static_fare_key=TY%7CP1%7CH0%7CL0%7CCH1%7CR0%7CTBC0&itinerary_key=4JvB5XCaooYaqRUguXmUnA&expected_price_source=share&expected_price_currency=rub&expected_price=29090"
-      },
-      {
-       "from": "IST",
-       "to": "DME",
-       "dep": "2027-07-27T16:10:00+03:00",
-       "arr": "2027-07-27T20:50:00+03:00",
-       "price": 16435,
-       "airline": "S7",
-       "transfers": 0,
-       "link": "https://www.aviasales.ru/search/IST2707MOW3?t=S718167046001816721400000280ISTDME_d1d704564422b39255733005b1de984f_16441&search_date=15112026&expected_price_uuid=01a1e0ec-bdd5-8031-2736-573d4017c8ff&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH1%7CR0%7CTBC0&itinerary_key=LeIFW7fAmQ7V8CGEFS21xw&expected_price_source=share&expected_price_currency=rub&expected_price=16435"
-      }
-     ],
-     "extra_rub": 4000,
-     "days": 29,
-     "airline_sites": [
-      {
-       "name": "United",
-       "url": "https://www.united.com/"
-      }
-     ]
     }
    ],
    "by_source": {
@@ -2074,7 +2027,7 @@
     "self_transfer": {
      "route_id": "LAX",
      "source": "self_transfer",
-     "price_rub": 107098,
+     "price_rub": 107276,
      "depart": "2027-06-28",
      "ret": "2027-07-27",
      "airline": "S7 / British Airways / United",
@@ -2082,7 +2035,7 @@
      "origin": "DME",
      "destination": "LAX",
      "link": "https://www.aviasales.ru/search/MOW2806IST3?t=S718141765001814195400000315DMEIST_45946fc588e0f5bdec3bf2b4711a1bf2_16207&search_date=15112026&expected_price_uuid=01a1dfe5-8e94-8030-2f92-9b7c00f879c9&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH1%7CR0%7CTBC0&itinerary_key=7uHkAQjKvAverkhRwXpaMA&expected_price_source=share&expected_price_currency=rub&expected_price=16194",
-     "price_orig": 103098,
+     "price_orig": 103276,
      "currency_orig": "RUB",
      "note": "4 отдельных билета через Стамбул; стыковка туда 5 ч, обратно 14 ч; в цену заложена ночёвка 4 000 ₽; багаж — получать и сдавать заново",
      "typical_range": null,
@@ -2123,10 +2076,10 @@
        "to": "DME",
        "dep": "2027-07-27T16:10:00+03:00",
        "arr": "2027-07-27T20:50:00+03:00",
-       "price": 16435,
+       "price": 16613,
        "airline": "S7",
        "transfers": 0,
-       "link": "https://www.aviasales.ru/search/IST2707MOW3?t=S718167046001816721400000280ISTDME_d1d704564422b39255733005b1de984f_16441&search_date=15112026&expected_price_uuid=01a1e0ec-bdd5-8031-2736-573d4017c8ff&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH1%7CR0%7CTBC0&itinerary_key=LeIFW7fAmQ7V8CGEFS21xw&expected_price_source=share&expected_price_currency=rub&expected_price=16435"
+       "link": "https://www.aviasales.ru/search/IST2707MOW3?t=S718167046001816721400000280ISTDME_d1d704564422b39255733005b1de984f_16613&search_date=17112026&expected_price_uuid=01a1e777-e1e5-8030-61d0-451cc719adf0&static_fare_key=TY%7CP0%7CH1%7CL0%7CCH1%7CR0%7CTBC0&itinerary_key=LeIFW7fAmQ7V8CGEFS21xw&expected_price_source=share&expected_price_currency=rub&expected_price=16613"
       }
      ],
      "extra_rub": 4000,
@@ -2140,7 +2093,7 @@
     }
    },
    "median": 101652,
-   "median_points": 4,
+   "median_points": 5,
    "reasons": [],
    "is_deal": false
   },
@@ -2595,7 +2548,7 @@
     }
    },
    "median": 87215,
-   "median_points": 4,
+   "median_points": 5,
    "reasons": [],
    "is_deal": false
   }
@@ -2604,8 +2557,8 @@
   "travelpayouts": {
    "ok": true,
    "skipped": null,
-   "offers": 2348,
-   "summer": 2047,
+   "offers": 2338,
+   "summer": 2044,
    "errors": []
   },
   "self_transfer": {
@@ -2633,9 +2586,11 @@
    "ok": true,
    "skipped": null,
    "offers": 49,
-   "summer": 3,
+   "summer": 0,
    "errors": []
   }
  },
- "sent": []
+ "sent": [
+  "digest:not_delivered"
+ ]
 }
