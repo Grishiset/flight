@@ -1409,5 +1409,76 @@
     "skipped": null
    }
   }
+ },
+ {
+  "at": "2026-11-21T07:14:13+00:00",
+  "routes": {
+   "SEL": {
+    "best": 50096,
+    "src": "travelpayouts",
+    "by_source": {
+     "travelpayouts": 50096,
+     "self_transfer": 55702
+    }
+   },
+   "TYO": {
+    "best": 55232,
+    "src": "travelpayouts",
+    "by_source": {
+     "travelpayouts": 55232,
+     "self_transfer": 97444
+    }
+   },
+   "NYC": {
+    "best": 88516,
+    "src": "travelpayouts",
+    "by_source": {
+     "travelpayouts": 88516,
+     "self_transfer": 94652
+    }
+   },
+   "LAX": {
+    "best": 99105,
+    "src": "travelpayouts",
+    "by_source": {
+     "travelpayouts": 99105,
+     "self_transfer": 110239
+    }
+   },
+   "NZ": {
+    "best": 86901,
+    "src": "travelpayouts",
+    "by_source": {
+     "travelpayouts": 86901
+    }
+   }
+  },
+  "sources": {
+   "travelpayouts": {
+    "ok": true,
+    "offers": 2598,
+    "skipped": null
+   },
+   "self_transfer": {
+    "ok": true,
+    "offers": 62,
+    "skipped": null
+   },
+   "google_flights": {
+    "ok": false,
+    "offers": 0,
+    "skipped": "нет секрета SERPAPI_KEY"
+   },
+   "etihad": {
+    "ok": false,
+    "offers": 0,
+    "skipped": "выключен в config.yaml"
+   },
+   "samokatus": {
+    "ok": true,
+    "offers": 49,
+    "skipped": null
+   }
+  }
  }
 ]
