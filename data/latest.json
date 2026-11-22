@@ -1,5 +1,5 @@
 {
- "at": "2026-11-22T14:48:55+00:00",
+ "at": "2026-11-22T16:19:06+00:00",
  "window": {
   "start": "2027-06-01",
   "end": "2027-08-31",
@@ -527,8 +527,8 @@
      ]
     }
    },
-   "median": 50830,
-   "median_points": 24,
+   "median": 50828,
+   "median_points": 25,
    "reasons": [],
    "is_deal": false
   },
@@ -1065,8 +1065,8 @@
      ]
     }
    },
-   "median": 55508,
-   "median_points": 25,
+   "median": 55491,
+   "median_points": 26,
    "reasons": [],
    "is_deal": false
   },
@@ -1574,7 +1574,7 @@
        "price": 16224,
        "airline": "S7",
        "transfers": 0,
-       "link": "https://www.aviasales.ru/search/IST2007MOW3?t=S718160998001816116600000280ISTDME_8bd98147c757ebafeff5ac66b7c86814_16224&search_date=21112026&expected_price_uuid=01a1ff4e-aa9c-8030-2095-4aed9482ee8b&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH1%7CR0%7CTBC0&itinerary_key=LeIFW7fAmQ7V8CGEFS21xw&expected_price_source=share&expected_price_currency=rub&expected_price=16224"
+       "link": "https://www.aviasales.ru/search/IST2007MOW3?t=S718160998001816116600000280ISTDME_8bd98147c757ebafeff5ac66b7c86814_16224&search_date=22112026&expected_price_uuid=01a203df-1208-8030-21c7-ad5599956055&static_fare_key=TY%7CP1%7CH1%7CL0%7CCH1%7CR0%7CTBC0&itinerary_key=LeIFW7fAmQ7V8CGEFS21xw&expected_price_source=share&expected_price_currency=rub&expected_price=16224"
       }
      ],
      "extra_rub": 0,
@@ -1583,7 +1583,7 @@
     }
    },
    "median": 88516,
-   "median_points": 24,
+   "median_points": 25,
    "reasons": [],
    "is_deal": false
   },
@@ -2105,7 +2105,7 @@
     }
    },
    "median": 99105,
-   "median_points": 24,
+   "median_points": 25,
    "reasons": [],
    "is_deal": false
   },
@@ -2559,8 +2559,8 @@
      ]
     }
    },
-   "median": 87194,
-   "median_points": 24,
+   "median": 87173,
+   "median_points": 25,
    "reasons": [],
    "is_deal": false
   }
@@ -2569,8 +2569,8 @@
   "travelpayouts": {
    "ok": true,
    "skipped": null,
-   "offers": 2536,
-   "summer": 2261,
+   "offers": 2551,
+   "summer": 2274,
    "errors": []
   },
   "self_transfer": {
