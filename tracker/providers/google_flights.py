@@ -39,7 +39,7 @@ def parse_response(body: dict, route_id: str, dep: date, ret: date, passengers: 
     offers = []
     for f in flights:
         price = f.get("price")
-        if not isinstance(price, (int, float)):
+        if not isinstance(price, (int, float)) or price <= 0:
             continue
         legs = f.get("flights") or []
         airlines = []
@@ -104,6 +104,7 @@ class GoogleFlightsProvider(Provider):
                 "currency": "RUB",
                 "hl": "ru",
                 "adults": cfg.passengers,
+                "no_cache": "true",
                 "api_key": self.ctx.env["SERPAPI_KEY"],
             }
             try:

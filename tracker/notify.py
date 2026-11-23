@@ -76,12 +76,19 @@ def offer_line(o: Offer) -> str:
     return ", ".join(parts)
 
 
-def price_text(per_person: int, passengers: int) -> str:
+def group_price(o: Offer, passengers: int) -> int:
+    if o.source == "google_flights" and o.price_orig is not None:
+        return int(o.price_orig)
+    return o.price_rub * passengers
+
+
+def price_text(o: Offer, passengers: int) -> str:
     """«41 000 ₽ с человека, 123 000 ₽ на троих»."""
+    per_person = o.price_rub
     if passengers <= 1:
         return fmt_rub(per_person)
     who = {2: "двоих", 3: "троих", 4: "четверых", 5: "пятерых"}.get(passengers, f"{passengers} чел.")
-    return f"{fmt_rub(per_person * passengers)} на {who} ({fmt_rub(per_person)} с человека)"
+    return f"{fmt_rub(group_price(o, passengers))} на {who} ({fmt_rub(per_person)} с человека)"
 
 
 def alert_message(sts: list[RouteStatus], site_url: str | None = None, passengers: int = 1) -> str:
@@ -91,7 +98,7 @@ def alert_message(sts: list[RouteStatus], site_url: str | None = None, passenger
         assert o is not None
         src = SOURCE_TITLES.get(o.source, o.source)
         lines = [
-            f"✈️ <b>{html.escape(st.name)} — {price_text(o.price_rub, passengers)}</b>, туда-обратно",
+            f"✈️ <b>{html.escape(st.name)} — {price_text(o, passengers)}</b>, туда-обратно",
             offer_line(o),
             f"Источник: {src}. " + "; ".join(html.escape(r) for r in st.reasons) + ".",
         ]
@@ -102,13 +109,13 @@ def alert_message(sts: list[RouteStatus], site_url: str | None = None, passenger
             direct = [v for k, v in st.by_source.items() if k != "self_transfer"]
             if direct:
                 d = min(direct, key=lambda x: x.price_rub)
-                lines.append(f"Для сравнения, одним билетом: {price_text(d.price_rub, passengers)} "
+                lines.append(f"Для сравнения, одним билетом: {price_text(d, passengers)} "
                              f"({SOURCE_TITLES.get(d.source, d.source)}, {fmt_date(d.depart)} → {fmt_date(d.ret)})")
         links = buy_links(o, passengers)
         if links:
             lines.append("Проверить и купить: " + links)
         if passengers > 1:
-            lines.append(f"⚠️ Цена — из кэша поиска на одного. Наличие {passengers} мест и итоговую сумму проверь по ссылке.")
+            lines.append(f"⚠️ Поиск на {passengers} пассажиров. Наличие и цена могут измениться до оплаты.")
         blocks.append("\n".join(lines))
     text = "\n\n".join(blocks)
     if site_url:
@@ -146,14 +153,14 @@ def digest_message(sts: list[RouteStatus], sources: dict, site_url: str | None =
     who = "1 взрослого" if n == 1 else f"{n} взрослых"
     lines = [f"🗓 <b>Отчёт по летним билетам</b> · {fmt_date(now.date())}\n"
              f"Туда-обратно на {who}; в скобках — цена с человека"
-             + ("\n⚠️ Цены — из кэша поиска на одного: наличие мест на всех проверяй по ссылкам" if n > 1 else "")]
+             + ("\n⚠️ Поиск на всю группу. Наличие и цена могут измениться до оплаты" if n > 1 else "")]
     for st in sts:
         lines.append("")
         if st.best:
             b = st.best
             diff = round((b.price_rub / st.threshold - 1) * 100)
             mark = "✅" if b.price_rub <= st.threshold else ("🔸" if diff <= 15 else "▫️")
-            lines.append(f"{mark} <b>{html.escape(st.name)}: {fmt_rub(b.price_rub * n)}</b> ({fmt_rub(b.price_rub)}, "
+            lines.append(f"{mark} <b>{html.escape(st.name)}: {fmt_rub(group_price(b, n))}</b> ({fmt_rub(b.price_rub)}, "
                          f"{'+' if diff > 0 else ''}{diff}% к порогу {fmt_rub(st.threshold)})")
             lines.append(f"   {offer_line(b)} — {SOURCE_TITLES.get(b.source, b.source)}")
             links = buy_links(b, n)
@@ -168,7 +175,7 @@ def digest_message(sts: list[RouteStatus], sources: dict, site_url: str | None =
                 title = SOURCE_TITLES.get(src, src).replace(" (Aviasales)", "")
                 if o.via:
                     title += f" через {o.via}"
-                parts.append(f"{html.escape(title)} {fmt_rub(o.price_rub * n)}")
+                parts.append(f"{html.escape(title)} {fmt_rub(group_price(o, n))}")
             lines.append("   Варианты: " + " · ".join(parts))
         # динамика (цены с человека)
         if history is not None:

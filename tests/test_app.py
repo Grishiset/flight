@@ -199,9 +199,11 @@ def test_passengers_everywhere():
     sts = evaluate(cfg, [offer("SEL", 41000)], [], NOW)
     msg = alert_message([s for s in sts if s.is_deal], None, passengers=3)
     assert "123\u202f000\u00a0₽ на троих (41\u202f000\u00a0₽ с человека)" in msg
-    body = {"other_flights": [{"price": 150000, "flights": [{"airline": "Etihad"}], "layovers": []}],
+    body = {"other_flights": [{"price": 150001, "flights": [{"airline": "Etihad"}], "layovers": []}],
             "price_insights": {"typical_price_range": [180000, 240000]}}
     o = parse_response(body, "NYC", date(2027, 6, 1), date(2027, 6, 15), passengers=3)[0]
+    from tracker.notify import group_price
+    assert group_price(o, 3) == 150001
     assert o.price_rub == 50000 and o.typical_range == [60000, 80000]
 
 
@@ -219,7 +221,7 @@ def test_buy_links():
     assert "uzairways" in lk and "turkishairlines" in lk and "Google" not in lk
     cfg = load_config("config.yaml")
     msg = digest_message(evaluate(cfg, [o], [], NOW), {}, None, passengers=3)
-    assert "csair.com" in msg and "из кэша поиска на одного" in msg
+    assert "csair.com" in msg and "Поиск на всю группу" in msg
     assert o.to_dict()["airline_sites"] == [{"name": "China Southern", "url": "https://www.csair.com/ru/ru/"}]
 
 

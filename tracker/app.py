@@ -40,6 +40,9 @@ def collect(ctx: Context, only: list[str] | None = None) -> list[SourceResult]:
     for cls in ALL_PROVIDERS:
         if only and cls.name not in only:
             continue
+        if ctx.cfg.passengers > 1 and cls.name != "google_flights":
+            results.append(SourceResult(cls.name, skipped="источник не проверяет наличие мест на всю группу"))
+            continue
         log.info("Источник: %s", cls.title)
         res = cls(ctx).run()
         if res.skipped:
