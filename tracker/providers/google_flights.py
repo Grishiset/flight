@@ -1,14 +1,12 @@
-"""Google Flights через SerpAPI: тарифы почти всех авиакомпаний, включая продажи напрямую.
-
-Один поиск = одна пара дат, поэтому даты перебираются по кругу между запусками.
-Документация: https://serpapi.com/google-flights-api
-"""
+"""Поиск Google Flights на заданное число взрослых, напрямую или через SerpApi."""
 from __future__ import annotations
 
 from datetime import date, timedelta
+from math import isfinite
 
 from ..models import Offer, SourceResult
 from .base import Provider
+from .google_direct import GoogleDirect
 
 API = "https://serpapi.com/search.json"
 
@@ -29,17 +27,21 @@ def date_plan(cfg, trip_days: list[int], every_days: int) -> list[tuple[str, dat
     return plan
 
 
+def flight_rows(body: dict) -> list[dict]:
+    return (body.get("best_flights") or []) + (body.get("other_flights") or [])
+
+
 def parse_response(body: dict, route_id: str, dep: date, ret: date, passengers: int = 1) -> list[Offer]:
     """Google отдаёт цену за всех пассажиров — переводим в цену с человека."""
     n = max(1, passengers)
-    flights = (body.get("best_flights") or []) + (body.get("other_flights") or [])
+    flights = flight_rows(body)
     insights = body.get("price_insights") or {}
     typical = insights.get("typical_price_range")
     url = (body.get("search_metadata") or {}).get("google_flights_url")
     offers = []
     for f in flights:
         price = f.get("price")
-        if not isinstance(price, (int, float)) or price <= 0:
+        if type(price) not in (int, float) or not isfinite(price) or price <= 0:
             continue
         legs = f.get("flights") or []
         airlines = []
@@ -51,6 +53,8 @@ def parse_response(body: dict, route_id: str, dep: date, ret: date, passengers: 
         last = legs[-1] if legs else {}
         offers.append(
             Offer(
+                quoted_passengers=n,
+                total_price_rub=round(price),
                 route_id=route_id,
                 source="google_flights",
                 price_rub=int(round(price / n)),
@@ -78,47 +82,90 @@ class GoogleFlightsProvider(Provider):
         reason = super().enabled()
         if reason:
             return reason
-        if not self.ctx.env.get("SERPAPI_KEY"):
+        if self.opts.get("backend", "direct") == "serpapi" and not self.ctx.env.get("SERPAPI_KEY"):
             return "нет секрета SERPAPI_KEY"
         return None
 
     def collect(self, res: SourceResult) -> None:
         cfg = self.ctx.cfg
         plan = date_plan(cfg, self.opts.get("trip_days") or [10, 14], int(self.opts.get("every_days", 7)))
+        today = date.today()
+        plan = [(rid, dep, ret) for rid, dep, ret in plan if dep >= today]
         if not plan:
-            res.errors.append("пустой план дат — проверь window и trip_days")
+            if cfg.window.end >= today:
+                res.errors.append("пустой план дат — проверь window и trip_days")
             return
-        st = self.ctx.state.setdefault("google_flights", {})
-        cursor = int(st.get("cursor", 0)) % len(plan)
-        n = int(self.opts.get("searches_per_run", 1))
-        for i in range(min(n, len(plan))):
-            route_id, dep, ret = plan[(cursor + i) % len(plan)]
-            route = cfg.route(route_id)
-            params = {
-                "engine": "google_flights",
-                "departure_id": ",".join(cfg.origin_airports),
-                "arrival_id": ",".join(route.airports),
-                "outbound_date": dep.isoformat(),
-                "return_date": ret.isoformat(),
-                "type": 1,
-                "currency": "RUB",
-                "hl": "ru",
-                "adults": cfg.passengers,
-                "no_cache": "true",
-                "api_key": self.ctx.env["SERPAPI_KEY"],
+        state = self.ctx.state.setdefault(self.name, {})
+        backend = self.opts.get("backend", "direct")
+        if backend == "direct":
+            direct = GoogleDirect(self.ctx)
+            dates = list(dict.fromkeys((dep, ret) for _, dep, ret in plan))
+            cursor = int(state.get("direct_cursor", 0)) % len(dates)
+            count = min(max(1, int(self.opts.get("dates_per_route", 2))), len(dates))
+            # За один запуск проверяем все направления на датах из разных частей окна.
+            batch = [dates[(cursor + i * len(dates) // count) % len(dates)] for i in range(count)]
+            for route in cfg.routes:
+                for dep, ret in batch:
+                    self.search_date(res, direct.offers, route.id, dep, ret)
+            state["direct_cursor"] = (cursor + 1) % len(dates)
+        elif backend == "serpapi":
+            cursor = int(state.get("cursor", 0)) % len(plan)
+            count = min(max(1, int(self.opts.get("searches_per_run", 1))), len(plan))
+            for i in range(count):
+                self.search_date(res, self.serpapi_offers, *plan[(cursor + i) % len(plan)])
+            state["cursor"] = (cursor + count) % len(plan)
+        else:
+            res.errors.append(f"неизвестный backend Google Flights: {backend}")
+
+    @staticmethod
+    def search_date(res, search, route_id, dep, ret) -> None:
+        try:
+            res.offers.extend(search(route_id, dep, ret))
+        except Exception as e:  # noqa: BLE001 — продолжаем с другими датами и направлениями
+            res.errors.append(f"{route_id} {dep} → {ret}: {e}")
+
+    def serpapi_offers(self, route_id: str, dep: date, ret: date) -> list[Offer]:
+        cfg = self.ctx.cfg
+        params = {
+            "engine": "google_flights",
+            "departure_id": ",".join(cfg.origin_airports),
+            "arrival_id": ",".join(cfg.route(route_id).airports),
+            "outbound_date": dep.isoformat(),
+            "return_date": ret.isoformat(),
+            "type": 1,
+            "currency": "RUB",
+            "hl": "ru",
+            "adults": cfg.passengers,
+            "no_cache": "true",
+            "api_key": self.ctx.env["SERPAPI_KEY"],
+        }
+        outgoing = self.serpapi_search(params)
+        start = min((f for f in flight_rows(outgoing) if f.get("departure_token") and f.get("flights")),
+                    key=lambda f: f.get("price") or float("inf"), default=None)
+        if not start:
+            return []
+        returning = self.serpapi_search({**params, "departure_token": start["departure_token"]})
+        offers = []
+        for end in flight_rows(returning):
+            if not end.get("flights"):
+                continue
+            # Цена из списка обратных рейсов уже включает выбранный рейс туда.
+            body = {
+                "best_flights": [{**start, "price": end.get("price")}],
+                "price_insights": outgoing.get("price_insights"),
             }
-            try:
-                r = self.ctx.http.get(API, params=params, timeout=90)
-                body = r.json()
-            except Exception as e:  # noqa: BLE001
-                res.errors.append(f"{route_id} {dep}: {e}")
-                continue
-            err = body.get("error") or (body.get("search_metadata") or {}).get("error")
-            if err and not (body.get("best_flights") or body.get("other_flights")):
-                # «Google hasn't returned any results» — не ошибка, просто нет рейсов
-                if "returned any results" not in str(err):
-                    res.errors.append(f"{route_id} {dep}: {err}")
-                continue
-            res.offers.extend(parse_response(body, route_id, dep, ret, cfg.passengers))
-        st["cursor"] = (cursor + n) % len(plan)
-        st["plan_size"] = len(plan)
+            for offer in parse_response(body, route_id, dep, ret, cfg.passengers):
+                names = dict.fromkeys(leg["airline"] for leg in start["flights"] + end["flights"] if leg.get("airline"))
+                offer.airline = ", ".join(names) or None
+                offer.stops = max(offer.stops or 0, len(end["flights"]) - 1)
+                offers.append(offer)
+        return offers
+
+    def serpapi_search(self, params: dict) -> dict:
+        r = self.ctx.http.get(API, params=params, timeout=45)
+        r.raise_for_status()
+        body = r.json()
+        error = body.get("error") or (body.get("search_metadata") or {}).get("error")
+        if error and not flight_rows(body) and "returned any results" not in str(error):
+            raise ValueError(error)
+        return body

@@ -26,6 +26,9 @@ class Offer:
     legs: list[dict] | None = None           # отдельные билеты маршрута (для self_transfer)
     extra_rub: int = 0                       # сколько в цене — оценка ночёвки, не билеты
 
+    quoted_passengers: int | None = None     # число взрослых, указанное при поиске цены
+    total_price_rub: int | None = None       # сумма из группового поиска, в рублях
+
     @property
     def days(self) -> int:
         return (self.ret - self.depart).days

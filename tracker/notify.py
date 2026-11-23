@@ -60,7 +60,7 @@ def buy_links(o: Offer, passengers: int = 1) -> str:
         links.append(f'<a href="{html.escape(o.link, quote=True)}">{SOURCE_TITLES.get(o.source, o.source)}{who}</a>')
     for name, url in airline_links(o.airline):
         links.append(f'<a href="{html.escape(url, quote=True)}">сайт {html.escape(name)}</a>')
-    if not o.legs:
+    if not o.legs and (o.source != "google_flights" or not o.link):
         g = google_flights_url(o.origin or "MOW", o.destination or "", o.depart, o.ret, passengers)
         links.append(f'<a href="{html.escape(g, quote=True)}">Google Flights{f" (на {passengers})" if passengers > 1 else ""}</a>')
     return " · ".join(links)
@@ -78,8 +78,8 @@ def offer_line(o: Offer) -> str:
 
 
 def group_price(o: Offer, passengers: int) -> int:
-    if o.source == "google_flights" and o.price_orig is not None:
-        return int(o.price_orig)
+    if o.quoted_passengers == passengers and o.total_price_rub is not None:
+        return o.total_price_rub
     return o.price_rub * passengers
 
 

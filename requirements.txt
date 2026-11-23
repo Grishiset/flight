@@ -2,3 +2,4 @@ httpx>=0.27
 PyYAML>=6.0
 beautifulsoup4>=4.12
 playwright>=1.47
+flights @ git+https://github.com/punitarani/fli.git@af5d0ed82a8c1316ca142dcd0362574d9194135a

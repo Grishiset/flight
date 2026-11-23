@@ -41,7 +41,10 @@ def collect(ctx: Context, only: list[str] | None = None) -> list[SourceResult]:
         if only and cls.name not in only:
             continue
         if ctx.cfg.passengers > 1 and cls.name != "google_flights":
-            results.append(SourceResult(cls.name, skipped="источник не проверяет наличие мест на всю группу"))
+            reason = "источник не проверяет наличие мест на всю группу"
+            if not ctx.cfg.source(cls.name).get("enabled", True):
+                reason = "выключен в config.yaml"
+            results.append(SourceResult(cls.name, skipped=reason))
             continue
         log.info("Источник: %s", cls.title)
         res = cls(ctx).run()
@@ -84,6 +87,7 @@ def run(
     env = dict(os.environ if env is None else env)
     state = store.state()
     history = store.history()
+    comparable_history = [r for r in history if r.get("passengers") == cfg.passengers]
     site_url = env.get("SITE_URL") or state.get("site_url")
 
     browser = Browser() if use_browser else None
@@ -97,8 +101,12 @@ def run(
         if browser:
             browser.close()
 
-    offers: list[Offer] = [o for r in results for o in r.offers]
-    statuses = evaluate(cfg, offers, history, now)
+    offers: list[Offer] = [
+        o for r in results for o in r.offers
+        if (cfg.passengers == 1 and o.quoted_passengers is None)
+        or (o.quoted_passengers == cfg.passengers and (o.total_price_rub or 0) > 0)
+    ]
+    statuses = evaluate(cfg, offers, comparable_history, now)
     srcs = sources_summary(results, cfg)
 
     tg = Telegram(env.get("TELEGRAM_BOT_TOKEN"), env.get("TELEGRAM_CHAT_ID"), dry_run=dry_run)
@@ -117,7 +125,7 @@ def run(
     due = report_due(cfg.alerts, msk_now) and state.get("last_digest") != msk_day.isoformat()
     forced = env.get("FORCE_REPORT") in ("1", "true", "True")
     if due or forced:
-        delivered = tg.send(digest_message(statuses, srcs, site_url, history=history, now=now,
+        delivered = tg.send(digest_message(statuses, srcs, site_url, history=comparable_history, now=msk_now,
                                            passengers=cfg.passengers, cfg=cfg))
         if due and delivered and not dry_run:
             state["last_digest"] = msk_day.isoformat()
@@ -138,6 +146,7 @@ def run(
     # 4. Сохранить
     run_rec = {
         "at": now.isoformat(),
+        "passengers": cfg.passengers,
         "routes": {
             s.route_id: {
                 "best": s.best.price_rub if s.best else None,
@@ -169,5 +178,5 @@ def run(
         store.save_state(state)
         store.save_latest(latest)
     if site_dir:
-        build_site(site_dir, latest, history)
+        build_site(site_dir, latest, [*comparable_history, run_rec])
     return latest
