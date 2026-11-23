@@ -111,10 +111,12 @@ sources:
     market: ru
 
   google_flights:
-    enabled: true                    # нужен секрет SERPAPI_KEY; без него источник пропускается
-    searches_per_run: 1              # 6 запусков в день × 30 = 180 поисков/мес (бесплатно — 250)
-    trip_days: [10, 14]              # длины поездок, которые проверяются по очереди
-    every_days: 7                    # шаг дат вылета по окну
+    enabled: true
+    backend: direct                  # публичная страница Google Flights, без ключа
+    dates_per_route: 3               # пар дат на каждое направление за проверку (direct)
+    searches_per_run: 1              # пар дат за проверку (serpapi, до 2 запросов на пару)
+    trip_days: [10, 14, 21, 30]      # длины поездок, которые проверяются по очереди
+    every_days: 3                    # шаг дат вылета по окну
   etihad:
     # etihad.com не пускает автоматические запросы с серверов GitHub (защита от ботов),
     # поэтому здесь выключен: тарифы Etihad и так попадают в Google Flights и Aviasales.

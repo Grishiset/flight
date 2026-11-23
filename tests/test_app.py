@@ -84,6 +84,7 @@ def test_messages_escape_html():
 
 def test_full_run(tmp_path, monkeypatch):
     cfg = load_config("config.yaml")
+    cfg.passengers = 1
     cfg.alerts["digest_days"] = None   # отчёт проверяется отдельно
     store = Store(tmp_path / "data")
     results = [
@@ -267,3 +268,27 @@ def test_digest_without_price_sources():
     assert "Открыть Google Flights" in msg
     assert msg.count("for%203%20adults") == len(cfg.routes)
     assert msg.count("нет свежей цены на всю группу") == len(cfg.routes)
+
+
+def test_group_run_excludes_estimates_and_other_party_sizes(tmp_path, monkeypatch):
+    cfg = load_config("config.yaml")
+    store = Store(tmp_path / "data")
+    store.save_history([{"at": (NOW - timedelta(days=1)).isoformat(), "routes": {"SEL": {"best": 20000}}}])
+    monkeypatch.setattr("tracker.app.load_rates", lambda http, fb: __import__("tracker.fx", fromlist=["Rates"]).Rates(fb, "test"))
+    sent = []
+    monkeypatch.setattr("tracker.notify.Telegram.send", lambda self, text: sent.append(text) or True)
+    results = [
+        SourceResult("travelpayouts", offers=[offer("SEL", 32000)]),
+        SourceResult("google_flights", offers=[
+            offer("SEL", 35000, source="google_flights", quoted_passengers=2, total_price_rub=70000),
+            offer("SEL", 36000, source="google_flights", quoted_passengers=3),
+            offer("SEL", 50000, source="google_flights", quoted_passengers=3, total_price_rub=150001),
+        ]),
+    ]
+    latest = run(cfg, store, tmp_path / "public", use_browser=False, now=NOW, results=results, env={})
+    seoul = latest["routes"][0]
+    assert [o["total_price_rub"] for o in seoul["top"]] == [150001]
+    assert latest["sent"] == ["digest"]
+    assert "150\u202f001\u00a0₽" in sent[0] and "минимум за неделю" not in sent[0]
+    data = json.loads((tmp_path / "public" / "data.json").read_text())
+    assert data["history"]["SEL"] == [[NOW.isoformat(), 50000]]

@@ -48,7 +48,7 @@
     const N = window.__N || 1;
     if (o.link && !o.legs) add((SRC[o.source] || o.source) + (N > 1 ? ` на ${N}` : '') + ' →', o.link);
     for (const s of o.airline_sites || []) add('Сайт ' + s.name, s.url);
-    if (!o.legs) add('Google Flights' + (N > 1 ? ` на ${N}` : ''), gfl(o));
+    if (!o.legs && (o.source !== 'google_flights' || !o.link)) add('Google Flights' + (N > 1 ? ` на ${N}` : ''), gfl(o));
     return box;
   }
 
@@ -92,7 +92,7 @@
     const L = data.latest;
     const N = L.passengers || 1;
     window.__N = N;
-    const total = (o) => rub(o.source === "google_flights" && o.price_orig != null ? o.price_orig : o.price_rub * N);
+    const total = (o) => rub(o.quoted_passengers === N && o.total_price_rub != null ? o.total_price_rub : o.price_rub * N);
     const pp = N > 1 ? ' с чел.' : '';
     const routes = L.routes;
     const at = new Date(L.at);
