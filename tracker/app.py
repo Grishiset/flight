@@ -118,7 +118,7 @@ def run(
     forced = env.get("FORCE_REPORT") in ("1", "true", "True")
     if due or forced:
         delivered = tg.send(digest_message(statuses, srcs, site_url, history=history, now=now,
-                                           passengers=cfg.passengers))
+                                           passengers=cfg.passengers, cfg=cfg))
         if due and delivered and not dry_run:
             state["last_digest"] = msk_day.isoformat()
         if not delivered and not dry_run:

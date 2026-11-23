@@ -155,7 +155,7 @@ def test_report_dynamics():
     assert "сутки назад 50" in msg3 and "−8%" in msg3          # 46 000 против 50 000
     assert "Сеул: 138\u202f000\u00a0₽" in msg3                   # 46 000 × 3
     assert "3 взрослых" in msg3
-    assert "Нью-Йорк</b>: летних билетов сейчас нет" in msg
+    assert "Нью-Йорк</b>: нет свежей цены на всю группу" in msg
 
 
 def test_health_warning(tmp_path, monkeypatch):
@@ -259,3 +259,11 @@ def test_telegram_chunks_preserve_html(monkeypatch):
     monkeypatch.setattr("tracker.notify.httpx.post", fake_post)
     assert Telegram("token", "1").send(message)
     assert len(sent) > 1 and "".join(sent) == message
+
+
+def test_digest_without_price_sources():
+    cfg = load_config("config.yaml")
+    msg = digest_message(evaluate(cfg, [], [], NOW), {}, now=NOW, passengers=3, cfg=cfg)
+    assert "Открыть Google Flights" in msg
+    assert msg.count("for%203%20adults") == len(cfg.routes)
+    assert msg.count("нет свежей цены на всю группу") == len(cfg.routes)

@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 
 import httpx
 
+from .config import Config
 from .airlines import airline_links, google_flights_url
 from .analyze import RouteStatus, fmt_rub
 from .models import Offer
@@ -145,7 +146,7 @@ def _pct(a: int, b: int) -> str:
 
 def digest_message(sts: list[RouteStatus], sources: dict, site_url: str | None = None,
                    history: list[dict] | None = None, now: datetime | None = None,
-                   passengers: int = 1) -> str:
+                   passengers: int = 1, cfg: Config | None = None) -> str:
     """Отчёт: по каждому направлению — лучшая цена, лучшие варианты по каждому источнику,
     изменение за сутки и минимум за неделю."""
     now = now or datetime.now().astimezone()
@@ -154,6 +155,7 @@ def digest_message(sts: list[RouteStatus], sources: dict, site_url: str | None =
     lines = [f"🗓 <b>Отчёт по летним билетам</b> · {fmt_date(now.date())}\n"
              f"Туда-обратно на {who}; в скобках — цена с человека"
              + ("\n⚠️ Поиск на всю группу. Наличие и цена могут измениться до оплаты" if n > 1 else "")]
+    lines.append('<a href="https://www.google.com/travel/flights?hl=ru&amp;curr=RUB">Открыть Google Flights</a>')
     for st in sts:
         lines.append("")
         if st.best:
@@ -167,7 +169,13 @@ def digest_message(sts: list[RouteStatus], sources: dict, site_url: str | None =
             if links:
                 lines.append("   " + links)
         else:
-            lines.append(f"▫️ <b>{html.escape(st.name)}</b>: летних билетов сейчас нет (порог {fmt_rub(st.threshold)} с человека)")
+            lines.append(f"▫️ <b>{html.escape(st.name)}</b>: нет свежей цены на всю группу (порог {fmt_rub(st.threshold)} с человека)")
+            if cfg:
+                dep = max(cfg.window.start, now.date())
+                ret = dep + timedelta(days=cfg.window.min_days)
+                if cfg.window.contains(dep, ret):
+                    url = google_flights_url(cfg.origin_city, cfg.route(st.route_id).city, dep, ret, n)
+                    lines.append(f'<a href="{html.escape(url, quote=True)}">Поиск на {n} чел. · {fmt_date(dep)} → {fmt_date(ret)}</a>')
         # по каждому источнику
         if st.by_source:
             parts = []
@@ -184,7 +192,7 @@ def digest_message(sts: list[RouteStatus], sources: dict, site_url: str | None =
             bits = []
             if st.best and yday:
                 bits.append(f"сутки назад {fmt_rub(yday)} ({_pct(st.best.price_rub, yday)})")
-            if week:
+            if st.best and week:
                 bits.append(f"минимум за неделю {fmt_rub(week)}")
             if bits:
                 lines.append("   С человека: " + ", ".join(bits))
