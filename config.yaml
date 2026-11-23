@@ -83,7 +83,7 @@ alerts:
   # Отчёт в Telegram: в какие дни (daily — каждый день, или список: 0 = понедельник … 6 = воскресенье;
   # null — выключить) и во сколько по Москве. Отдельный запуск в это время задан в .github/workflows/track.yml.
   digest_days: daily
-  digest_time_msk: "09:30"
+  digest_time_msk: "09:00"
   # Сообщать, если все источники падают столько запусков подряд
   failing_runs_to_warn: 3
 

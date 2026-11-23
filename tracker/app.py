@@ -116,9 +116,11 @@ def run(
     if due or forced:
         delivered = tg.send(digest_message(statuses, srcs, site_url, history=history, now=now,
                                            passengers=cfg.passengers))
-        if due:
+        if due and delivered and not dry_run:
             state["last_digest"] = msk_day.isoformat()
-        sent.append("digest" if delivered or dry_run or not tg.configured else "digest:not_delivered")
+        if not delivered and not dry_run:
+            log.error("Ежедневный отчёт не доставлен; следующая проверка повторит попытку")
+        sent.append("digest" if delivered or dry_run else "digest:not_delivered")
 
     # 3. Все источники падают несколько запусков подряд
     active = [v for v in srcs.values() if not v["skipped"]]

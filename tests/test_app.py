@@ -116,13 +116,13 @@ def test_full_run(tmp_path, monkeypatch):
     assert "digest" in forced["sent"]
 
 
-def test_daily_report_at_930(tmp_path, monkeypatch):
+def test_daily_report_at_900(tmp_path, monkeypatch):
     from tracker.app import MSK, report_due
     cfg = load_config("config.yaml")
-    assert cfg.alerts["digest_days"] == "daily" and cfg.alerts["digest_time_msk"] == "09:30"
+    assert cfg.alerts["digest_days"] == "daily" and cfg.alerts["digest_time_msk"] == "09:00"
     at = lambda h, m, day=18: datetime(2026, 11, day, h, m, tzinfo=MSK)  # noqa: E731
-    assert not report_due(cfg.alerts, at(9, 29))
-    assert report_due(cfg.alerts, at(9, 30)) and report_due(cfg.alerts, at(11, 17))
+    assert not report_due(cfg.alerts, at(8, 59))
+    assert report_due(cfg.alerts, at(9, 0)) and report_due(cfg.alerts, at(11, 17))
     assert not report_due({"digest_days": [6], "digest_time_msk": "18:00"}, at(19, 0, day=18))   # среда
     assert report_due({"digest_days": [6], "digest_time_msk": "18:00"}, at(19, 0, day=22))       # воскресенье
     assert not report_due({"digest_days": None}, at(12, 0))
@@ -130,8 +130,9 @@ def test_daily_report_at_930(tmp_path, monkeypatch):
     store = Store(tmp_path / "data")
     monkeypatch.setattr("tracker.app.load_rates", lambda http, fb: __import__("tracker.fx", fromlist=["Rates"]).Rates(fb, "test"))
     results = [SourceResult("travelpayouts", offers=[offer("TYO", 60000)])]
+    monkeypatch.setattr("tracker.notify.Telegram.send", lambda self, text: True)
     kinds = []
-    for h, m in [(7, 17), (9, 31), (11, 17), (15, 17)]:          # МСК 18 ноября, затем утро 19-го
+    for h, m in [(7, 17), (9, 1), (11, 17), (15, 17)]:          # МСК 18 ноября, затем утро 19-го
         kinds.append("digest" in run(cfg, store, None, use_browser=False, now=at(h, m), results=results, env={})["sent"])
     kinds.append("digest" in run(cfg, store, None, use_browser=False, now=at(9, 40, day=19), results=results, env={})["sent"])
     assert kinds == [False, True, False, False, True]
@@ -220,3 +221,39 @@ def test_buy_links():
     msg = digest_message(evaluate(cfg, [o], [], NOW), {}, None, passengers=3)
     assert "csair.com" in msg and "из кэша поиска на одного" in msg
     assert o.to_dict()["airline_sites"] == [{"name": "China Southern", "url": "https://www.csair.com/ru/ru/"}]
+
+
+def test_failed_digest_retries(tmp_path, monkeypatch):
+    cfg = load_config("config.yaml")
+    store = Store(tmp_path / "data")
+    monkeypatch.setattr("tracker.app.load_rates", lambda http, fb: __import__("tracker.fx", fromlist=["Rates"]).Rates(fb, "test"))
+    attempts = iter([False, True])
+    monkeypatch.setattr("tracker.notify.Telegram.send", lambda self, text: next(attempts))
+    for offset, expected in [(0, ["digest:not_delivered"]), (1, ["digest"]), (2, [])]:
+        latest = run(cfg, store, None, use_browser=False, now=NOW + timedelta(hours=offset),
+                     results=[], env={"TELEGRAM_BOT_TOKEN": "t", "TELEGRAM_CHAT_ID": "1"})
+        assert latest["sent"] == expected
+        assert bool(store.state().get("last_digest")) == (offset > 0)
+
+
+def test_telegram_chunks_preserve_html(monkeypatch):
+    import httpx
+    from tracker.notify import Telegram
+    from html.parser import HTMLParser
+
+    line = '<a href="https://example.com/?a=1&amp;b=2">Билет</a>\n'
+    message = line * 100
+    sent = []
+
+    def fake_post(url, json, timeout):
+        chunk = json["text"]
+        assert len(chunk) <= 3900
+        assert chunk.count("<a ") == chunk.count("</a>")
+        assert chunk.endswith("</a>\n")
+        HTMLParser().feed(chunk)
+        sent.append(chunk)
+        return httpx.Response(200, text="{}")
+
+    monkeypatch.setattr("tracker.notify.httpx.post", fake_post)
+    assert Telegram("token", "1").send(message)
+    assert len(sent) > 1 and "".join(sent) == message

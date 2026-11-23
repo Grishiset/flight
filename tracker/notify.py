@@ -197,6 +197,28 @@ def digest_message(sts: list[RouteStatus], sources: dict, site_url: str | None =
     return "\n".join(lines)
 
 
+def message_chunks(text: str, limit: int = 3900) -> list[str]:
+    """Разбивать по целым строкам: формирователи сообщений закрывают HTML-теги в каждой строке."""
+    chunks = []
+    current = ""
+    for line in text.splitlines(keepends=True):
+        if len(line) > limit:
+            # Не разрезаем длинный href или HTML-сущность. В исключительном случае
+            # сохраняем видимый текст строки без форматирования.
+            plain = html.unescape(re.sub(r"<[^>]*>", "", line))
+            pieces = [html.escape(plain[i:i + limit // 5]) for i in range(0, len(plain), limit // 5)]
+        else:
+            pieces = [line]
+        for piece in pieces:
+            if len(current) + len(piece) > limit:
+                chunks.append(current)
+                current = ""
+            current += piece
+    if current:
+        chunks.append(current)
+    return [chunk for chunk in chunks if chunk.strip()]
+
+
 class Telegram:
     """Отправка в Telegram. chat_id — один или несколько через запятую: «111,222,-100333»."""
 
@@ -216,7 +238,9 @@ class Telegram:
             return False
         url = f"https://api.telegram.org/bot{self.token}/sendMessage"
         # Telegram ограничивает сообщение 4096 символами
-        chunks = [text[i:i + 3900] for i in range(0, len(text), 3900)] or [text]
+        chunks = message_chunks(text)
+        if not chunks:
+            return False
         delivered = 0
         for chat in self.chat_ids:
             ok = True
@@ -234,7 +258,7 @@ class Telegram:
                         ok = False
                         break
                 except httpx.HTTPError as e:
-                    log.error("Telegram недоступен: %s", e)
+                    log.error("Telegram недоступен: %s", type(e).__name__)
                     ok = False
                     break
             delivered += ok
