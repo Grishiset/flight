@@ -4,6 +4,8 @@
   const $ = (id) => document.getElementById(id);
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
   const rub = (n) => n == null ? '—' : Math.round(n).toLocaleString('ru-RU').replace(/\s/g, ' ') + ' ₽';
+  const total = (o, passengers) => rub(o.quoted_passengers === passengers && o.total_price_rub != null
+    ? o.total_price_rub : o.price_rub * passengers);
   const d = (iso) => { const [y, m, dd] = iso.split('-').map(Number); return `${dd} ${MON[m - 1]}`; };
   const color = (i) => `var(--c${i % 5})`;
   const tip = $('tip');
@@ -92,7 +94,6 @@
     const L = data.latest;
     const N = L.passengers || 1;
     window.__N = N;
-    const total = (o) => rub(o.quoted_passengers === N && o.total_price_rub != null ? o.total_price_rub : o.price_rub * N);
     const pp = N > 1 ? ' с чел.' : '';
     const routes = L.routes;
     const at = new Date(L.at);
@@ -101,10 +102,10 @@
 
     const deals = routes.filter((r) => r.is_deal);
     const withPrice = routes.filter((r) => r.best).sort((a, b) => a.best.price_rub / a.threshold - b.best.price_rub / b.threshold);
-    if (deals.length) $('lede').textContent = 'Выгодно сейчас: ' + deals.map((r) => `${r.name} — ${total(r.best)}`).join(', ') + (N > 1 ? ` на ${N} чел` : '') + '.';
+    if (deals.length) $('lede').textContent = 'Выгодно сейчас: ' + deals.map((r) => `${r.name} — ${total(r.best, N)}`).join(', ') + (N > 1 ? ` на ${N} чел` : '') + '.';
     else if (withPrice.length) {
       const r = withPrice[0];
-      $('lede').textContent = `Ни одна летняя цена пока не дошла до порога. Ближе всего — ${r.name}: ${total(r.best)}${N > 1 ? ` на ${N} чел. (${rub(r.best.price_rub)} с человека)` : ''}, на ${Math.round((r.best.price_rub / r.threshold - 1) * 100)}% выше порога.`;
+      $('lede').textContent = `Ни одна летняя цена пока не дошла до порога. Ближе всего — ${r.name}: ${total(r.best, N)}${N > 1 ? ` на ${N} чел. (${rub(r.best.price_rub)} с человека)` : ''}, на ${Math.round((r.best.price_rub / r.threshold - 1) * 100)}% выше порога.`;
     } else $('lede').textContent = 'Летних билетов в выдаче пока нет ни по одному направлению.';
 
     const cards = $('cards'); cards.replaceChildren();
@@ -120,13 +121,13 @@
       c.append(top);
       if (r.best) {
         const b = r.best;
-        c.append(el('div', 'price', total(b)));
+        c.append(el('div', 'price', total(b, N)));
         if (N > 1) c.append(el('div', 'sub', `${rub(b.price_rub)} с человека · на ${N} чел.`));
         c.append(el('div', 'sub', `${d(b.depart)} → ${d(b.ret)} (${b.days} дн.)${b.via ? ', через ' + b.via : ''}${b.airline ? ', ' + b.airline : ''}`));
         if (b.legs) c.append(legsList(b));
         c.append(el('div', 'sub', `${SRC[b.source] || b.source} · порог ${rub(r.threshold)}${pp}${r.median ? ' · обычно ' + rub(r.median) + pp : ''}`));
         if (r.reasons.length) { const ul = el('ul', 'reasons'); r.reasons.forEach((x) => ul.append(el('li', null, x))); c.append(ul); }
-        const others = Object.entries(r.by_source).filter(([k]) => k !== b.source).map(([k, v]) => `${SRC[k] || k}: ${total(v)}`);
+        const others = Object.entries(r.by_source).filter(([k]) => k !== b.source).map(([k, v]) => `${SRC[k] || k}: ${total(v, N)}`);
         if (others.length) c.append(el('div', 'sub', 'Другие источники: ' + others.join(' · ')));
         c.append(buyLinks(b));
       } else {
@@ -171,7 +172,7 @@
       const tr = el('tr');
       tr.append(el('td', null, r.name));
       const N = window.__N || 1;
-      tr.append(el('td', 'num' + (o.price_rub <= r.threshold ? ' good' : ''), total(o)));
+      tr.append(el('td', 'num' + (o.price_rub <= r.threshold ? ' good' : ''), total(o, N)));
       if (N > 1) tr.append(el('td', 'num muted', rub(o.price_rub)));
       const dc = el('td', 'dates', `${d(o.depart)} → ${d(o.ret)} (${o.days} дн.)`);
       if (o.via) dc.append(el('div', 'legnote', 'через ' + o.via + (o.extra_rub ? ` · вкл. ночёвку ${rub(o.extra_rub)}` : '')));
