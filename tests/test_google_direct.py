@@ -45,9 +45,11 @@ def test_direct_prices_full_round_trip_without_key(monkeypatch):
     assert {o.price_rub for o in res.offers} == {54000}
     assert all(o.stops == 1 for o in res.offers)
     first_dates = set(seen)
+    first_checked = seen[0]
     seen.clear()
     GoogleFlightsProvider(ctx).run()
-    assert first_dates.isdisjoint(seen)
+    assert first_dates & set(seen) == {first_checked}
+    assert len(set(seen) - first_dates) == cfg.sources["google_flights"]["dates_per_route"]
 
 
 def test_serpapi_prices_only_after_selecting_return():

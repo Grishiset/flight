@@ -104,9 +104,22 @@ class GoogleFlightsProvider(Provider):
             count = min(max(1, int(self.opts.get("dates_per_route", 2))), len(dates))
             # За один запуск проверяем все направления на датах из разных частей окна.
             batch = [dates[(cursor + i * len(dates) // count) % len(dates)] for i in range(count)]
+            valid_dates = {(dep.isoformat(), ret.isoformat()): (dep, ret) for dep, ret in dates}
+            previous = state.get("direct_last_dates", {}) if state.get("direct_passengers") == cfg.passengers else {}
+            last_dates = {}
             for route in cfg.routes:
-                for dep, ret in batch:
+                last = valid_dates.get(tuple(previous.get(route.id, ())))
+                pairs = [last, *batch] if last and last not in batch else batch
+                start = len(res.offers)
+                for dep, ret in pairs:
                     self.search_date(res, direct.offers, route.id, dep, ret)
+                best = min(res.offers[start:], key=lambda o: o.price_rub, default=None)
+                if best:
+                    last = (best.depart, best.ret)
+                if last:
+                    last_dates[route.id] = [d.isoformat() for d in last]
+            state["direct_passengers"] = cfg.passengers
+            state["direct_last_dates"] = last_dates
             state["direct_cursor"] = (cursor + 1) % len(dates)
         elif backend == "serpapi":
             cursor = int(state.get("cursor", 0)) % len(plan)
