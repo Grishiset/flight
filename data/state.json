@@ -1,7 +1,7 @@
 {
  "alerts": {},
  "last_digest": "2026-11-24",
- "failing_runs": 1,
+ "failing_runs": 2,
  "google_flights": {
   "direct_passengers": 3,
   "direct_last_dates": {
@@ -10,6 +10,6 @@
     "2027-06-11"
    ]
   },
-  "direct_cursor": 2
+  "direct_cursor": 3
  }
 }
