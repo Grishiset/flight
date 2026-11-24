@@ -2,10 +2,12 @@ name: Проверка цен на билеты
 
 on:
   schedule:
-    # Каждые 4 часа (время UTC; GitHub может запускать с опозданием до ~30 минут)
+    # Каждые 4 часа (время UTC)
     - cron: "17 */4 * * *"
     # Ежедневный отчёт в 9:00 по Москве (= 6:00 UTC)
     - cron: "0 6 * * *"
+    # Повторные утренние проверки в 09:23 и 09:53 МСК на случай пропуска запуска.
+    - cron: "23,53 6 * * *"
   workflow_dispatch:          # кнопка «Run workflow» — проверить прямо сейчас
     inputs:
       dry_run:
@@ -35,6 +37,9 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          # После ожидания в очереди нужна актуальная отметка доставки из data/state.json.
+          ref: ${{ github.ref }}
 
       - uses: actions/setup-python@v5
         with:
