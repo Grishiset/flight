@@ -1,5 +1,5 @@
 {
- "at": "2026-11-25T16:25:41+00:00",
+ "at": "2026-11-25T17:26:41+00:00",
  "window": {
   "start": "2027-06-01",
   "end": "2027-08-31",
@@ -26,9 +26,219 @@
    "route_id": "TYO",
    "name": "Токио",
    "threshold": 43900,
-   "best": null,
-   "top": [],
-   "by_source": {},
+   "best": {
+    "route_id": "TYO",
+    "source": "google_flights",
+    "price_rub": 69137,
+    "depart": "2027-06-07",
+    "ret": "2027-06-17",
+    "airline": "Qatar Airways",
+    "stops": 1,
+    "origin": "SVO",
+    "destination": "NRT",
+    "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTA3Ih8KA1NWTxIKMjAyNy0wNi0wNxoDRE9IKgJRUjIDMzM4Ih8KA0RPSBIKMjAyNy0wNi0wNxoDTlJUKgJRUjIDODA4agcIARIDU1ZPcgcIARIDTlJUGmASCjIwMjctMDYtMTciHwoDTlJUEgoyMDI3LTA2LTE3GgNET0gqAlFSMgM4MDkiHwoDRE9IEgoyMDI3LTA2LTE4GgNTVk8qAlFSMgMzMzdqBwgBEgNOUlRyBwgBEgNTVk9AAUABQAFIAXABggELCP___________wGYAQE&curr=RUB&hl=ru&gl=RU",
+    "price_orig": 207411.0,
+    "currency_orig": "RUB",
+    "note": null,
+    "typical_range": null,
+    "via": null,
+    "legs": null,
+    "extra_rub": 0,
+    "quoted_passengers": 3,
+    "total_price_rub": 207411,
+    "days": 10,
+    "airline_sites": [
+     {
+      "name": "Qatar Airways",
+      "url": "https://www.qatarairways.com/ru-ru/homepage.html"
+     }
+    ]
+   },
+   "top": [
+    {
+     "route_id": "TYO",
+     "source": "google_flights",
+     "price_rub": 69137,
+     "depart": "2027-06-07",
+     "ret": "2027-06-17",
+     "airline": "Qatar Airways",
+     "stops": 1,
+     "origin": "SVO",
+     "destination": "NRT",
+     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTA3Ih8KA1NWTxIKMjAyNy0wNi0wNxoDRE9IKgJRUjIDMzM4Ih8KA0RPSBIKMjAyNy0wNi0wNxoDTlJUKgJRUjIDODA4agcIARIDU1ZPcgcIARIDTlJUGmASCjIwMjctMDYtMTciHwoDTlJUEgoyMDI3LTA2LTE3GgNET0gqAlFSMgM4MDkiHwoDRE9IEgoyMDI3LTA2LTE4GgNTVk8qAlFSMgMzMzdqBwgBEgNOUlRyBwgBEgNTVk9AAUABQAFIAXABggELCP___________wGYAQE&curr=RUB&hl=ru&gl=RU",
+     "price_orig": 207411.0,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "quoted_passengers": 3,
+     "total_price_rub": 207411,
+     "days": 10,
+     "airline_sites": [
+      {
+       "name": "Qatar Airways",
+       "url": "https://www.qatarairways.com/ru-ru/homepage.html"
+      }
+     ]
+    },
+    {
+     "route_id": "TYO",
+     "source": "google_flights",
+     "price_rub": 75133,
+     "depart": "2027-06-07",
+     "ret": "2027-06-17",
+     "airline": "Etihad Airways",
+     "stops": 1,
+     "origin": "SVO",
+     "destination": "NRT",
+     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTA3Ih8KA1NWTxIKMjAyNy0wNi0wNxoDQVVIKgJFWTIDODQyIh8KA0FVSBIKMjAyNy0wNi0wNxoDTlJUKgJFWTIDODAwagcIARIDU1ZPcgcIARIDTlJUGmASCjIwMjctMDYtMTciHwoDTlJUEgoyMDI3LTA2LTE3GgNBVUgqAkVZMgM4MDEiHwoDQVVIEgoyMDI3LTA2LTE4GgNTVk8qAkVZMgM4NDFqBwgBEgNOUlRyBwgBEgNTVk9AAUABQAFIAXABggELCP___________wGYAQE&curr=RUB&hl=ru&gl=RU",
+     "price_orig": 225399.0,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "quoted_passengers": 3,
+     "total_price_rub": 225399,
+     "days": 10,
+     "airline_sites": []
+    },
+    {
+     "route_id": "TYO",
+     "source": "google_flights",
+     "price_rub": 76115,
+     "depart": "2027-06-01",
+     "ret": "2027-06-11",
+     "airline": "Etihad Airways",
+     "stops": 1,
+     "origin": "SVO",
+     "destination": "NRT",
+     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTAxIh8KA1NWTxIKMjAyNy0wNi0wMRoDQVVIKgJFWTIDODQyIh8KA0FVSBIKMjAyNy0wNi0wMRoDTlJUKgJFWTIDODAwagcIARIDU1ZPcgcIARIDTlJUGmASCjIwMjctMDYtMTEiHwoDTlJUEgoyMDI3LTA2LTExGgNBVUgqAkVZMgM4MDEiHwoDQVVIEgoyMDI3LTA2LTEyGgNTVk8qAkVZMgM4NDFqBwgBEgNOUlRyBwgBEgNTVk9AAUABQAFIAXABggELCP___________wGYAQE&curr=RUB&hl=ru&gl=RU",
+     "price_orig": 228345.0,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "quoted_passengers": 3,
+     "total_price_rub": 228345,
+     "days": 10,
+     "airline_sites": []
+    },
+    {
+     "route_id": "TYO",
+     "source": "google_flights",
+     "price_rub": 84529,
+     "depart": "2027-06-01",
+     "ret": "2027-06-11",
+     "airline": "Qatar Airways",
+     "stops": 1,
+     "origin": "SVO",
+     "destination": "NRT",
+     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTAxIh8KA1NWTxIKMjAyNy0wNi0wMRoDRE9IKgJRUjIDMzQwIh8KA0RPSBIKMjAyNy0wNi0wMhoDTlJUKgJRUjIDODA2agcIARIDU1ZPcgcIARIDTlJUGmASCjIwMjctMDYtMTEiHwoDTlJUEgoyMDI3LTA2LTExGgNET0gqAlFSMgM4MDkiHwoDRE9IEgoyMDI3LTA2LTEyGgNTVk8qAlFSMgMzMzdqBwgBEgNOUlRyBwgBEgNTVk9AAUABQAFIAXABggELCP___________wGYAQE&curr=RUB&hl=ru&gl=RU",
+     "price_orig": 253587.0,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "quoted_passengers": 3,
+     "total_price_rub": 253587,
+     "days": 10,
+     "airline_sites": [
+      {
+       "name": "Qatar Airways",
+       "url": "https://www.qatarairways.com/ru-ru/homepage.html"
+      }
+     ]
+    },
+    {
+     "route_id": "TYO",
+     "source": "google_flights",
+     "price_rub": 96951,
+     "depart": "2027-06-01",
+     "ret": "2027-06-11",
+     "airline": "China Southern Airlines",
+     "stops": 1,
+     "origin": "SVO",
+     "destination": "NRT",
+     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI3LTA2LTAxIiAKA1NWTxIKMjAyNy0wNi0wMRoDQ0FOKgJDWjIEODAyOCIgCgNDQU4SCjIwMjctMDYtMDIaA05SVCoCQ1oyBDgxMDFqBwgBEgNTVk9yBwgBEgNOUlQaYhIKMjAyNy0wNi0xMSIgCgNOUlQSCjIwMjctMDYtMTEaA0NBTioCQ1oyBDgxMDIiIAoDQ0FOEgoyMDI3LTA2LTEyGgNTVk8qAkNaMgQ4MDI3agcIARIDTlJUcgcIARIDU1ZPQAFAAUABSAFwAYIBCwj___________8BmAEB&curr=RUB&hl=ru&gl=RU",
+     "price_orig": 290853.0,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "quoted_passengers": 3,
+     "total_price_rub": 290853,
+     "days": 10,
+     "airline_sites": []
+    },
+    {
+     "route_id": "TYO",
+     "source": "google_flights",
+     "price_rub": 827825,
+     "depart": "2027-06-07",
+     "ret": "2027-06-17",
+     "airline": "Etihad Airways / Hainan Airlines",
+     "stops": 2,
+     "origin": "SVO",
+     "destination": "NRT",
+     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTA3Ih8KA1NWTxIKMjAyNy0wNi0wNxoDQVVIKgJFWTIDODQyIh8KA0FVSBIKMjAyNy0wNi0wNxoDTlJUKgJFWTIDODAwagcIARIDU1ZPcgcIARIDTlJUGoIBEgoyMDI3LTA2LTE3Ih8KA05SVBIKMjAyNy0wNi0xNxoDUEVLKgJIVTIDNDQwIiAKA1BFSxIKMjAyNy0wNi0xOBoDSEFLKgJIVTIENzM4MiIfCgNIQUsSCjIwMjctMDYtMTkaA1NWTyoCSFUyAzc2NWoHCAESA05SVHIHCAESA1NWT0ABQAFAAUgBcAGCAQsI____________AZgBAQ&curr=RUB&hl=ru&gl=RU",
+     "price_orig": 2483475.0,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "quoted_passengers": 3,
+     "total_price_rub": 2483475,
+     "days": 10,
+     "airline_sites": [
+      {
+       "name": "Hainan Airlines",
+       "url": "https://www.hainanairlines.com/"
+      }
+     ]
+    }
+   ],
+   "by_source": {
+    "google_flights": {
+     "route_id": "TYO",
+     "source": "google_flights",
+     "price_rub": 69137,
+     "depart": "2027-06-07",
+     "ret": "2027-06-17",
+     "airline": "Qatar Airways",
+     "stops": 1,
+     "origin": "SVO",
+     "destination": "NRT",
+     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTA3Ih8KA1NWTxIKMjAyNy0wNi0wNxoDRE9IKgJRUjIDMzM4Ih8KA0RPSBIKMjAyNy0wNi0wNxoDTlJUKgJRUjIDODA4agcIARIDU1ZPcgcIARIDTlJUGmASCjIwMjctMDYtMTciHwoDTlJUEgoyMDI3LTA2LTE3GgNET0gqAlFSMgM4MDkiHwoDRE9IEgoyMDI3LTA2LTE4GgNTVk8qAlFSMgMzMzdqBwgBEgNOUlRyBwgBEgNTVk9AAUABQAFIAXABggELCP___________wGYAQE&curr=RUB&hl=ru&gl=RU",
+     "price_orig": 207411.0,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "quoted_passengers": 3,
+     "total_price_rub": 207411,
+     "days": 10,
+     "airline_sites": [
+      {
+       "name": "Qatar Airways",
+       "url": "https://www.qatarairways.com/ru-ru/homepage.html"
+      }
+     ]
+    }
+   },
    "median": 75894,
    "median_points": 2,
    "reasons": [],
@@ -38,9 +248,145 @@
    "route_id": "NYC",
    "name": "Нью-Йорк",
    "threshold": 65800,
-   "best": null,
-   "top": [],
-   "by_source": {},
+   "best": {
+    "route_id": "NYC",
+    "source": "google_flights",
+    "price_rub": 105478,
+    "depart": "2027-06-07",
+    "ret": "2027-06-17",
+    "airline": "Royal Air Maroc",
+    "stops": 1,
+    "origin": "SVO",
+    "destination": "JFK",
+    "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTA3Ih8KA1NWTxIKMjAyNy0wNi0wNxoDQ01OKgJBVDIDMjIxIh8KA0NNThIKMjAyNy0wNi0wNxoDSkZLKgJBVDIDMjAwagcIARIDU1ZPcgcIARIDSkZLGmASCjIwMjctMDYtMTciHwoDSkZLEgoyMDI3LTA2LTE3GgNDTU4qAkFUMgMyMDMiHwoDQ01OEgoyMDI3LTA2LTE3GgNTVk8qAkFUMgMyMjBqBwgBEgNKRktyBwgBEgNTVk9AAUABQAFIAXABggELCP___________wGYAQE&curr=RUB&hl=ru&gl=RU",
+    "price_orig": 316434.0,
+    "currency_orig": "RUB",
+    "note": null,
+    "typical_range": null,
+    "via": null,
+    "legs": null,
+    "extra_rub": 0,
+    "quoted_passengers": 3,
+    "total_price_rub": 316434,
+    "days": 10,
+    "airline_sites": [
+     {
+      "name": "Royal Air Maroc",
+      "url": "https://www.royalairmaroc.com/"
+     }
+    ]
+   },
+   "top": [
+    {
+     "route_id": "NYC",
+     "source": "google_flights",
+     "price_rub": 105478,
+     "depart": "2027-06-07",
+     "ret": "2027-06-17",
+     "airline": "Royal Air Maroc",
+     "stops": 1,
+     "origin": "SVO",
+     "destination": "JFK",
+     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTA3Ih8KA1NWTxIKMjAyNy0wNi0wNxoDQ01OKgJBVDIDMjIxIh8KA0NNThIKMjAyNy0wNi0wNxoDSkZLKgJBVDIDMjAwagcIARIDU1ZPcgcIARIDSkZLGmASCjIwMjctMDYtMTciHwoDSkZLEgoyMDI3LTA2LTE3GgNDTU4qAkFUMgMyMDMiHwoDQ01OEgoyMDI3LTA2LTE3GgNTVk8qAkFUMgMyMjBqBwgBEgNKRktyBwgBEgNTVk9AAUABQAFIAXABggELCP___________wGYAQE&curr=RUB&hl=ru&gl=RU",
+     "price_orig": 316434.0,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "quoted_passengers": 3,
+     "total_price_rub": 316434,
+     "days": 10,
+     "airline_sites": [
+      {
+       "name": "Royal Air Maroc",
+       "url": "https://www.royalairmaroc.com/"
+      }
+     ]
+    },
+    {
+     "route_id": "NYC",
+     "source": "google_flights",
+     "price_rub": 127277,
+     "depart": "2027-06-07",
+     "ret": "2027-06-17",
+     "airline": "Turkish Airlines",
+     "stops": 1,
+     "origin": "VKO",
+     "destination": "JFK",
+     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpeEgoyMDI3LTA2LTA3Ih8KA1ZLTxIKMjAyNy0wNi0wNxoDSVNUKgJUSzIDNDIyIh0KA0lTVBIKMjAyNy0wNi0wNxoDSkZLKgJUSzIBM2oHCAESA1ZLT3IHCAESA0pGSxpeEgoyMDI3LTA2LTE3Ih0KA0pGSxIKMjAyNy0wNi0xNxoDSVNUKgJUSzIBNCIfCgNJU1QSCjIwMjctMDYtMTgaA1ZLTyoCVEsyAzQxM2oHCAESA0pGS3IHCAESA1ZLT0ABQAFAAUgBcAGCAQsI____________AZgBAQ&curr=RUB&hl=ru&gl=RU",
+     "price_orig": 381831.0,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "quoted_passengers": 3,
+     "total_price_rub": 381831,
+     "days": 10,
+     "airline_sites": [
+      {
+       "name": "Turkish Airlines",
+       "url": "https://www.turkishairlines.com/ru-ru/"
+      }
+     ]
+    },
+    {
+     "route_id": "NYC",
+     "source": "google_flights",
+     "price_rub": 130202,
+     "depart": "2027-06-07",
+     "ret": "2027-06-17",
+     "airline": "Etihad Airways",
+     "stops": 1,
+     "origin": "SVO",
+     "destination": "JFK",
+     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpeEgoyMDI3LTA2LTA3Ih8KA1NWTxIKMjAyNy0wNi0wNxoDQVVIKgJFWTIDODQ2Ih0KA0FVSBIKMjAyNy0wNi0wOBoDSkZLKgJFWTIBMWoHCAESA1NWT3IHCAESA0pGSxpeEgoyMDI3LTA2LTE3Ih0KA0pGSxIKMjAyNy0wNi0xNxoDQVVIKgJFWTIBMiIfCgNBVUgSCjIwMjctMDYtMTgaA1NWTyoCRVkyAzg0M2oHCAESA0pGS3IHCAESA1NWT0ABQAFAAUgBcAGCAQsI____________AZgBAQ&curr=RUB&hl=ru&gl=RU",
+     "price_orig": 390606.0,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "quoted_passengers": 3,
+     "total_price_rub": 390606,
+     "days": 10,
+     "airline_sites": []
+    }
+   ],
+   "by_source": {
+    "google_flights": {
+     "route_id": "NYC",
+     "source": "google_flights",
+     "price_rub": 105478,
+     "depart": "2027-06-07",
+     "ret": "2027-06-17",
+     "airline": "Royal Air Maroc",
+     "stops": 1,
+     "origin": "SVO",
+     "destination": "JFK",
+     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTA3Ih8KA1NWTxIKMjAyNy0wNi0wNxoDQ01OKgJBVDIDMjIxIh8KA0NNThIKMjAyNy0wNi0wNxoDSkZLKgJBVDIDMjAwagcIARIDU1ZPcgcIARIDSkZLGmASCjIwMjctMDYtMTciHwoDSkZLEgoyMDI3LTA2LTE3GgNDTU4qAkFUMgMyMDMiHwoDQ01OEgoyMDI3LTA2LTE3GgNTVk8qAkFUMgMyMjBqBwgBEgNKRktyBwgBEgNTVk9AAUABQAFIAXABggELCP___________wGYAQE&curr=RUB&hl=ru&gl=RU",
+     "price_orig": 316434.0,
+     "currency_orig": "RUB",
+     "note": null,
+     "typical_range": null,
+     "via": null,
+     "legs": null,
+     "extra_rub": 0,
+     "quoted_passengers": 3,
+     "total_price_rub": 316434,
+     "days": 10,
+     "airline_sites": [
+      {
+       "name": "Royal Air Maroc",
+       "url": "https://www.royalairmaroc.com/"
+      }
+     ]
+    }
+   },
    "median": null,
    "median_points": 0,
    "reasons": [],
@@ -87,20 +433,11 @@
    "errors": []
   },
   "google_flights": {
-   "ok": false,
+   "ok": true,
    "skipped": null,
-   "offers": 0,
-   "summer": 0,
-   "errors": [
-    "SEL 2027-07-25 → 2027-08-08: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "TYO 2027-06-01 → 2027-06-11: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "TYO 2027-07-25 → 2027-08-08: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NYC 2027-07-01 → 2027-07-11: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NYC 2027-07-25 → 2027-08-08: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NZ 2027-06-04 → 2027-07-04: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NZ 2027-07-01 → 2027-07-11: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NZ 2027-07-25 → 2027-08-08: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead."
-   ]
+   "offers": 20,
+   "summer": 20,
+   "errors": []
   },
   "etihad": {
    "ok": false,
