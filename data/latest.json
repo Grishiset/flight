@@ -1,5 +1,5 @@
 {
- "at": "2026-11-24T16:40:51+00:00",
+ "at": "2026-11-25T00:48:22+00:00",
  "window": {
   "start": "2027-06-01",
   "end": "2027-08-31",
@@ -92,9 +92,22 @@
    "offers": 0,
    "summer": 0,
    "errors": [
-    "TYO 2027-06-01 → 2027-06-11: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NYC 2027-07-22 → 2027-08-05: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "LAX 2027-07-22 → 2027-08-05: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead."
+    "SEL 2027-06-04 → 2027-06-14: Google Flights returned an error response (HTTP 429). The request may be malformed, rate-limited, or blocked.",
+    "SEL 2027-06-28 → 2027-07-12: Google Flights returned an error response (HTTP 429). The request may be malformed, rate-limited, or blocked.",
+    "SEL 2027-07-22 → 2027-08-12: Google Flights returned an error response (HTTP 429). The request may be malformed, rate-limited, or blocked.",
+    "TYO 2027-06-01 → 2027-06-11: Google Flights returned an error response (HTTP 429). The request may be malformed, rate-limited, or blocked.",
+    "TYO 2027-06-04 → 2027-06-14: Google Flights returned an error response (HTTP 429). The request may be malformed, rate-limited, or blocked.",
+    "TYO 2027-06-28 → 2027-07-12: Google Flights returned an error response (HTTP 429). The request may be malformed, rate-limited, or blocked.",
+    "TYO 2027-07-22 → 2027-08-12: Google Flights returned an error response (HTTP 429). The request may be malformed, rate-limited, or blocked.",
+    "NYC 2027-06-04 → 2027-06-14: Google Flights returned an error response (HTTP 429). The request may be malformed, rate-limited, or blocked.",
+    "NYC 2027-06-28 → 2027-07-12: Google Flights returned an error response (HTTP 429). The request may be malformed, rate-limited, or blocked.",
+    "NYC 2027-07-22 → 2027-08-12: Google Flights returned an error response (HTTP 429). The request may be malformed, rate-limited, or blocked.",
+    "LAX 2027-06-04 → 2027-06-14: Google Flights returned an error response (HTTP 429). The request may be malformed, rate-limited, or blocked.",
+    "LAX 2027-06-28 → 2027-07-12: Google Flights returned an error response (HTTP 429). The request may be malformed, rate-limited, or blocked.",
+    "LAX 2027-07-22 → 2027-08-12: Google Flights returned an error response (HTTP 429). The request may be malformed, rate-limited, or blocked.",
+    "NZ 2027-06-04 → 2027-06-14: Google Flights returned an error response (HTTP 429). The request may be malformed, rate-limited, or blocked.",
+    "NZ 2027-06-28 → 2027-07-12: Google Flights returned an error response (HTTP 429). The request may be malformed, rate-limited, or blocked.",
+    "NZ 2027-07-22 → 2027-08-12: Google Flights returned an error response (HTTP 429). The request may be malformed, rate-limited, or blocked."
    ]
   },
   "etihad": {
@@ -112,7 +125,5 @@
    "errors": []
   }
  },
- "sent": [
-  "health"
- ]
+ "sent": []
 }
