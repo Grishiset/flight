@@ -1,5 +1,5 @@
 {
- "at": "2026-11-26T00:24:15+00:00",
+ "at": "2026-11-26T06:00:51+00:00",
  "window": {
   "start": "2027-06-01",
   "end": "2027-08-31",
@@ -137,8 +137,8 @@
      ]
     }
    },
-   "median": 75673,
-   "median_points": 3,
+   "median": 72405,
+   "median_points": 4,
    "reasons": [],
    "is_deal": false
   },
@@ -146,180 +146,11 @@
    "route_id": "NYC",
    "name": "Нью-Йорк",
    "threshold": 65800,
-   "best": {
-    "route_id": "NYC",
-    "source": "google_flights",
-    "price_rub": 105522,
-    "depart": "2027-06-07",
-    "ret": "2027-06-21",
-    "airline": "Royal Air Maroc",
-    "stops": 1,
-    "origin": "SVO",
-    "destination": "JFK",
-    "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTA3Ih8KA1NWTxIKMjAyNy0wNi0wNxoDQ01OKgJBVDIDMjIxIh8KA0NNThIKMjAyNy0wNi0wNxoDSkZLKgJBVDIDMjAwagcIARIDU1ZPcgcIARIDSkZLGmASCjIwMjctMDYtMjEiHwoDSkZLEgoyMDI3LTA2LTIxGgNDTU4qAkFUMgMyMDMiHwoDQ01OEgoyMDI3LTA2LTIxGgNTVk8qAkFUMgMyMjBqBwgBEgNKRktyBwgBEgNTVk9AAUABQAFIAXABggELCP___________wGYAQE&curr=RUB&hl=ru&gl=RU",
-    "price_orig": 316566.0,
-    "currency_orig": "RUB",
-    "note": null,
-    "typical_range": null,
-    "via": null,
-    "legs": null,
-    "extra_rub": 0,
-    "quoted_passengers": 3,
-    "total_price_rub": 316566,
-    "days": 14,
-    "airline_sites": [
-     {
-      "name": "Royal Air Maroc",
-      "url": "https://www.royalairmaroc.com/"
-     }
-    ]
-   },
-   "top": [
-    {
-     "route_id": "NYC",
-     "source": "google_flights",
-     "price_rub": 105522,
-     "depart": "2027-06-07",
-     "ret": "2027-06-21",
-     "airline": "Royal Air Maroc",
-     "stops": 1,
-     "origin": "SVO",
-     "destination": "JFK",
-     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTA3Ih8KA1NWTxIKMjAyNy0wNi0wNxoDQ01OKgJBVDIDMjIxIh8KA0NNThIKMjAyNy0wNi0wNxoDSkZLKgJBVDIDMjAwagcIARIDU1ZPcgcIARIDSkZLGmASCjIwMjctMDYtMjEiHwoDSkZLEgoyMDI3LTA2LTIxGgNDTU4qAkFUMgMyMDMiHwoDQ01OEgoyMDI3LTA2LTIxGgNTVk8qAkFUMgMyMjBqBwgBEgNKRktyBwgBEgNTVk9AAUABQAFIAXABggELCP___________wGYAQE&curr=RUB&hl=ru&gl=RU",
-     "price_orig": 316566.0,
-     "currency_orig": "RUB",
-     "note": null,
-     "typical_range": null,
-     "via": null,
-     "legs": null,
-     "extra_rub": 0,
-     "quoted_passengers": 3,
-     "total_price_rub": 316566,
-     "days": 14,
-     "airline_sites": [
-      {
-       "name": "Royal Air Maroc",
-       "url": "https://www.royalairmaroc.com/"
-      }
-     ]
-    },
-    {
-     "route_id": "NYC",
-     "source": "google_flights",
-     "price_rub": 126628,
-     "depart": "2027-06-07",
-     "ret": "2027-06-21",
-     "airline": "Turkish Airlines",
-     "stops": 1,
-     "origin": "VKO",
-     "destination": "JFK",
-     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpeEgoyMDI3LTA2LTA3Ih8KA1ZLTxIKMjAyNy0wNi0wNxoDSVNUKgJUSzIDNDIyIh0KA0lTVBIKMjAyNy0wNi0wNxoDSkZLKgJUSzIBM2oHCAESA1ZLT3IHCAESA0pGSxpfEgoyMDI3LTA2LTIxIh4KA0pGSxIKMjAyNy0wNi0yMRoDSVNUKgJUSzICMTIiHwoDSVNUEgoyMDI3LTA2LTIxGgNWS08qAlRLMgM0MDlqBwgBEgNKRktyBwgBEgNWS09AAUABQAFIAXABggELCP___________wGYAQE&curr=RUB&hl=ru&gl=RU",
-     "price_orig": 379884.0,
-     "currency_orig": "RUB",
-     "note": null,
-     "typical_range": null,
-     "via": null,
-     "legs": null,
-     "extra_rub": 0,
-     "quoted_passengers": 3,
-     "total_price_rub": 379884,
-     "days": 14,
-     "airline_sites": [
-      {
-       "name": "Turkish Airlines",
-       "url": "https://www.turkishairlines.com/ru-ru/"
-      }
-     ]
-    },
-    {
-     "route_id": "NYC",
-     "source": "google_flights",
-     "price_rub": 140142,
-     "depart": "2027-06-07",
-     "ret": "2027-06-21",
-     "airline": "Emirates",
-     "stops": 2,
-     "origin": "DME",
-     "destination": "JFK",
-     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTA3Ih8KA0RNRRIKMjAyNy0wNi0wNxoDRFhCKgJFSzIDMTMyIh8KA0RYQhIKMjAyNy0wNi0wOBoDSkZLKgJFSzIDMjAxagcIARIDRE1FcgcIARIDSkZLGoEBEgoyMDI3LTA2LTIxIh8KA0pGSxIKMjAyNy0wNi0yMRoDTVhQKgJFSzIDMjA2Ih8KA01YUBIKMjAyNy0wNi0yMhoDRFhCKgJFSzIDMjA2Ih8KA0RYQhIKMjAyNy0wNi0yMxoDRE1FKgJFSzIDMTI5agcIARIDSkZLcgcIARIDRE1FQAFAAUABSAFwAYIBCwj___________8BmAEB&curr=RUB&hl=ru&gl=RU",
-     "price_orig": 420426.0,
-     "currency_orig": "RUB",
-     "note": null,
-     "typical_range": null,
-     "via": null,
-     "legs": null,
-     "extra_rub": 0,
-     "quoted_passengers": 3,
-     "total_price_rub": 420426,
-     "days": 14,
-     "airline_sites": [
-      {
-       "name": "Emirates",
-       "url": "https://www.emirates.com/ru/russian/"
-      }
-     ]
-    },
-    {
-     "route_id": "NYC",
-     "source": "google_flights",
-     "price_rub": 937549,
-     "depart": "2027-06-07",
-     "ret": "2027-06-21",
-     "airline": "Royal Air Maroc / Etihad Airways",
-     "stops": 1,
-     "origin": "SVO",
-     "destination": "JFK",
-     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTA3Ih8KA1NWTxIKMjAyNy0wNi0wNxoDQ01OKgJBVDIDMjIxIh8KA0NNThIKMjAyNy0wNi0wNxoDSkZLKgJBVDIDMjAwagcIARIDU1ZPcgcIARIDSkZLGl4SCjIwMjctMDYtMjEiHQoDSkZLEgoyMDI3LTA2LTIxGgNBVUgqAkVZMgEyIh8KA0FVSBIKMjAyNy0wNi0yMhoDU1ZPKgJFWTIDODQzagcIARIDSkZLcgcIARIDU1ZPQAFAAUABSAFwAYIBCwj___________8BmAEB&curr=RUB&hl=ru&gl=RU",
-     "price_orig": 2812647.0,
-     "currency_orig": "RUB",
-     "note": null,
-     "typical_range": null,
-     "via": null,
-     "legs": null,
-     "extra_rub": 0,
-     "quoted_passengers": 3,
-     "total_price_rub": 2812647,
-     "days": 14,
-     "airline_sites": [
-      {
-       "name": "Royal Air Maroc",
-       "url": "https://www.royalairmaroc.com/"
-      }
-     ]
-    }
-   ],
-   "by_source": {
-    "google_flights": {
-     "route_id": "NYC",
-     "source": "google_flights",
-     "price_rub": 105522,
-     "depart": "2027-06-07",
-     "ret": "2027-06-21",
-     "airline": "Royal Air Maroc",
-     "stops": 1,
-     "origin": "SVO",
-     "destination": "JFK",
-     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTA3Ih8KA1NWTxIKMjAyNy0wNi0wNxoDQ01OKgJBVDIDMjIxIh8KA0NNThIKMjAyNy0wNi0wNxoDSkZLKgJBVDIDMjAwagcIARIDU1ZPcgcIARIDSkZLGmASCjIwMjctMDYtMjEiHwoDSkZLEgoyMDI3LTA2LTIxGgNDTU4qAkFUMgMyMDMiHwoDQ01OEgoyMDI3LTA2LTIxGgNTVk8qAkFUMgMyMjBqBwgBEgNKRktyBwgBEgNTVk9AAUABQAFIAXABggELCP___________wGYAQE&curr=RUB&hl=ru&gl=RU",
-     "price_orig": 316566.0,
-     "currency_orig": "RUB",
-     "note": null,
-     "typical_range": null,
-     "via": null,
-     "legs": null,
-     "extra_rub": 0,
-     "quoted_passengers": 3,
-     "total_price_rub": 316566,
-     "days": 14,
-     "airline_sites": [
-      {
-       "name": "Royal Air Maroc",
-       "url": "https://www.royalairmaroc.com/"
-      }
-     ]
-    }
-   },
-   "median": 105478,
-   "median_points": 1,
+   "best": null,
+   "top": [],
+   "by_source": {},
+   "median": 105500,
+   "median_points": 2,
    "reasons": [],
    "is_deal": false
   },
@@ -366,16 +197,20 @@
   "google_flights": {
    "ok": true,
    "skipped": null,
-   "offers": 15,
-   "summer": 15,
+   "offers": 5,
+   "summer": 5,
    "errors": [
-    "SEL 2027-06-07 → 2027-06-21: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "SEL 2027-07-25 → 2027-08-24: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "TYO 2027-06-07 → 2027-06-17: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "TYO 2027-07-25 → 2027-08-24: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NYC 2027-06-07 → 2027-06-17: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NYC 2027-07-01 → 2027-07-22: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NZ 2027-07-01 → 2027-07-22: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead."
+    "TYO 2027-07-01 → 2027-07-31: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "TYO 2027-07-28 → 2027-08-07: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NYC 2027-06-07 → 2027-06-21: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NYC 2027-06-07 → 2027-06-28: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NYC 2027-07-01 → 2027-07-31: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NYC 2027-07-28 → 2027-08-07: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "LAX 2027-07-01 → 2027-07-31: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "LAX 2027-07-28 → 2027-08-07: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NZ 2027-06-07 → 2027-06-28: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NZ 2027-07-01 → 2027-07-31: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NZ 2027-07-28 → 2027-08-07: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead."
    ]
   },
   "etihad": {
@@ -393,5 +228,7 @@
    "errors": []
   }
  },
- "sent": []
+ "sent": [
+  "digest"
+ ]
 }
