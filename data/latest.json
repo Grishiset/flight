@@ -1,5 +1,5 @@
 {
- "at": "2026-11-26T06:00:51+00:00",
+ "at": "2026-11-26T13:57:07+00:00",
  "window": {
   "start": "2027-06-01",
   "end": "2027-08-31",
@@ -26,119 +26,11 @@
    "route_id": "TYO",
    "name": "Токио",
    "threshold": 43900,
-   "best": {
-    "route_id": "TYO",
-    "source": "google_flights",
-    "price_rub": 69137,
-    "depart": "2027-06-07",
-    "ret": "2027-06-21",
-    "airline": "Qatar Airways",
-    "stops": 1,
-    "origin": "SVO",
-    "destination": "NRT",
-    "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTA3Ih8KA1NWTxIKMjAyNy0wNi0wNxoDRE9IKgJRUjIDMzM4Ih8KA0RPSBIKMjAyNy0wNi0wNxoDTlJUKgJRUjIDODA4agcIARIDU1ZPcgcIARIDTlJUGmASCjIwMjctMDYtMjEiHwoDTlJUEgoyMDI3LTA2LTIxGgNET0gqAlFSMgM4MDkiHwoDRE9IEgoyMDI3LTA2LTIyGgNTVk8qAlFSMgMzMzdqBwgBEgNOUlRyBwgBEgNTVk9AAUABQAFIAXABggELCP___________wGYAQE&curr=RUB&hl=ru&gl=RU",
-    "price_orig": 207411.0,
-    "currency_orig": "RUB",
-    "note": null,
-    "typical_range": null,
-    "via": null,
-    "legs": null,
-    "extra_rub": 0,
-    "quoted_passengers": 3,
-    "total_price_rub": 207411,
-    "days": 14,
-    "airline_sites": [
-     {
-      "name": "Qatar Airways",
-      "url": "https://www.qatarairways.com/ru-ru/homepage.html"
-     }
-    ]
-   },
-   "top": [
-    {
-     "route_id": "TYO",
-     "source": "google_flights",
-     "price_rub": 69137,
-     "depart": "2027-06-07",
-     "ret": "2027-06-21",
-     "airline": "Qatar Airways",
-     "stops": 1,
-     "origin": "SVO",
-     "destination": "NRT",
-     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTA3Ih8KA1NWTxIKMjAyNy0wNi0wNxoDRE9IKgJRUjIDMzM4Ih8KA0RPSBIKMjAyNy0wNi0wNxoDTlJUKgJRUjIDODA4agcIARIDU1ZPcgcIARIDTlJUGmASCjIwMjctMDYtMjEiHwoDTlJUEgoyMDI3LTA2LTIxGgNET0gqAlFSMgM4MDkiHwoDRE9IEgoyMDI3LTA2LTIyGgNTVk8qAlFSMgMzMzdqBwgBEgNOUlRyBwgBEgNTVk9AAUABQAFIAXABggELCP___________wGYAQE&curr=RUB&hl=ru&gl=RU",
-     "price_orig": 207411.0,
-     "currency_orig": "RUB",
-     "note": null,
-     "typical_range": null,
-     "via": null,
-     "legs": null,
-     "extra_rub": 0,
-     "quoted_passengers": 3,
-     "total_price_rub": 207411,
-     "days": 14,
-     "airline_sites": [
-      {
-       "name": "Qatar Airways",
-       "url": "https://www.qatarairways.com/ru-ru/homepage.html"
-      }
-     ]
-    },
-    {
-     "route_id": "TYO",
-     "source": "google_flights",
-     "price_rub": 75673,
-     "depart": "2027-06-07",
-     "ret": "2027-06-21",
-     "airline": "Etihad Airways",
-     "stops": 1,
-     "origin": "SVO",
-     "destination": "NRT",
-     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTA3Ih8KA1NWTxIKMjAyNy0wNi0wNxoDQVVIKgJFWTIDODQyIh8KA0FVSBIKMjAyNy0wNi0wNxoDTlJUKgJFWTIDODAwagcIARIDU1ZPcgcIARIDTlJUGmASCjIwMjctMDYtMjEiHwoDTlJUEgoyMDI3LTA2LTIxGgNBVUgqAkVZMgM4MDEiHwoDQVVIEgoyMDI3LTA2LTIyGgNTVk8qAkVZMgM4NDFqBwgBEgNOUlRyBwgBEgNTVk9AAUABQAFIAXABggELCP___________wGYAQE&curr=RUB&hl=ru&gl=RU",
-     "price_orig": 227019.0,
-     "currency_orig": "RUB",
-     "note": null,
-     "typical_range": null,
-     "via": null,
-     "legs": null,
-     "extra_rub": 0,
-     "quoted_passengers": 3,
-     "total_price_rub": 227019,
-     "days": 14,
-     "airline_sites": []
-    }
-   ],
-   "by_source": {
-    "google_flights": {
-     "route_id": "TYO",
-     "source": "google_flights",
-     "price_rub": 69137,
-     "depart": "2027-06-07",
-     "ret": "2027-06-21",
-     "airline": "Qatar Airways",
-     "stops": 1,
-     "origin": "SVO",
-     "destination": "NRT",
-     "link": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI3LTA2LTA3Ih8KA1NWTxIKMjAyNy0wNi0wNxoDRE9IKgJRUjIDMzM4Ih8KA0RPSBIKMjAyNy0wNi0wNxoDTlJUKgJRUjIDODA4agcIARIDU1ZPcgcIARIDTlJUGmASCjIwMjctMDYtMjEiHwoDTlJUEgoyMDI3LTA2LTIxGgNET0gqAlFSMgM4MDkiHwoDRE9IEgoyMDI3LTA2LTIyGgNTVk8qAlFSMgMzMzdqBwgBEgNOUlRyBwgBEgNTVk9AAUABQAFIAXABggELCP___________wGYAQE&curr=RUB&hl=ru&gl=RU",
-     "price_orig": 207411.0,
-     "currency_orig": "RUB",
-     "note": null,
-     "typical_range": null,
-     "via": null,
-     "legs": null,
-     "extra_rub": 0,
-     "quoted_passengers": 3,
-     "total_price_rub": 207411,
-     "days": 14,
-     "airline_sites": [
-      {
-       "name": "Qatar Airways",
-       "url": "https://www.qatarairways.com/ru-ru/homepage.html"
-      }
-     ]
-    }
-   },
-   "median": 72405,
-   "median_points": 4,
+   "best": null,
+   "top": [],
+   "by_source": {},
+   "median": 69137,
+   "median_points": 5,
    "reasons": [],
    "is_deal": false
   },
@@ -195,22 +87,21 @@
    "errors": []
   },
   "google_flights": {
-   "ok": true,
+   "ok": false,
    "skipped": null,
-   "offers": 5,
-   "summer": 5,
+   "offers": 0,
+   "summer": 0,
    "errors": [
-    "TYO 2027-07-01 → 2027-07-31: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "TYO 2027-07-28 → 2027-08-07: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "SEL 2027-06-07 → 2027-07-07: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "SEL 2027-07-28 → 2027-08-11: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "TYO 2027-06-07 → 2027-06-21: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "TYO 2027-06-07 → 2027-07-07: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
     "NYC 2027-06-07 → 2027-06-21: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NYC 2027-06-07 → 2027-06-28: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NYC 2027-07-01 → 2027-07-31: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NYC 2027-07-28 → 2027-08-07: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "LAX 2027-07-01 → 2027-07-31: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "LAX 2027-07-28 → 2027-08-07: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NZ 2027-06-07 → 2027-06-28: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NZ 2027-07-01 → 2027-07-31: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NZ 2027-07-28 → 2027-08-07: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead."
+    "NYC 2027-07-04 → 2027-07-14: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NYC 2027-07-28 → 2027-08-11: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NZ 2027-06-07 → 2027-07-07: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NZ 2027-07-04 → 2027-07-14: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NZ 2027-07-28 → 2027-08-11: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead."
    ]
   },
   "etihad": {
@@ -228,7 +119,5 @@
    "errors": []
   }
  },
- "sent": [
-  "digest"
- ]
+ "sent": []
 }
