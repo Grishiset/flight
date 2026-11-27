@@ -2922,5 +2922,63 @@
     "skipped": "источник не проверяет наличие мест на всю группу"
    }
   }
+ },
+ {
+  "at": "2026-11-27T06:03:36+00:00",
+  "passengers": 3,
+  "routes": {
+   "SEL": {
+    "best": null,
+    "src": null,
+    "by_source": {}
+   },
+   "TYO": {
+    "best": null,
+    "src": null,
+    "by_source": {}
+   },
+   "NYC": {
+    "best": null,
+    "src": null,
+    "by_source": {}
+   },
+   "LAX": {
+    "best": null,
+    "src": null,
+    "by_source": {}
+   },
+   "NZ": {
+    "best": null,
+    "src": null,
+    "by_source": {}
+   }
+  },
+  "sources": {
+   "travelpayouts": {
+    "ok": false,
+    "offers": 0,
+    "skipped": "источник не проверяет наличие мест на всю группу"
+   },
+   "self_transfer": {
+    "ok": false,
+    "offers": 0,
+    "skipped": "источник не проверяет наличие мест на всю группу"
+   },
+   "google_flights": {
+    "ok": false,
+    "offers": 0,
+    "skipped": null
+   },
+   "etihad": {
+    "ok": false,
+    "offers": 0,
+    "skipped": "выключен в config.yaml"
+   },
+   "samokatus": {
+    "ok": false,
+    "offers": 0,
+    "skipped": "источник не проверяет наличие мест на всю группу"
+   }
+  }
  }
 ]
