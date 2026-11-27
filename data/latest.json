@@ -1,5 +1,5 @@
 {
- "at": "2026-11-26T17:07:14+00:00",
+ "at": "2026-11-27T00:38:12+00:00",
  "window": {
   "start": "2027-06-01",
   "end": "2027-08-31",
@@ -92,16 +92,22 @@
    "offers": 0,
    "summer": 0,
    "errors": [
-    "SEL 2027-07-28 → 2027-08-27: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "SEL 2027-06-10 → 2027-07-01: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "SEL 2027-07-04 → 2027-08-03: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "SEL 2027-07-31 → 2027-08-10: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
     "TYO 2027-06-07 → 2027-06-21: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "TYO 2027-06-10 → 2027-06-24: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "TYO 2027-07-04 → 2027-07-25: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "TYO 2027-07-28 → 2027-08-27: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "TYO 2027-06-10 → 2027-07-01: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "TYO 2027-07-04 → 2027-08-03: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "TYO 2027-07-31 → 2027-08-10: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
     "NYC 2027-06-07 → 2027-06-21: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NYC 2027-06-10 → 2027-06-24: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NYC 2027-07-04 → 2027-07-25: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NZ 2027-07-04 → 2027-07-25: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NZ 2027-07-28 → 2027-08-27: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead."
+    "NYC 2027-06-10 → 2027-07-01: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NYC 2027-07-04 → 2027-08-03: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NYC 2027-07-31 → 2027-08-10: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "LAX 2027-07-04 → 2027-08-03: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "LAX 2027-07-31 → 2027-08-10: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NZ 2027-06-10 → 2027-07-01: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NZ 2027-07-04 → 2027-08-03: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NZ 2027-07-31 → 2027-08-10: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead."
    ]
   },
   "etihad": {
@@ -119,7 +125,5 @@
    "errors": []
   }
  },
- "sent": [
-  "health"
- ]
+ "sent": []
 }
