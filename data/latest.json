@@ -1,5 +1,5 @@
 {
- "at": "2026-11-28T14:43:01+00:00",
+ "at": "2026-11-28T15:42:21+00:00",
  "window": {
   "start": "2027-06-01",
   "end": "2027-08-31",
@@ -92,23 +92,23 @@
    "offers": 0,
    "summer": 0,
    "errors": [
-    "SEL 2027-06-16 → 2027-07-07: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "SEL 2027-07-10 → 2027-08-09: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "SEL 2027-08-06 → 2027-08-20: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "SEL 2027-06-16 → 2027-07-16: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "SEL 2027-07-13 → 2027-07-23: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "SEL 2027-08-06 → 2027-08-27: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
     "TYO 2027-06-07 → 2027-06-21: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "TYO 2027-06-16 → 2027-07-07: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "TYO 2027-07-10 → 2027-08-09: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "TYO 2027-08-06 → 2027-08-20: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "TYO 2027-06-16 → 2027-07-16: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "TYO 2027-07-13 → 2027-07-23: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "TYO 2027-08-06 → 2027-08-27: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
     "NYC 2027-06-07 → 2027-06-21: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NYC 2027-06-16 → 2027-07-07: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NYC 2027-07-10 → 2027-08-09: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NYC 2027-08-06 → 2027-08-20: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "LAX 2027-06-16 → 2027-07-07: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "LAX 2027-07-10 → 2027-08-09: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "LAX 2027-08-06 → 2027-08-20: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NZ 2027-06-16 → 2027-07-07: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NZ 2027-07-10 → 2027-08-09: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
-    "NZ 2027-08-06 → 2027-08-20: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead."
+    "NYC 2027-06-16 → 2027-07-16: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NYC 2027-07-13 → 2027-07-23: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NYC 2027-08-06 → 2027-08-27: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "LAX 2027-06-16 → 2027-07-16: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "LAX 2027-07-13 → 2027-07-23: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "LAX 2027-08-06 → 2027-08-27: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NZ 2027-06-16 → 2027-07-16: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NZ 2027-07-13 → 2027-07-23: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead.",
+    "NZ 2027-08-06 → 2027-08-27: Search page carried no ds:1 payload — Google may have changed the page shape, or served a consent/blocked page instead."
    ]
   },
   "etihad": {
